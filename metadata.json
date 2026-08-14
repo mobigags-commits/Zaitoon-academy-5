@@ -1,0 +1,6 @@
+{
+  "name": "Zaitoon Roots Academy",
+  "description": "Premier international academic portal for Zaitoon Roots Academy featuring complete All The World's Degrees and Diplomas, Online Admissions, Student LMS Portal, and 20 comprehensive institutional pages.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
