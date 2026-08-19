@@ -480,7 +480,7 @@ export const CAMPUS_LOCATIONS = [
     name: 'Islamabad Central Flagship Campus',
     type: 'Main University Campus & Research Complex',
     address: 'Zaitoon Academic Boulevard, Sector H-12 / Park Road, Islamabad, Pakistan',
-    phone: '+92 51 8892000 / +92 300 1234567',
+    phone: '+92 51 8892000 / WhatsApp: +92 344 7956085',
     email: 'info.isb@zaitoonroots.edu',
     highlights: ['50-Acre Smart Campus', '700-Bed Teaching Hospital', 'Central E-Library & Olympiad Sports']
   },

@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageId } from '../types';
-import { Award, Compass, ShieldCheck, HeartHandshake, Sparkles, ArrowRight, Target, Eye } from 'lucide-react';
+import { Award, Compass, ShieldCheck, HeartHandshake, Sparkles, ArrowRight, Target, Eye, MessageCircle } from 'lucide-react';
 
 interface AboutPageProps {
   onNavigate: (page: PageId) => void;
@@ -70,9 +70,20 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl">
                 At Zaitoon Roots Academy, we believe no passionate student should be deprived of world-class education due to financial boundaries. We have built an ecosystem where knowledge meets practice, preparing you for the frontiers of artificial intelligence, healthcare, and engineering.
               </p>
-              <div className="pt-2">
-                <p className="text-base font-bold text-amber-300">Prof. Dr. Tariq Mahmood Zaitoon</p>
-                <p className="text-xs text-slate-400">Chancellor & Chairman Board of Governors, ZRA</p>
+              <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                  <p className="text-base font-bold text-amber-300">Prof. Dr. Tariq Mahmood Zaitoon</p>
+                  <p className="text-xs text-slate-400">Chancellor & Chairman Board of Governors, ZRA</p>
+                </div>
+                <a
+                  href="https://wa.me/923447956085?text=Assalam-o-Alaikum%20Chancellor%20Sir%2C%20I%20am%20contacting%20you%20regarding%20Zaitoon%20Roots%20Academy."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-md transform hover:scale-105"
+                >
+                  <MessageCircle className="w-4 h-4 fill-current" />
+                  <span>Direct Owner WhatsApp: 0344-7956085</span>
+                </a>
               </div>
             </div>
           </div>

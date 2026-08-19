@@ -16,7 +16,8 @@ import {
   Clock,
   ArrowRight,
   ShieldCheck,
-  AlertCircle
+  AlertCircle,
+  MessageCircle
 } from 'lucide-react';
 
 interface AdmissionsPageProps {
@@ -145,6 +146,16 @@ export const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onNavigate }) =>
                   {trackResult}
                 </p>
               )}
+
+              <a
+                href="https://wa.me/923447956085?text=Assalam-o-Alaikum%2C%20I%20need%20help%20with%20my%20Zaitoon%20Roots%20Academy%20Admission%20Application"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-2 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] flex items-center justify-center gap-1.5 transition-colors shadow-sm"
+              >
+                <MessageCircle className="w-3.5 h-3.5 fill-current" />
+                <span>Owner WhatsApp Helpline: 0344-7956085</span>
+              </a>
             </div>
           </div>
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PageId } from '../types';
 import { CAMPUS_LOCATIONS } from '../data/academyData';
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, MessageSquare, Sparkles } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, MessageSquare, Sparkles, MessageCircle } from 'lucide-react';
 
 interface ContactPageProps {
   onNavigate: (page: PageId) => void;
@@ -39,6 +39,46 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
             <p className="text-slate-600 text-sm max-w-3xl">
               رابطہ و کیمپس لوکیشنز: Connect with our admissions counselors, campus registrars, or visit our flagship smart campuses in Islamabad, Lahore, Karachi, and Dubai.
             </p>
+          </div>
+        </div>
+
+        {/* Direct Owner & Executive WhatsApp VIP Banner */}
+        <div className="mb-8 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-emerald-900 via-teal-900 to-slate-950 text-white shadow-xl border border-emerald-500/40 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
+          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="space-y-2 max-w-2xl">
+              <div className="flex items-center gap-2">
+                <span className="px-3 py-1 bg-emerald-400/20 text-emerald-300 text-xs font-extrabold rounded-full border border-emerald-400/40 uppercase tracking-wider flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                  Direct Executive Desk • فوری رابطہ
+                </span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black text-white">
+                Academy Owner & Chancellor Direct WhatsApp
+              </h2>
+              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                ڈائریکٹ اونر واٹس ایپ ہیلپ لائن: For urgent admission confirmations, scholarship queries, degree equivalence, or personal academic counseling directly from the academy management.
+              </p>
+              <div className="pt-2 flex items-center gap-3">
+                <div className="px-4 py-2 rounded-xl bg-black/40 border border-emerald-500/40 font-mono text-lg sm:text-xl font-bold text-amber-300 tracking-wider">
+                  0344-7956085
+                </div>
+                <span className="text-xs text-emerald-300 font-semibold">(Available 24/7 on WhatsApp)</span>
+              </div>
+            </div>
+
+            <div className="shrink-0 flex flex-col sm:flex-row gap-3">
+              <a
+                href="https://wa.me/923447956085?text=Assalam-o-Alaikum%20Sir%2C%20I%20am%20contacting%20you%20regarding%20Zaitoon%20Roots%20Academy%20Admissions%20and%20Programs."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-sm flex items-center justify-center gap-2.5 shadow-xl transition-all transform hover:scale-105"
+                id="contact-owner-whatsapp-btn"
+              >
+                <MessageCircle className="w-5 h-5 fill-current" />
+                <span>Chat on WhatsApp (0344-7956085)</span>
+              </a>
+            </div>
           </div>
         </div>
 

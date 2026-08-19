@@ -16,7 +16,8 @@ import {
   Layers,
   Globe2,
   CalendarDays,
-  FileText
+  FileText,
+  MessageCircle
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -55,26 +56,38 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenS
             </span>
           </div>
 
-          <div className="flex items-center gap-4 text-xs font-medium ml-auto">
+          <div className="flex items-center gap-3 sm:gap-4 text-xs font-medium ml-auto">
+            <a
+              href="https://wa.me/923447956085?text=Assalam-o-Alaikum%2C%20I%20want%20information%20regarding%20Zaitoon%20Roots%20Academy%20Admissions%20and%20Programs"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition-all shadow-sm transform hover:scale-105"
+              id="topbar-whatsapp-btn"
+            >
+              <MessageCircle className="w-3.5 h-3.5 fill-current" />
+              <span className="hidden xs:inline">Owner WhatsApp:</span>
+              <span className="font-mono">0344-7956085</span>
+            </a>
+            <span className="text-slate-600 hidden sm:inline">|</span>
             <button
               onClick={() => handlePageSelect('verification')}
-              className="hover:text-amber-400 transition-colors flex items-center gap-1 cursor-pointer"
+              className="hover:text-amber-400 transition-colors hidden sm:flex items-center gap-1 cursor-pointer"
             >
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
               <span>Verify Credential</span>
             </button>
-            <span className="text-slate-600">|</span>
+            <span className="text-slate-600 hidden md:inline">|</span>
             <button
               onClick={() => handlePageSelect('lms-portal')}
-              className="hover:text-amber-400 transition-colors flex items-center gap-1 cursor-pointer"
+              className="hover:text-amber-400 transition-colors hidden md:flex items-center gap-1 cursor-pointer"
             >
               <LayoutDashboard className="w-3.5 h-3.5 text-blue-400" />
               <span>Student LMS</span>
             </button>
-            <span className="text-slate-600 hidden md:inline">|</span>
+            <span className="text-slate-600 hidden lg:inline">|</span>
             <button
               onClick={() => handlePageSelect('distance-learning')}
-              className="hidden md:flex items-center gap-1 text-slate-300 hover:text-amber-400 cursor-pointer"
+              className="hidden lg:flex items-center gap-1 text-slate-300 hover:text-amber-400 cursor-pointer"
             >
               <Globe2 className="w-3.5 h-3.5 text-amber-400" />
               <span>Global Online Campus</span>
@@ -328,6 +341,18 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenS
               <Search className="w-5 h-5" />
             </button>
 
+            <a
+              href="https://wa.me/923447956085?text=Assalam-o-Alaikum%2C%20I%20want%20information%20regarding%20Zaitoon%20Roots%20Academy%20Admissions%20and%20Programs"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden xl:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition-all shadow-sm transform hover:-translate-y-0.5"
+              id="header-whatsapp-chat-btn"
+              title="Chat directly with Owner / Management on WhatsApp"
+            >
+              <MessageCircle className="w-4 h-4 fill-current" />
+              <span>WhatsApp: 0344-7956085</span>
+            </a>
+
             <button
               onClick={() => handlePageSelect('admissions')}
               className={`hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm shadow-md transition-all transform hover:-translate-y-0.5 cursor-pointer ${
@@ -362,6 +387,17 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenS
             <span className="text-sm font-bold text-slate-300">Zaitoon Roots Academy Menu</span>
             <span className="text-xs px-2 py-0.5 bg-red-600 rounded text-white font-medium">20 Pages</span>
           </div>
+
+          {/* Quick Owner WhatsApp in Mobile Drawer */}
+          <a
+            href="https://wa.me/923447956085?text=Assalam-o-Alaikum%2C%20I%20want%20information%20regarding%20Zaitoon%20Roots%20Academy%20Admissions%20and%20Programs"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mb-4 w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md"
+          >
+            <MessageCircle className="w-4 h-4 fill-current" />
+            <span>Owner Direct WhatsApp: 0344-7956085</span>
+          </a>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {PAGES_MANIFEST.map((page) => (

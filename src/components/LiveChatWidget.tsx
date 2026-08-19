@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MessageSquare, X, Send, Bot, Sparkles, Phone, CheckCircle2, User } from 'lucide-react';
+import { MessageSquare, X, Send, Bot, Sparkles, Phone, CheckCircle2, User, MessageCircle } from 'lucide-react';
 import { PageId } from '../types';
 
 interface LiveChatWidgetProps {
@@ -21,11 +21,12 @@ export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({ onNavigate }) =>
     {
       id: 'msg-1',
       sender: 'ai',
-      text: 'Assalam-o-Alaikum! Welcome to Zaitoon Roots Academy (زیتون روٹس اکیڈمی). How can I assist you today with Admissions, A-Z Degrees, Diplomas, or Scholarships?',
+      text: 'Assalam-o-Alaikum! Welcome to Zaitoon Roots Academy (زیتون روٹس اکیڈمی). How can I assist you today with Admissions, Degrees, Diplomas, or Scholarships? You can also contact our Academy Owner directly on WhatsApp at 0344-7956085.',
       timestamp: 'Just now',
       actions: [
-        { label: '🎓 View A-Z Degrees', page: 'degrees' },
-        { label: '📜 View A-Z Diplomas', page: 'diplomas' },
+        { label: '💬 WhatsApp Owner (0344-7956085)', link: 'https://wa.me/923447956085?text=Assalam-o-Alaikum%2C%20I%20want%20information%20regarding%20Zaitoon%20Roots%20Academy' },
+        { label: '🎓 View World Degrees', page: 'degrees' },
+        { label: '📜 View Diplomas', page: 'diplomas' },
         { label: '📝 Apply for Fall 2026', page: 'admissions' },
         { label: '💰 Fee & Scholarship Calculator', page: 'fee-scholarship' }
       ]
@@ -52,7 +53,13 @@ export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({ onNavigate }) =>
       let actions: { label: string; page?: PageId; link?: string }[] = [];
 
       const lower = userText.toLowerCase();
-      if (lower.includes('degree') || lower.includes('bs') || lower.includes('master') || lower.includes('phd')) {
+      if (lower.includes('whatsapp') || lower.includes('phone') || lower.includes('contact') || lower.includes('number') || lower.includes('owner') || lower.includes('call') || lower.includes('rabta')) {
+        replyText = 'You can connect directly with the Academy Owner and Executive Admissions Desk on WhatsApp at 0344-7956085 (+92 344 7956085). We are available 24/7 to answer your questions.';
+        actions = [
+          { label: '💬 Chat on WhatsApp Now (0344-7956085)', link: 'https://wa.me/923447956085?text=Assalam-o-Alaikum%2C%20I%20need%20information%20regarding%20Zaitoon%20Roots%20Academy' },
+          { label: '📍 View All Campuses', page: 'contact' }
+        ];
+      } else if (lower.includes('degree') || lower.includes('bs') || lower.includes('master') || lower.includes('phd')) {
         replyText = 'Zaitoon Roots Academy offers comprehensive A-Z World Degrees in Artificial Intelligence, Computer Science, Engineering, Medicine (MBBS, DPT, Pharm-D), Business, and Law with international accreditations.';
         actions = [{ label: 'Browse All Degrees', page: 'degrees' }, { label: 'Submit Admission Application', page: 'admissions' }];
       } else if (lower.includes('diploma') || lower.includes('certificate') || lower.includes('cyber') || lower.includes('ai')) {
@@ -68,8 +75,9 @@ export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({ onNavigate }) =>
         replyText = 'You can instantly verify any genuine degree or diploma issued by Zaitoon Roots Academy on our online verification system with QR security.';
         actions = [{ label: 'Verify Certificate Now', page: 'verification' }];
       } else {
-        replyText = 'I am here to guide you across all our 20 institutional portals, program requirements, and campus facilities. What would you like to explore?';
+        replyText = 'I am here to guide you across all our 20 institutional portals, program requirements, and campus facilities. What would you like to explore? You can also message our Owner directly on WhatsApp at 0344-7956085.';
         actions = [
+          { label: '💬 WhatsApp (0344-7956085)', link: 'https://wa.me/923447956085?text=Assalam-o-Alaikum%2C%20I%20want%20information%20regarding%20Zaitoon%20Roots%20Academy' },
           { label: 'Explore Degrees', page: 'degrees' },
           { label: 'Fee Calculator', page: 'fee-scholarship' },
           { label: 'Campus Tour', page: 'campus-tour' }
@@ -115,6 +123,21 @@ export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({ onNavigate }) =>
             </button>
           </div>
 
+          {/* Quick Direct Owner WhatsApp Strip */}
+          <a
+            href="https://wa.me/923447956085?text=Assalam-o-Alaikum%2C%20I%20want%20to%20speak%20with%20the%20Owner%20%2F%20Chancellor%20of%20Zaitoon%20Roots%20Academy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-emerald-700 hover:bg-emerald-600 text-white px-4 py-2 text-xs font-bold flex items-center justify-between transition-colors shadow-inner"
+          >
+            <div className="flex items-center gap-1.5">
+              <MessageCircle className="w-3.5 h-3.5 fill-current" />
+              <span>Owner WhatsApp Helpline:</span>
+              <span className="font-mono underline">0344-7956085</span>
+            </div>
+            <span className="text-[10px] bg-emerald-800 px-1.5 py-0.5 rounded uppercase font-semibold">Direct Desk</span>
+          </a>
+
           {/* Messages Body */}
           <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-slate-50/80">
             {messages.map((msg) => (
@@ -139,16 +162,29 @@ export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({ onNavigate }) =>
                   {msg.actions && msg.actions.length > 0 && (
                     <div className="mt-2.5 pt-2 border-t border-slate-100 flex flex-wrap gap-1.5">
                       {msg.actions.map((act, i) => (
-                        <button
-                          key={i}
-                          onClick={() => {
-                            if (act.page) onNavigate(act.page);
-                            setIsOpen(false);
-                          }}
-                          className="px-2.5 py-1 rounded-lg bg-red-50 hover:bg-red-100 text-red-800 font-semibold text-[11px] border border-red-200 transition-colors"
-                        >
-                          {act.label}
-                        </button>
+                        act.link ? (
+                          <a
+                            key={i}
+                            href={act.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] flex items-center gap-1 transition-colors"
+                          >
+                            <MessageCircle className="w-3 h-3 fill-current" />
+                            <span>{act.label}</span>
+                          </a>
+                        ) : (
+                          <button
+                            key={i}
+                            onClick={() => {
+                              if (act.page) onNavigate(act.page);
+                              setIsOpen(false);
+                            }}
+                            className="px-2.5 py-1 rounded-lg bg-red-50 hover:bg-red-100 text-red-800 font-semibold text-[11px] border border-red-200 transition-colors"
+                          >
+                            {act.label}
+                          </button>
+                        )
                       ))}
                     </div>
                   )}
@@ -182,17 +218,32 @@ export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({ onNavigate }) =>
           </div>
         </div>
       ) : (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="flex items-center gap-3 px-4 py-3 rounded-full bg-gradient-to-r from-red-700 to-rose-700 text-white shadow-xl hover:shadow-2xl hover:scale-105 transition-all cursor-pointer border-2 border-white/40"
-          id="live-chat-toggle-btn"
-        >
-          <div className="relative">
-            <MessageSquare className="w-5 h-5" />
-            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 rounded-full ring-2 ring-white animate-pulse"></span>
-          </div>
-          <span className="font-bold text-xs">Admission Advisor 24/7</span>
-        </button>
+        <div className="flex items-center gap-2.5">
+          <a
+            href="https://wa.me/923447956085?text=Assalam-o-Alaikum%2C%20I%20want%20information%20regarding%20Zaitoon%20Roots%20Academy%20Admissions"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-3.5 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-xl hover:shadow-2xl hover:scale-105 transition-all cursor-pointer border-2 border-white/40 font-bold text-xs"
+            id="floating-whatsapp-btn"
+            title="Chat directly with Academy Owner on WhatsApp"
+          >
+            <MessageCircle className="w-5 h-5 fill-current" />
+            <span className="hidden sm:inline">WhatsApp Owner: 0344-7956085</span>
+            <span className="sm:hidden">WhatsApp</span>
+          </a>
+
+          <button
+            onClick={() => setIsOpen(true)}
+            className="flex items-center gap-3 px-4 py-3 rounded-full bg-gradient-to-r from-red-700 to-rose-700 text-white shadow-xl hover:shadow-2xl hover:scale-105 transition-all cursor-pointer border-2 border-white/40"
+            id="live-chat-toggle-btn"
+          >
+            <div className="relative">
+              <MessageSquare className="w-5 h-5" />
+              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 rounded-full ring-2 ring-white animate-pulse"></span>
+            </div>
+            <span className="font-bold text-xs">Admission Advisor 24/7</span>
+          </button>
+        </div>
       )}
     </div>
   );

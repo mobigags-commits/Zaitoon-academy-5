@@ -10,7 +10,8 @@ import {
   Award,
   Globe,
   ArrowUpRight,
-  Heart
+  Heart,
+  MessageCircle
 } from 'lucide-react';
 
 interface FooterProps {
@@ -69,14 +70,29 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               Zaitoon Roots Academy is a premier international higher education and professional training institution offering complete All The World's Degrees, cutting-edge technology diplomas, executive certifications, and distance learning programs worldwide.
             </p>
 
-            <div className="pt-2 flex flex-col gap-2 text-xs text-slate-300">
+            <div className="pt-2 flex flex-col gap-2.5 text-xs text-slate-300">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
                 <span>Main Campus: Zaitoon Academic Boulevard, Sector H-12, Islamabad, Pakistan</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>UAN Helpline: +92 51 8892000 | WhatsApp: +92 300 1234567</span>
+                <span>UAN Helpline: +92 51 8892000</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="font-semibold text-emerald-400">Owner WhatsApp:</span>
+                  <a
+                    href="https://wa.me/923447956085?text=Assalam-o-Alaikum%2C%20I%20want%20information%20regarding%20Zaitoon%20Roots%20Academy%20Admissions%20and%20Programs"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-mono font-bold text-white hover:text-emerald-300 underline underline-offset-2 flex items-center gap-1"
+                  >
+                    <span>0344-7956085</span>
+                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-emerald-600/80 text-white font-sans no-underline font-bold">Chat Now</span>
+                  </a>
+                </div>
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-blue-400 shrink-0" />
