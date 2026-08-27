@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="gradBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B0000" />
+      <stop offset="100%" stop-color="#550000" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D" />
+      <stop offset="50%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+  </defs>
+  <!-- Background Shield/Rounded Square -->
+  <rect width="512" height="512" rx="110" fill="url(#gradBg)" />
+  <rect x="24" y="24" width="464" height="464" rx="86" fill="none" stroke="url(#goldGrad)" stroke-width="8" stroke-opacity="0.6" />
+  
+  <!-- Graduation Cap Icon -->
+  <g transform="translate(256, 210) scale(1.3)" text-anchor="middle">
+    <!-- Cap Top -->
+    <path d="M 0 -70 L 110 -25 L 0 20 L -110 -25 Z" fill="url(#goldGrad)" />
+    <!-- Cap Bottom/Band -->
+    <path d="M -65 -4 L -65 35 C -65 65, 65 65, 65 35 L 65 -4 C 45 15, -45 15, -65 -4 Z" fill="#FDE68A" />
+    <!-- Tassel -->
+    <path d="M 85 -15 L 95 30 L 85 75 L 95 75 L 105 30 Z" fill="#F59E0B" />
+  </g>
+
+  <!-- Laurel / Olive Wreath Base Arc -->
+  <path d="M 120 340 C 140 400, 372 400, 392 340" fill="none" stroke="url(#goldGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="14 10" />
+
+  <!-- ZRA Text -->
+  <text x="256" y="420" font-family="system-ui, -apple-system, sans-serif" font-size="52" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="4">ZAITOON</text>
+  <text x="256" y="455" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="700" fill="#FCD34D" text-anchor="middle" letter-spacing="8">ACADEMY</text>
+</svg>

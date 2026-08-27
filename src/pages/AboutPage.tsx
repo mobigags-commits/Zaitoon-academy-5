@@ -57,7 +57,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           <div className="flex flex-col md:flex-row items-center gap-8">
             <img
               src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80"
-              alt="Chancellor"
+              alt="Prof. Dr. Tariq Mahmood Zaitoon - Chancellor and Founder of Zaitoon Roots Academy"
+              loading="lazy"
+              decoding="async"
+              width={144}
+              height={144}
               className="w-36 h-36 rounded-3xl object-cover border-4 border-amber-400/50 shadow-2xl shrink-0"
             />
             <div className="space-y-3 text-center md:text-left">

@@ -66,7 +66,9 @@ export const NewsEventsPage: React.FC<NewsEventsPageProps> = ({ onNavigate }) =>
               <div>
                 <img
                   src={news.image}
-                  alt={news.title}
+                  alt={`${news.title} - Zaitoon Roots Academy Event`}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-6 space-y-3">

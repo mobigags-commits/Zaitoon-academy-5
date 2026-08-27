@@ -53,7 +53,9 @@ export const AlumniPage: React.FC<AlumniPageProps> = ({ onNavigate }) => {
                 <div className="relative">
                   <img
                     src={alumnus.image}
-                    alt={alumnus.name}
+                    alt={`${alumnus.name} - Zaitoon Roots Academy Alumnus (${alumnus.currentRole} at ${alumnus.company})`}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-48 rounded-2xl object-cover border border-slate-100 shadow-sm"
                   />
                   <span className="absolute bottom-2 left-2 px-2.5 py-1 rounded bg-black/70 backdrop-blur-md text-amber-300 text-[11px] font-bold">

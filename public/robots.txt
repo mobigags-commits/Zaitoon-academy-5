@@ -1,0 +1,11 @@
+# robots.txt for Zaitoon Roots Academy
+# Production Domain: https://zaitoon-academy-5.vercel.app/
+
+User-agent: *
+Allow: /
+
+# Disallow private build/asset internals if applicable
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://zaitoon-academy-5.vercel.app/sitemap.xml

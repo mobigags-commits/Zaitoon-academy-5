@@ -1,0 +1,18 @@
+{
+  "name": "Zaitoon Roots Academy",
+  "short_name": "ZRA",
+  "description": "Premier international academic portal for Zaitoon Roots Academy offering World Degrees, Professional Diplomas, and Online Admissions.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#8B0000",
+  "theme_color": "#8B0000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

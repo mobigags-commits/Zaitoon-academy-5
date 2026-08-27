@@ -94,7 +94,9 @@ export const CampusTourPage: React.FC<CampusTourPageProps> = ({ onNavigate }) =>
             <div className="lg:col-span-7 rounded-2xl overflow-hidden shadow-xl border border-slate-200 relative group aspect-video">
               <img
                 src={facilities[selectedFacility].image}
-                alt={facilities[selectedFacility].title}
+                alt={`${facilities[selectedFacility].title} - Campus Facility at Zaitoon Roots Academy`}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6">

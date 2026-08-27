@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B0000" />
+      <stop offset="60%" stop-color="#600000" />
+      <stop offset="100%" stop-color="#3A0000" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A" />
+      <stop offset="50%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)" />
+  <rect x="30" y="30" width="1140" height="570" rx="30" fill="none" stroke="url(#goldGrad)" stroke-width="4" stroke-opacity="0.5" />
+
+  <!-- Academic Crest -->
+  <g transform="translate(140, 220) scale(1.6)">
+    <!-- Cap Top -->
+    <path d="M 0 -45 L 70 -15 L 0 15 L -70 -15 Z" fill="url(#goldGrad)" />
+    <!-- Cap Band -->
+    <path d="M -40 -2 L -40 22 C -40 42, 40 42, 40 22 L 40 -2 C 30 10, -30 10, -40 -2 Z" fill="#FDE68A" />
+    <!-- Tassel -->
+    <path d="M 55 -8 L 62 20 L 56 50 L 62 50 L 68 20 Z" fill="#F59E0B" />
+  </g>
+
+  <!-- Title & Branding -->
+  <text x="320" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="700" fill="#FCD34D" letter-spacing="4">OFFICIAL ACADEMIC PORTAL • EST. 2004</text>
+  <text x="320" y="260" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="900" fill="#FFFFFF" letter-spacing="1">Zaitoon Roots Academy</text>
+  <text x="320" y="320" font-family="system-ui, -apple-system, sans-serif" font-size="30" font-weight="600" fill="#FECDD3">All The World's Degrees &amp; Professional Diplomas</text>
+
+  <!-- Feature Pills -->
+  <g transform="translate(320, 390)">
+    <!-- Pill 1 -->
+    <rect x="0" y="0" width="220" height="56" rx="28" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.25)" />
+    <text x="110" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF" text-anchor="middle">🎓 120+ Degrees</text>
+
+    <!-- Pill 2 -->
+    <rect x="240" y="0" width="230" height="56" rx="28" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.25)" />
+    <text x="355" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF" text-anchor="middle">📜 80+ Diplomas</text>
+
+    <!-- Pill 3 -->
+    <rect x="490" y="0" width="260" height="56" rx="28" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.25)" />
+    <text x="620" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF" text-anchor="middle">🌐 100% Online Study</text>
+  </g>
+
+  <!-- Bottom Bar Info -->
+  <line x1="80" y1="510" x2="1120" y2="510" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+  <text x="80" y="555" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="600" fill="#FCD34D">https://zaitoon-academy-5.vercel.app/</text>
+  <text x="1120" y="555" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="600" fill="#FECDD3" text-anchor="end">Admissions Open 2026-27 | 100% Scholarships</text>
+</svg>

@@ -203,7 +203,15 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
                         }}
                         className="w-full text-left p-2.5 rounded-xl bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 transition-all flex items-center gap-3 group"
                       >
-                        <img src={f.image} alt={f.name} className="w-9 h-9 rounded-full object-cover shrink-0" />
+                        <img
+                          src={f.image}
+                          alt={`${f.name} - ${f.designation}`}
+                          loading="lazy"
+                          decoding="async"
+                          width={36}
+                          height={36}
+                          className="w-9 h-9 rounded-full object-cover shrink-0"
+                        />
                         <div className="min-w-0">
                           <p className="text-xs font-bold text-slate-900 group-hover:text-blue-700">{f.name}</p>
                           <p className="text-[11px] text-slate-500 truncate">{f.designation} • {f.department}</p>

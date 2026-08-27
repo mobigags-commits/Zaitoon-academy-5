@@ -423,7 +423,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             {ALUMNI_STORIES.map((alumni) => (
               <div key={alumni.id} className="p-6 rounded-2xl bg-[#3d020a] border border-red-800 space-y-4">
                 <div className="flex items-center gap-3">
-                  <img src={alumni.image} alt={alumni.name} className="w-12 h-12 rounded-full object-cover border-2 border-amber-400" />
+                  <img
+                    src={alumni.image}
+                    alt={`${alumni.name} - Zaitoon Roots Academy Alumnus, ${alumni.currentRole} at ${alumni.company}`}
+                    loading="lazy"
+                    decoding="async"
+                    width={48}
+                    height={48}
+                    className="w-12 h-12 rounded-full object-cover border-2 border-amber-400"
+                  />
                   <div>
                     <h4 className="font-bold text-white text-sm">{alumni.name}</h4>
                     <p className="text-[11px] text-amber-300">{alumni.currentRole}</p>

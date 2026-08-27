@@ -69,7 +69,11 @@ export const FacultyPage: React.FC<FacultyPageProps> = ({ onNavigate }) => {
                 <div className="flex items-center gap-4">
                   <img
                     src={member.image}
-                    alt={member.name}
+                    alt={`${member.name} - ${member.designation}, ${member.department} at Zaitoon Roots Academy`}
+                    loading="lazy"
+                    decoding="async"
+                    width={80}
+                    height={80}
                     className="w-20 h-20 rounded-2xl object-cover border-2 border-red-100 shadow-sm shrink-0"
                   />
                   <div className="min-w-0">
