@@ -100,7 +100,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenS
       <div
         className={`${
           isHome
-            ? 'bg-[#7a0614] text-white border-b border-red-900/60 shadow-xl'
+            ? 'bg-[#8B0000] text-white border-b border-red-900/60 shadow-xl'
             : 'bg-white text-slate-800 border-b border-slate-200 shadow-sm'
         } transition-colors duration-300`}
       >

@@ -36,8 +36,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   const featuredDiplomas = ALL_DIPLOMAS.slice(0, 6);
 
   return (
-    // Front page has RED background as explicitly commanded by user!
-    <div className="bg-[#780616] text-white min-h-screen font-sans selection:bg-amber-400 selection:text-red-950">
+    // Front page has rich professional academic RED (#8B0000) background
+    <div className="bg-[#8B0000] text-white min-h-screen font-sans selection:bg-amber-400 selection:text-red-950">
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-8 pb-20 px-4 sm:px-6 lg:px-8 border-b border-red-900/60">
         {/* Background glow effects */}
