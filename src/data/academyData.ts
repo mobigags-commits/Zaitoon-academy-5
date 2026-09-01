@@ -173,8 +173,35 @@ export const PAGES_MANIFEST: PageInfo[] = [
     icon: 'Trophy'
   },
   {
-    id: 'contact',
+    id: 'about',
     pageNumber: 20,
+    title: 'About ZRA & Institutional Leadership',
+    urduTitle: 'تعارف زیتون روٹس اکیڈمی و قیادت',
+    subtitle: 'Chancellor Message, Board of Governors & 20+ Years Educational Legacy',
+    category: 'Institution',
+    icon: 'Building'
+  },
+  {
+    id: 'research',
+    pageNumber: 21,
+    title: 'Research Innovations & Patents Wing',
+    urduTitle: 'ریسرچ انوویشنز و پیٹنٹس ونگ',
+    subtitle: 'AI Neural Labs, Oncology Drug Delivery, Quantum Cryptography & CleanTech',
+    category: 'Academics',
+    icon: 'Microscope'
+  },
+  {
+    id: 'hostel-life',
+    pageNumber: 22,
+    title: 'Modern Student Hostels & Residencies',
+    urduTitle: 'ہاسٹل و طلبہ کی رہائش',
+    subtitle: 'Separate Boys & Girls Hostels, Nutritious Dining & High-Speed Fiber Wi-Fi',
+    category: 'Student Services',
+    icon: 'Home'
+  },
+  {
+    id: 'contact',
+    pageNumber: 23,
     title: 'Contact Us, Campuses & Helpdesk',
     urduTitle: 'رابطہ، کیمپس ایڈریس و کسٹمر سپورٹ',
     subtitle: 'Islamabad Main Campus, Lahore, Karachi, Dubai & 24/7 Student Helpline',

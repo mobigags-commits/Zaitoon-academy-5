@@ -19,6 +19,8 @@ export type PageId =
   | 'news-events'
   | 'alumni'
   | 'about'
+  | 'research'
+  | 'hostel-life'
   | 'contact';
 
 export interface PageInfo {

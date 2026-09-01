@@ -28,6 +28,8 @@ import { DownloadsPage } from './pages/DownloadsPage';
 import { NewsEventsPage } from './pages/NewsEventsPage';
 import { AlumniPage } from './pages/AlumniPage';
 import { AboutPage } from './pages/AboutPage';
+import { ResearchPage } from './pages/ResearchPage';
+import { HostelLifePage } from './pages/HostelLifePage';
 import { ContactPage } from './pages/ContactPage';
 
 export default function App() {
@@ -103,6 +105,10 @@ export default function App() {
         return <AlumniPage onNavigate={handleNavigate} />;
       case 'about':
         return <AboutPage onNavigate={handleNavigate} />;
+      case 'research':
+        return <ResearchPage onNavigate={handleNavigate} />;
+      case 'hostel-life':
+        return <HostelLifePage onNavigate={handleNavigate} />;
       case 'contact':
         return <ContactPage onNavigate={handleNavigate} />;
       default:

@@ -140,7 +140,21 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-  <!-- 21. Contact & Campuses -->
+  <!-- 21. Research & Innovations -->
+  <url>
+    <loc>https://zaitoon-academy-5.vercel.app/research</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <!-- 22. Student Hostels & Residencies -->
+  <url>
+    <loc>https://zaitoon-academy-5.vercel.app/hostel-life</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- 23. Contact & Campuses -->
   <url>
     <loc>https://zaitoon-academy-5.vercel.app/contact</loc>
     <lastmod>2026-08-27</lastmod>

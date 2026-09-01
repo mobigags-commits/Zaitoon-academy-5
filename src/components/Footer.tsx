@@ -204,6 +204,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 </button>
               </li>
               <li>
+                <button onClick={() => handleNav('hostel-life')} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                  <span>Hostels & Campus Residencies</span>
+                </button>
+              </li>
+              <li>
                 <button onClick={() => handleNav('accreditations')} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>International Accreditations</span>
@@ -234,6 +240,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 </button>
               </li>
               <li>
+                <button onClick={() => handleNav('about')} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                  <span>About ZRA & Leadership</span>
+                </button>
+              </li>
+              <li>
                 <button onClick={() => handleNav('contact')} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>Contact Campuses & Helpdesk</span>
@@ -243,15 +255,17 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* 20 Pages Quick Bottom Bar */}
+        {/* 23 Pages Quick Bottom Bar */}
         <div className="mt-12 pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500">
           <p>© {new Date().getFullYear()} Zaitoon Roots Academy (زیتون روٹس اکیڈمی). All Rights Reserved Worldwide.</p>
           <div className="flex items-center gap-3">
-            <span className="text-emerald-400 font-semibold">20 Comprehensive Pages Active</span>
+            <span className="text-emerald-400 font-semibold">23 Comprehensive Pages Active</span>
             <span>•</span>
             <button onClick={() => handleNav('home')} className="hover:text-white">Front Page</button>
             <span>•</span>
             <button onClick={() => handleNav('verification')} className="hover:text-white">Verify Certificate</button>
+            <span>•</span>
+            <button onClick={() => handleNav('research')} className="hover:text-white">Research Wing</button>
             <span>•</span>
             <button onClick={() => handleNav('contact')} className="hover:text-white">Helpdesk</button>
           </div>

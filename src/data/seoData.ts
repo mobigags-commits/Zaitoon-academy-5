@@ -172,6 +172,22 @@ export const PAGES_SEO_METADATA: Record<PageId, PageSEOMeta> = {
     breadcrumbName: 'About Us',
     keywords: 'about Zaitoon Roots Academy, institutional vision, chancellor message, higher education history'
   },
+  research: {
+    id: 'research',
+    path: '/research',
+    title: 'Research Innovations & Patents Wing | ZRA',
+    description: 'Explore cutting-edge research, international grants, patents, and scientific publications spearheaded by Zaitoon Roots Academy research fellows.',
+    breadcrumbName: 'Research & Innovations',
+    keywords: 'academic research, international research grants, AI neural systems, oncology drug delivery, scientific patents'
+  },
+  'hostel-life': {
+    id: 'hostel-life',
+    path: '/hostel-life',
+    title: 'Student Hostels & Campus Residences | ZRA',
+    description: 'Modern, safe, and hygienic hostel accommodations with 24/7 power backup, high-speed fiber internet, and nutritious dining for male and female scholars.',
+    breadcrumbName: 'Hostel & Residencies',
+    keywords: 'student hostel, campus residency, Islamabad student accommodation, hostel allotment, student dining'
+  },
   contact: {
     id: 'contact',
     path: '/contact',
