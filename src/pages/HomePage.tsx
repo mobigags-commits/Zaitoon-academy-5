@@ -363,15 +363,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* Institutional Highlights Grid (20 Pages Quick Launcher) */}
+      {/* Institutional Highlights Grid (23 Pages Quick Launcher) */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
-          <span className="text-xs font-bold text-amber-400 uppercase tracking-widest">Complete 20-Page Institutional Ecosystem</span>
+          <span className="text-xs font-bold text-amber-400 uppercase tracking-widest">Complete 23-Page Institutional Ecosystem</span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
             Explore All Academic & Student Portals
           </h2>
           <p className="text-rose-200 text-sm">
-            اکیڈمی کے تمام 20 خصوصی ڈیجیٹل پورٹلز، طلباء سہولیات اور آن لائن نظام
+            اکیڈمی کے تمام 23 خصوصی ڈیجیٹل پورٹلز، طلباء سہولیات اور آن لائن نظام
           </p>
         </div>
 
@@ -380,12 +380,16 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             { id: 'admissions', title: 'Online Admissions', icon: GraduationCap, desc: 'Digital Application & Challan' },
             { id: 'lms-portal', title: 'Student Portal (LMS)', icon: Layers, desc: 'Lectures, Timetable & GPA' },
             { id: 'fee-scholarship', title: 'Fee & Scholarships', icon: TrendingUp, desc: '100% Merit Financial Aid' },
+            { id: 'research', title: 'Research & Patents', icon: Sparkles, desc: 'AI Labs & Innovation Grants' },
             { id: 'verification', title: 'Degree Verification', icon: ShieldCheck, desc: 'Online QR Credential Check' },
             { id: 'library', title: 'E-Library & Papers', icon: BookOpen, desc: '50,000+ Digital Books & Past Papers' },
+            { id: 'hostel-life', title: 'Hostels & Residencies', icon: Building, desc: 'Boys & Girls Secure Residencies' },
             { id: 'placement', title: 'Placement & Jobs', icon: Building, desc: 'Google, MS & Global Linkages' },
             { id: 'distance-learning', title: 'Global Online Campus', icon: Globe2, desc: 'Study Worldwide 100% Online' },
             { id: 'career-counselor', title: 'AI Career Advisor', icon: Sparkles, desc: 'Interactive Aptitude Test' },
             { id: 'campus-tour', title: 'Campus Facilities', icon: Building, desc: 'STEM Labs & Hostels' },
+            { id: 'faculty', title: 'Distinguished Faculty', icon: Users, desc: 'PhD Professors & Deans' },
+            { id: 'calendar', title: 'Academic Calendar', icon: Calendar, desc: 'Semester Timelines & Exams' },
             { id: 'accreditations', title: 'Accreditations', icon: ShieldCheck, desc: 'HEC, WES & ISO 9001' },
             { id: 'alumni', title: 'Alumni Hall of Fame', icon: Users, desc: 'Global Graduate Stories' },
             { id: 'contact', title: 'Campuses & Helpdesk', icon: PhoneCall, desc: 'ISB, LHR, KHI, DXB' }

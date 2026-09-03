@@ -198,6 +198,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </h4>
             <ul className="space-y-2 text-xs text-slate-400">
               <li>
+                <button onClick={() => handleNav('research')} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                  <span>Research & Innovations Wing</span>
+                </button>
+              </li>
+              <li>
                 <button onClick={() => handleNav('campus-tour')} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>Campus Tour & Facilities</span>

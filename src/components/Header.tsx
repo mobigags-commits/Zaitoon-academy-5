@@ -268,7 +268,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenS
               Faculty
             </button>
 
-            {/* All 20 Pages Mega Menu Dropdown */}
+            {/* All 23 Pages Mega Menu Dropdown */}
             <div className="relative">
               <button
                 onClick={() => setPagesDropdownOpen(!pagesDropdownOpen)}
@@ -283,7 +283,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenS
                 }`}
               >
                 <Layers className="w-4 h-4 text-amber-400" />
-                <span>All 20 Pages</span>
+                <span>All 23 Pages</span>
                 <ChevronDown className="w-3.5 h-3.5" />
               </button>
 
@@ -294,11 +294,11 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenS
                 >
                   <div className="col-span-2 pb-2 border-b border-slate-100 flex items-center justify-between">
                     <div>
-                      <h4 className="font-bold text-slate-900 text-sm">Zaitoon Roots Academy — All 20 Institutional Pages</h4>
-                      <p className="text-xs text-slate-500">مکمل 20 صفحات ڈائرکٹری اور فوری نیویگیشن</p>
+                      <h4 className="font-bold text-slate-900 text-sm">Zaitoon Roots Academy — All 23 Institutional Pages</h4>
+                      <p className="text-xs text-slate-500">مکمل 23 صفحات ڈائرکٹری اور فوری نیویگیشن</p>
                     </div>
                     <span className="text-xs font-semibold px-2.5 py-1 bg-red-100 text-red-700 rounded-full">
-                      20 Comprehensive Portals
+                      23 Comprehensive Portals
                     </span>
                   </div>
 
@@ -385,7 +385,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenS
         <div className="lg:hidden bg-slate-900 text-white border-b border-slate-800 px-4 py-6 max-h-[85vh] overflow-y-auto animate-in slide-in-from-top-4 duration-200">
           <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-800">
             <span className="text-sm font-bold text-slate-300">Zaitoon Roots Academy Menu</span>
-            <span className="text-xs px-2 py-0.5 bg-red-600 rounded text-white font-medium">20 Pages</span>
+            <span className="text-xs px-2 py-0.5 bg-red-600 rounded text-white font-medium">23 Pages</span>
           </div>
 
           {/* Quick Owner WhatsApp in Mobile Drawer */}

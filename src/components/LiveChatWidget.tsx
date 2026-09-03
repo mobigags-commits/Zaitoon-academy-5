@@ -75,7 +75,7 @@ export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({ onNavigate }) =>
         replyText = 'You can instantly verify any genuine degree or diploma issued by Zaitoon Roots Academy on our online verification system with QR security.';
         actions = [{ label: 'Verify Certificate Now', page: 'verification' }];
       } else {
-        replyText = 'I am here to guide you across all our 20 institutional portals, program requirements, and campus facilities. What would you like to explore? You can also message our Owner directly on WhatsApp at 0344-7956085.';
+        replyText = 'I am here to guide you across all our 23 institutional portals, program requirements, and campus facilities. What would you like to explore? You can also message our Owner directly on WhatsApp at 0344-7956085.';
         actions = [
           { label: '💬 WhatsApp (0344-7956085)', link: 'https://wa.me/923447956085?text=Assalam-o-Alaikum%2C%20I%20want%20information%20regarding%20Zaitoon%20Roots%20Academy' },
           { label: 'Explore Degrees', page: 'degrees' },
