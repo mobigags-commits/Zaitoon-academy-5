@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { PageId } from '../types';
-import { PAGES_SEO_METADATA, PRODUCTION_DOMAIN, buildBreadcrumbSchema } from '../data/seoData';
+import { PAGES_SEO_METADATA, PRODUCTION_DOMAIN, buildBreadcrumbSchema, buildPageFaqSchema } from '../data/seoData';
 
 interface SEOHeadProps {
   currentPage: PageId;
@@ -57,6 +57,21 @@ export const SEOHead: React.FC<SEOHeadProps> = ({ currentPage }) => {
       document.head.appendChild(breadcrumbScript);
     }
     breadcrumbScript.textContent = JSON.stringify(buildBreadcrumbSchema(currentPage));
+
+    // 7. Update Dynamic Page FAQ Schema
+    const faqSchema = buildPageFaqSchema(currentPage);
+    let faqScript = document.getElementById('schema-page-faq') as HTMLScriptElement | null;
+    if (faqSchema) {
+      if (!faqScript) {
+        faqScript = document.createElement('script');
+        faqScript.id = 'schema-page-faq';
+        faqScript.type = 'application/ld+json';
+        document.head.appendChild(faqScript);
+      }
+      faqScript.textContent = JSON.stringify(faqSchema);
+    } else if (faqScript) {
+      faqScript.remove();
+    }
   }, [currentPage]);
 
   return null;
