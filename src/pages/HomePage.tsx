@@ -60,15 +60,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             {/* Hero Main Heading & Intro */}
             <div className="lg:col-span-7 space-y-6">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight text-white">
-                Empowering Minds with{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-200 to-yellow-400">
-                  All The World's Degrees
-                </span>{' '}
-                & Future-Ready Diplomas
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-200 to-yellow-400 mb-2">
+                  Zaitoon Roots Academy
+                </span>
+                All The World's Degrees & Future-Ready Diplomas
               </h1>
 
               <p className="text-base sm:text-lg text-rose-100/90 leading-relaxed max-w-2xl font-normal">
-                Welcome to <strong>Zaitoon Roots Academy</strong> — A premier international academic institution offering comprehensive undergraduate, postgraduate, doctorate degrees, and professional certifications in AI, Medicine, Engineering, Law, and Emerging Technologies.
+                Welcome to <strong>Zaitoon Roots Academy</strong> (زیتون روٹس اکیڈمی) — A premier international academic institution offering comprehensive undergraduate, postgraduate, doctorate degrees, and professional certifications in AI, Medicine, Engineering, Law, and Emerging Technologies.
               </p>
 
               {/* Action Buttons */}
