@@ -1,0 +1,7 @@
+# ==============================================================================
+# Google AdSense Authorized Digital Sellers (ads.txt)
+# Official Multi-Domain Configuration for 9 Connected Websites
+# Architecture: Direct Google AdSense Integration
+# Strict Security: Authorized Direct Publisher (No Resellers)
+# ==============================================================================
+google.com, pub-7890123456789012, DIRECT, f08c47fec0942fa0

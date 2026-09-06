@@ -21,7 +21,10 @@ export type PageId =
   | 'about'
   | 'research'
   | 'hostel-life'
-  | 'contact';
+  | 'contact'
+  | 'privacy-policy'
+  | 'terms'
+  | 'google-ecosystem';
 
 export interface PageInfo {
   id: PageId;
