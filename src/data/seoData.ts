@@ -240,6 +240,30 @@ export const PAGES_SEO_METADATA: Record<PageId, PageSEOMeta> = {
     description: 'Get in touch with Zaitoon Roots Academy admissions office. Campus addresses in Islamabad, Lahore, Karachi, and Dubai. Call or WhatsApp directly at 0344-7956085.',
     breadcrumbName: 'Contact & Campuses',
     keywords: 'contact Zaitoon Roots Academy, university admissions helpline Islamabad, campus address Sector H-12, admissions WhatsApp 03447956085, contact information'
+  },
+  'privacy-policy': {
+    id: 'privacy-policy',
+    path: '/privacy-policy',
+    title: 'Privacy & Cookie Policy | Google AdSense Compliance - Zaitoon Roots Academy',
+    description: 'Official Privacy and Cookie Policy of Zaitoon Roots Academy. Compliant with Google AdSense, GDPR, CCPA, and Google Consent Mode v2.',
+    breadcrumbName: 'Privacy Policy',
+    keywords: 'privacy policy, cookie policy, google adsense dart cookie, GDPR disclosure, user data protection, Zaitoon Roots Academy privacy'
+  },
+  terms: {
+    id: 'terms',
+    path: '/terms',
+    title: 'Terms of Service & Academic Regulations - Zaitoon Roots Academy',
+    description: 'Terms of service, academic regulations, intellectual property, and acceptable user policy for Zaitoon Roots Academy and affiliated digital portals.',
+    breadcrumbName: 'Terms of Service',
+    keywords: 'terms of service, academic regulations, website terms, intellectual property, user agreement'
+  },
+  'google-ecosystem': {
+    id: 'google-ecosystem',
+    path: '/google-ecosystem',
+    title: 'Google Ecosystem 9-Websites Command Center - Zaitoon Roots Academy',
+    description: 'Official technical command center and checklist for connecting, verifying, and monitoring 9 websites with Google AdSense, Google Ads, and ads.txt.',
+    breadcrumbName: 'Google Ecosystem Hub',
+    keywords: 'google ecosystem, 9 websites setup, adsense verification, ads.txt manager, google ads tracking'
   }
 };
 
