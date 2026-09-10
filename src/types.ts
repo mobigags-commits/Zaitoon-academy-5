@@ -24,7 +24,8 @@ export type PageId =
   | 'contact'
   | 'privacy-policy'
   | 'terms'
-  | 'google-ecosystem';
+  | 'google-ecosystem'
+  | 'payment-portal';
 
 export interface PageInfo {
   id: PageId;

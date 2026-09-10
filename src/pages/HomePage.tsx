@@ -21,7 +21,8 @@ import {
   MapPin,
   Building,
   PhoneCall,
-  Search
+  Search,
+  CreditCard
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -376,6 +377,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {[
+            { id: 'payment-portal', title: 'Global Fee Payment', icon: CreditCard, desc: 'JazzCash, EasyPaisa, Card, Raast' },
             { id: 'admissions', title: 'Online Admissions', icon: GraduationCap, desc: 'Digital Application & Challan' },
             { id: 'lms-portal', title: 'Student Portal (LMS)', icon: Layers, desc: 'Lectures, Timetable & GPA' },
             { id: 'fee-scholarship', title: 'Fee & Scholarships', icon: TrendingUp, desc: '100% Merit Financial Aid' },
@@ -390,7 +392,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             { id: 'faculty', title: 'Distinguished Faculty', icon: Users, desc: 'PhD Professors & Deans' },
             { id: 'calendar', title: 'Academic Calendar', icon: Calendar, desc: 'Semester Timelines & Exams' },
             { id: 'accreditations', title: 'Accreditations', icon: ShieldCheck, desc: 'HEC, WES & ISO 9001' },
-            { id: 'alumni', title: 'Alumni Hall of Fame', icon: Users, desc: 'Global Graduate Stories' },
             { id: 'contact', title: 'Campuses & Helpdesk', icon: PhoneCall, desc: 'ISB, LHR, KHI, DXB' }
           ].map((item) => {
             const Icon = item.icon;
@@ -410,6 +411,57 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </button>
             );
           })}
+        </div>
+      </section>
+
+      {/* Global Payment Methods & Treasury Clearance Showcase */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#40020b] to-[#52030e] border-t border-red-900/80">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-8 gap-4">
+            <div>
+              <span className="text-xs font-bold text-amber-400 uppercase tracking-widest">Global Financial Infrastructure</span>
+              <h2 className="text-2xl sm:text-3xl font-black text-white mt-1">
+                Puri Dunya K Tamam Payment Methods & Instant Forms
+              </h2>
+              <p className="text-rose-200 text-xs sm:text-sm mt-1">
+                تمام ملکی اور بین الاقوامی ادائیگی کے ذرائع برائے داخلہ، سمسٹر فیس اور سرٹیفیکیشن
+              </p>
+            </div>
+            <button
+              onClick={() => onNavigate('payment-portal')}
+              className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-bold text-xs shadow-lg flex items-center gap-2 self-start lg:self-auto cursor-pointer"
+            >
+              <CreditCard className="w-4 h-4" />
+              <span>Open Complete Payment Portal</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            {[
+              { name: 'JazzCash', cat: 'Pakistan Mobile Wallet', desc: '0344-7956085 Till & QR', color: 'border-rose-500/50 bg-rose-950/30 text-rose-300' },
+              { name: 'EasyPaisa', cat: 'Instant Mobile Account', desc: '0344-7956085 Direct Account', color: 'border-emerald-500/50 bg-emerald-950/30 text-emerald-300' },
+              { name: 'Raast (SBP)', cat: 'Instant 0% Fee Transfer', desc: 'State Bank Fast Settlement', color: 'border-sky-500/50 bg-sky-950/30 text-sky-300' },
+              { name: 'Visa & Mastercard', cat: 'International Debit/Credit', desc: '3D Secure 256-Bit SSL', color: 'border-indigo-500/50 bg-indigo-950/30 text-indigo-300' },
+              { name: '1Bill Voucher', cat: '30+ Commercial Banks', desc: 'ATM, Online & Branch Slip', color: 'border-blue-500/50 bg-blue-950/30 text-blue-300' },
+              { name: 'PayPal & Crypto', cat: 'Global & USDT Treasury', desc: 'Multi-Currency Settlement', color: 'border-amber-500/50 bg-amber-950/30 text-amber-300' }
+            ].map((gateway, idx) => (
+              <button
+                key={idx}
+                onClick={() => onNavigate('payment-portal')}
+                className={`p-4 rounded-2xl border text-left flex flex-col justify-between hover:scale-102 hover:shadow-lg transition-all cursor-pointer ${gateway.color}`}
+              >
+                <div>
+                  <span className="text-[10px] opacity-75 uppercase font-bold block">{gateway.cat}</span>
+                  <h4 className="font-extrabold text-white text-sm sm:text-base mt-1">{gateway.name}</h4>
+                </div>
+                <div className="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-[11px]">
+                  <span className="truncate">{gateway.desc}</span>
+                  <ArrowRight className="w-3 h-3 shrink-0 opacity-80" />
+                </div>
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -3,6 +3,7 @@ import { PageId } from '../types';
 import { ALL_DEGREES } from '../data/degreesData';
 import { ALL_DIPLOMAS } from '../data/diplomasData';
 import confetti from 'canvas-confetti';
+import { ZaitoonLogo } from '../components/ZaitoonLogo';
 import {
   FileCheck2,
   UploadCloud,
@@ -17,7 +18,8 @@ import {
   ArrowRight,
   ShieldCheck,
   AlertCircle,
-  MessageCircle
+  MessageCircle,
+  CreditCard
 } from 'lucide-react';
 
 interface AdmissionsPageProps {
@@ -499,13 +501,7 @@ export const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onNavigate }) =>
               <div className="bg-slate-50 rounded-3xl p-6 sm:p-8 border-2 border-red-200 space-y-6">
                 <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-red-700 text-white flex items-center justify-center font-black text-sm">
-                      ZRA
-                    </div>
-                    <div>
-                      <h4 className="font-extrabold text-base text-slate-900">ZAITOON ROOTS ACADEMY</h4>
-                      <p className="text-[11px] text-slate-500 font-mono">Official Admission Fee Challan (Bank / Online Copy)</p>
-                    </div>
+                    <ZaitoonLogo variant="horizontal" size="sm" isDark={false} showUrdu={true} showMotto={false} />
                   </div>
 
                   <div className="text-right">
@@ -554,13 +550,23 @@ export const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onNavigate }) =>
 
               {/* Action Buttons */}
               <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
-                <button
-                  onClick={() => window.print()}
-                  className="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs flex items-center gap-2 cursor-pointer"
-                >
-                  <Printer className="w-4 h-4" />
-                  <span>Print Fee Challan / PDF Copy</span>
-                </button>
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <button
+                    onClick={() => onNavigate('payment-portal')}
+                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 text-white font-black text-xs flex items-center gap-2 shadow-lg cursor-pointer"
+                  >
+                    <CreditCard className="w-4 h-4" />
+                    <span>Pay Challan Online Now (JazzCash, Cards, EasyPaisa, Raast)</span>
+                  </button>
+
+                  <button
+                    onClick={() => window.print()}
+                    className="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs flex items-center gap-2 cursor-pointer"
+                  >
+                    <Printer className="w-4 h-4" />
+                    <span>Print Fee Challan</span>
+                  </button>
+                </div>
 
                 <div className="flex gap-2">
                   <button

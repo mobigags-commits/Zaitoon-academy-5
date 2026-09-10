@@ -31,6 +31,11 @@ import { AboutPage } from './pages/AboutPage';
 import { ResearchPage } from './pages/ResearchPage';
 import { HostelLifePage } from './pages/HostelLifePage';
 import { ContactPage } from './pages/ContactPage';
+import { GlobalPaymentPortalPage } from './pages/GlobalPaymentPortalPage';
+import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
+import { TermsPage } from './pages/TermsPage';
+import { GoogleEcosystemPage } from './pages/GoogleEcosystemPage';
+import { CookieConsentBanner } from './components/CookieConsentBanner';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>(() => {
@@ -111,6 +116,14 @@ export default function App() {
         return <HostelLifePage onNavigate={handleNavigate} />;
       case 'contact':
         return <ContactPage onNavigate={handleNavigate} />;
+      case 'payment-portal':
+        return <GlobalPaymentPortalPage onNavigate={handleNavigate} />;
+      case 'privacy-policy':
+        return <PrivacyPolicyPage onNavigate={handleNavigate} />;
+      case 'terms':
+        return <TermsPage onNavigate={handleNavigate} />;
+      case 'google-ecosystem':
+        return <GoogleEcosystemPage onNavigate={handleNavigate} />;
       default:
         return <HomePage onNavigate={handleNavigate} />;
     }
@@ -145,6 +158,9 @@ export default function App() {
 
       {/* Interactive AI Admission Counselor Widget */}
       <LiveChatWidget onNavigate={handleNavigate} />
+
+      {/* Cookie Consent Banner */}
+      <CookieConsentBanner onNavigate={handleNavigate} />
     </div>
   );
 }

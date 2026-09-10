@@ -1,6 +1,7 @@
 import React from 'react';
 import { PageId } from '../types';
 import { PAGES_MANIFEST, CAMPUS_LOCATIONS } from '../data/academyData';
+import { ZaitoonLogo } from './ZaitoonLogo';
 import {
   GraduationCap,
   Mail,
@@ -11,7 +12,9 @@ import {
   Globe,
   ArrowUpRight,
   Heart,
-  MessageCircle
+  MessageCircle,
+  CreditCard,
+  Lock
 } from 'lucide-react';
 
 interface FooterProps {
@@ -54,16 +57,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Brand Info & Motto */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-red-600 to-rose-500 flex items-center justify-center text-white shadow-lg">
-                <GraduationCap className="w-6 h-6" />
-              </div>
-              <div>
-                <span className="text-xl font-extrabold tracking-tight text-white">ZAITOON ROOTS</span>
-                <span className="text-xs ml-1.5 px-2 py-0.5 rounded bg-red-900/60 text-red-300 font-bold border border-red-800">
-                  Academy
-                </span>
-                <p className="text-xs text-slate-400 font-medium">زیتون روٹس اکیڈمی | Roots of Wisdom, Wings of Excellence</p>
-              </div>
+              <ZaitoonLogo variant="horizontal" size="md" isDark={true} showUrdu={true} showMotto={true} />
             </div>
 
             <p className="text-sm text-slate-400 leading-relaxed pr-4">
@@ -165,6 +159,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 </button>
               </li>
               <li>
+                <button onClick={() => handleNav('payment-portal')} className="text-amber-400 font-bold hover:text-amber-300 transition-colors flex items-center gap-1.5">
+                  <CreditCard className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Global Payment Portal (فیس ادائیگی)</span>
+                </button>
+              </li>
+              <li>
                 <button onClick={() => handleNav('lms-portal')} className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>Student LMS & Grades Portal</span>
@@ -261,19 +261,83 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* 23 Pages Quick Bottom Bar */}
-        <div className="mt-12 pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500">
+        {/* Global Payment Methods Showcase Banner */}
+        <div className="mt-12 pt-8 border-t border-slate-800/80 bg-slate-950/60 rounded-3xl p-6 border border-slate-800">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-4">
+            <div>
+              <span className="text-[10px] font-black uppercase tracking-widest text-amber-400 block mb-1">
+                INSTITUTIONAL TREASURY & GLOBAL FINANCIAL CLEARANCE
+              </span>
+              <h4 className="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+                <CreditCard className="w-4 h-4 text-emerald-400" />
+                <span>All The World's Payment Gateways Accepted (تمام عالمی ادائیگی کے طریقے)</span>
+              </h4>
+            </div>
+            <button
+              onClick={() => handleNav('payment-portal')}
+              className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs flex items-center gap-2 self-start lg:self-auto shadow-md transition-colors"
+            >
+              <span>Launch Global Payment Portal</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2 text-xs font-semibold">
+            <span className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-rose-400">
+              JazzCash
+            </span>
+            <span className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-emerald-400">
+              EasyPaisa
+            </span>
+            <span className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-sky-400">
+              Raast (SBP)
+            </span>
+            <span className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-indigo-400">
+              Visa & Mastercard
+            </span>
+            <span className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-blue-400">
+              1Bill (30+ Banks)
+            </span>
+            <span className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-red-400">
+              Meezan & HBL Challan
+            </span>
+            <span className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-amber-400">
+              PayPal
+            </span>
+            <span className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-200">
+              Apple & Google Pay
+            </span>
+            <span className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-teal-400">
+              Middle East Mada / STC
+            </span>
+            <span className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-blue-300">
+              SWIFT Wire
+            </span>
+            <span className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-yellow-500">
+              Western Union
+            </span>
+            <span className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-emerald-300">
+              Wise & Payoneer
+            </span>
+            <span className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-orange-400">
+              Crypto (USDT / BTC)
+            </span>
+          </div>
+        </div>
+
+        {/* 24 Pages Quick Bottom Bar & Legal */}
+        <div className="mt-8 pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500">
           <p>© {new Date().getFullYear()} Zaitoon Roots Academy (زیتون روٹس اکیڈمی). All Rights Reserved Worldwide.</p>
-          <div className="flex items-center gap-3">
-            <span className="text-emerald-400 font-semibold">23 Comprehensive Pages Active</span>
+          <div className="flex flex-wrap items-center gap-3">
+            <button onClick={() => handleNav('payment-portal')} className="text-amber-400 font-bold hover:underline">Pay Fee</button>
             <span>•</span>
-            <button onClick={() => handleNav('home')} className="hover:text-white">Front Page</button>
+            <button onClick={() => handleNav('privacy-policy')} className="hover:text-white">Privacy Policy</button>
+            <span>•</span>
+            <button onClick={() => handleNav('terms')} className="hover:text-white">Terms of Service</button>
+            <span>•</span>
+            <button onClick={() => handleNav('google-ecosystem')} className="text-sky-400 hover:underline">Google Ecosystem Hub</button>
             <span>•</span>
             <button onClick={() => handleNav('verification')} className="hover:text-white">Verify Certificate</button>
-            <span>•</span>
-            <button onClick={() => handleNav('research')} className="hover:text-white">Research Wing</button>
-            <span>•</span>
-            <button onClick={() => handleNav('contact')} className="hover:text-white">Helpdesk</button>
           </div>
         </div>
       </div>

@@ -56,6 +56,15 @@ export const PAGES_MANIFEST: PageInfo[] = [
     icon: 'Calculator'
   },
   {
+    id: 'payment-portal',
+    pageNumber: 7,
+    title: 'Global Payment Portal (All Methods)',
+    urduTitle: 'عالمی ادائیگی پورٹل (تمام بینکنگ و والٹس)',
+    subtitle: 'JazzCash, EasyPaisa, Raast, Cards, PayPal, Apple Pay, SWIFT & Bank Challan',
+    category: 'Admissions & Fees',
+    icon: 'CreditCard'
+  },
+  {
     id: 'faculty',
     pageNumber: 7,
     title: 'Faculty & Research Wing',

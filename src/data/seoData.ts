@@ -264,6 +264,14 @@ export const PAGES_SEO_METADATA: Record<PageId, PageSEOMeta> = {
     description: 'Official technical command center and checklist for connecting, verifying, and monitoring 9 websites with Google AdSense, Google Ads, and ads.txt.',
     breadcrumbName: 'Google Ecosystem Hub',
     keywords: 'google ecosystem, 9 websites setup, adsense verification, ads.txt manager, google ads tracking'
+  },
+  'payment-portal': {
+    id: 'payment-portal',
+    path: '/payment-portal',
+    title: 'Global Payment Portal & All World Payment Methods - Zaitoon Roots Academy',
+    description: 'Pay admission fees, tuition installments, and verification dues online via JazzCash, EasyPaisa, Raast, 1Bill, Visa, MasterCard, PayPal, Apple Pay, SWIFT Wire, or Mada.',
+    breadcrumbName: 'Global Payment Portal',
+    keywords: 'pay fee online, jazzcash fee payment, easypaisa fee, raast sbp payment, visa mastercard university fee, paypal international student fee, bank challan print, meezan bank hbl challan, zra payment portal'
   }
 };
 

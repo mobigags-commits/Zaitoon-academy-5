@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { PageId } from '../types';
 import { PAGES_MANIFEST } from '../data/academyData';
+import { ZaitoonLogo } from './ZaitoonLogo';
 import {
   GraduationCap,
   Award,
@@ -17,7 +18,8 @@ import {
   Globe2,
   CalendarDays,
   FileText,
-  MessageCircle
+  MessageCircle,
+  CreditCard
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -105,38 +107,14 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenS
         } transition-colors duration-300`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
-          {/* Logo & Brand Identity */}
+          {/* Official Heraldic Logo & Brand Identity */}
           <button
             onClick={() => handlePageSelect('home')}
-            className="flex items-center gap-3.5 text-left group cursor-pointer"
+            className="flex items-center text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-2xl"
             id="brand-logo-btn"
+            title="Zaitoon Roots Academy - Official Home"
           >
-            <div
-              className={`w-12 h-12 rounded-xl flex items-center justify-center shadow-lg transition-transform group-hover:scale-105 ${
-                isHome
-                  ? 'bg-gradient-to-tr from-amber-500 via-amber-400 to-amber-300 text-red-950 font-black'
-                  : 'bg-gradient-to-tr from-red-700 to-red-600 text-white font-black'
-              }`}
-            >
-              <GraduationCap className="w-7 h-7" />
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-extrabold tracking-tight text-xl sm:text-2xl leading-none">
-                  ZAITOON ROOTS
-                </span>
-                <span
-                  className={`text-[10px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded ${
-                    isHome ? 'bg-amber-400/20 text-amber-300 border border-amber-400/30' : 'bg-red-50 text-red-700 border border-red-200'
-                  }`}
-                >
-                  Academy
-                </span>
-              </div>
-              <p className={`text-xs mt-0.5 font-medium ${isHome ? 'text-rose-200' : 'text-slate-500'}`}>
-                زیتون روٹس اکیڈمی | Premier Global Higher Education & Skills
-              </p>
-            </div>
+            <ZaitoonLogo variant="horizontal" size="md" isDark={isHome} showUrdu={true} showMotto={true} />
           </button>
 
           {/* Desktop Navigation Links */}
@@ -250,7 +228,24 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenS
                   : 'text-slate-700 hover:bg-slate-100'
               }`}
             >
-              Fee & Scholarships
+              Fee & Aid
+            </button>
+
+            <button
+              onClick={() => handlePageSelect('payment-portal')}
+              className={`px-3 py-2 rounded-lg font-bold text-sm flex items-center gap-1.5 transition-all ${
+                currentPage === 'payment-portal'
+                  ? isHome
+                    ? 'bg-amber-400 text-slate-950 font-black'
+                    : 'bg-emerald-600 text-white font-black'
+                  : isHome
+                  ? 'text-amber-300 hover:bg-amber-400/20 hover:text-white'
+                  : 'text-emerald-700 hover:bg-emerald-50'
+              }`}
+              id="header-nav-pay-fee"
+            >
+              <CreditCard className="w-4 h-4" />
+              <span>Pay Fee (فیس ادائیگی)</span>
             </button>
 
             <button
@@ -422,6 +417,14 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenS
           </div>
 
           <div className="mt-6 pt-4 border-t border-slate-800 flex flex-col gap-3">
+            <button
+              onClick={() => handlePageSelect('payment-portal')}
+              className="w-full py-3 rounded-xl font-bold text-center bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center gap-2 shadow-lg"
+            >
+              <CreditCard className="w-4 h-4" />
+              <span>Pay Fee Online (تمام ادائیگی کے طریقے)</span>
+            </button>
+
             <button
               onClick={() => handlePageSelect('admissions')}
               className="w-full py-3 rounded-xl font-bold text-center bg-amber-400 text-slate-950 flex items-center justify-center gap-2"

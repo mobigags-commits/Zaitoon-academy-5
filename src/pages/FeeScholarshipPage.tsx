@@ -10,7 +10,8 @@ import {
   Sparkles,
   HelpCircle,
   ArrowRight,
-  ShieldCheck
+  ShieldCheck,
+  CreditCard
 } from 'lucide-react';
 
 interface FeeScholarshipPageProps {
@@ -215,13 +216,24 @@ export const FeeScholarshipPage: React.FC<FeeScholarshipPageProps> = ({ onNaviga
               </div>
             </div>
 
-            <button
-              onClick={() => onNavigate('admissions')}
-              className="w-full py-4 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-sm shadow-xl flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <span>Lock This Fee & Apply Online</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            <div className="space-y-2.5">
+              <button
+                onClick={() => onNavigate('payment-portal')}
+                className="w-full py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-black text-sm shadow-xl flex items-center justify-center gap-2 cursor-pointer transition-all"
+                id="btn-pay-fee-now"
+              >
+                <CreditCard className="w-4 h-4" />
+                <span>Pay Fee Online (JazzCash, Cards, EasyPaisa, Raast)</span>
+              </button>
+
+              <button
+                onClick={() => onNavigate('admissions')}
+                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-xs shadow-md flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <span>Lock This Fee & Apply Online</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
 
