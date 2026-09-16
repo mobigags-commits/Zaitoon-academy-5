@@ -3,9 +3,30 @@
 
 User-agent: *
 Allow: /
-
-# Disallow private build/asset internals if applicable
 Disallow: /api/
 
-# Sitemap location
+# Explicit permissions for Search & AI Answer Engines (AEO/GEO)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Canonical Sitemap & Host
 Sitemap: https://zaitoon-academy-5.vercel.app/sitemap.xml
+Host: https://zaitoon-academy-5.vercel.app

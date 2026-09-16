@@ -48,16 +48,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet" />
 
-    <!-- Schema.org EducationalOrganization & WebSite Structured Data -->
+    <!-- Schema.org EducationalOrganization & WebSite Structured Data (GEO & Entity Clarity) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "EducationalOrganization",
+          "@type": ["EducationalOrganization", "CollegeOrUniversity"],
           "@id": "https://zaitoon-academy-5.vercel.app/#organization",
           "name": "Zaitoon Roots Academy",
-          "alternateName": "ZRA",
+          "alternateName": ["ZRA", "زیتون روٹس اکیڈمی"],
           "url": "https://zaitoon-academy-5.vercel.app/",
           "logo": "https://zaitoon-academy-5.vercel.app/favicon.svg",
           "image": "https://zaitoon-academy-5.vercel.app/og-image.svg",
@@ -72,7 +72,64 @@
             "addressRegion": "Federal Capital",
             "postalCode": "44000",
             "addressCountry": "PK"
-          }
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 33.6844,
+            "longitude": 73.0479
+          },
+          "hasMap": "https://maps.google.com/?q=33.6844,73.0479",
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "telephone": "+92-344-7956085",
+              "contactType": "Admissions & Student Counseling Desk",
+              "availableLanguage": ["English", "Urdu"],
+              "areaServed": ["PK", "AE", "SA", "Worldwide"]
+            }
+          ],
+          "subOrganization": [
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "Islamabad Central Flagship Campus",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Zaitoon Academic Boulevard, Sector H-12 / Park Road",
+                "addressLocality": "Islamabad",
+                "addressCountry": "PK"
+              }
+            },
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "Lahore Executive Campus",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Gulberg III, Main Boulevard",
+                "addressLocality": "Lahore",
+                "addressCountry": "PK"
+              }
+            },
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "Karachi Coastal & Tech Campus",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Clifton Block 5 / Shahrah-e-Faisal",
+                "addressLocality": "Karachi",
+                "addressCountry": "PK"
+              }
+            },
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "Dubai International Liaison Campus",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Dubai Knowledge Park, Block 12",
+                "addressLocality": "Dubai",
+                "addressCountry": "AE"
+              }
+            }
+          ]
         },
         {
           "@type": "WebSite",
@@ -89,44 +146,6 @@
             "query-input": "required name=search_term_string"
           },
           "inLanguage": ["en-US", "ur-PK"]
-        },
-        {
-          "@type": "FAQPage",
-          "@id": "https://zaitoon-academy-5.vercel.app/#faq",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "How to apply for 2026 admissions at Zaitoon Roots Academy?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Candidates can apply 100% online through the official ZRA admissions portal at https://zaitoon-academy-5.vercel.app/admissions by filling the 4-step digital application form, uploading academic transcripts, and generating fee challans with automatic merit scholarship evaluation."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What degree programs are offered at Zaitoon Roots Academy?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Zaitoon Roots Academy offers 120+ accredited undergraduate (BS), graduate (MS), and doctorate (PhD) degrees covering Artificial Intelligence, Computer Science, Software Engineering, Doctor of Physical Therapy (DPT), Medical Lab Technology, Business Administration, and Social Sciences."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Does Zaitoon Roots Academy offer scholarships and financial aid?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes, Zaitoon Roots Academy provides up to 100% merit-based scholarships based on previous academic percentages, as well as need-based financial aid, sports scholarships, and flexible semester installment plans."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How can employers verify ZRA degrees and diplomas online?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Degrees and diplomas can be verified instantly 24/7 on the official online credential verification desk at https://zaitoon-academy-5.vercel.app/verification by entering the student roll number or scanning the secure QR code on the certificate."
-              }
-            }
-          ]
         }
       ]
     }
@@ -182,6 +201,10 @@
                 <li><a href="/research" style="color: #ffffff; text-decoration: underline;">20. Research Innovations & Patents</a></li>
                 <li><a href="/hostel-life" style="color: #ffffff; text-decoration: underline;">21. Boys & Girls Hostels Residencies</a></li>
                 <li><a href="/contact" style="color: #ffffff; text-decoration: underline;">22. Contact Us, Campuses & Helpline</a></li>
+                <li><a href="/payment-portal" style="color: #ffffff; text-decoration: underline;">23. Global Fee Payment Portal (JazzCash, Raast, Cards, PayPal)</a></li>
+                <li><a href="/privacy-policy" style="color: #ffffff; text-decoration: underline;">24. Official Privacy & Cookie Policy (AdSense & GDPR)</a></li>
+                <li><a href="/terms" style="color: #ffffff; text-decoration: underline;">25. Terms of Service & Academic Regulations</a></li>
+                <li><a href="/google-ecosystem" style="color: #ffffff; text-decoration: underline;">26. Google Ecosystem 9-Websites Command Center</a></li>
               </ul>
             </section>
 

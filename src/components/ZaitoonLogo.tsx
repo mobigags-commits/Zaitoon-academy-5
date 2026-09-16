@@ -280,9 +280,9 @@ export const ZaitoonLogo: React.FC<ZaitoonLogoProps> = ({
         <EmblemSVG widthClass={emblemSizes[size]} />
         <div className="space-y-1">
           <div className="flex items-center justify-center gap-2">
-            <h1 className={`font-black tracking-tight uppercase ${isDark ? 'text-white' : 'text-slate-900'} ${textSizes[size].main}`}>
+            <span className={`font-black tracking-tight uppercase ${isDark ? 'text-white' : 'text-slate-900'} ${textSizes[size].main}`}>
               ZAITOON ROOTS
-            </h1>
+            </span>
             <span className="px-2 py-0.5 rounded-md bg-red-700 text-white font-black text-xs uppercase tracking-wider shadow-sm">
               Academy
             </span>

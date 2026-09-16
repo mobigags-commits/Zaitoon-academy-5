@@ -1,4 +1,6 @@
 import { PageId } from '../types';
+import { ALL_DEGREES } from './degreesData';
+import { ALL_DIPLOMAS } from './diplomasData';
 
 export interface PageSEOMeta {
   id: PageId;
@@ -103,7 +105,17 @@ export const PAGES_SEO_METADATA: Record<PageId, PageSEOMeta> = {
     title: 'Fee Structure & 100% Merit Scholarships 2026 | Tuition Calculator | ZRA',
     description: 'Transparent 2026 fee structure for all BS, MS, PhD degrees & diplomas. Calculate semester tuition, flexible 3-installment payment plans, and 100% merit & need scholarships.',
     breadcrumbName: 'Fee & Scholarships',
-    keywords: 'university fee structure 2026, 100% merit scholarship Pakistan, scholarship calculator, affordable semester fee Islamabad, installment plans university tuition, financial aid'
+    keywords: 'university fee structure 2026, 100% merit scholarship Pakistan, scholarship calculator, affordable semester fee Islamabad, installment plans university tuition, financial aid',
+    faqs: [
+      {
+        question: 'What merit scholarships are available at Zaitoon Roots Academy?',
+        answer: 'ZRA offers up to 100% merit tuition waivers for students scoring 90%+ in previous qualifications, 50% waiver for 85-89.9%, and 30% waiver for 75-84.9%, along with kinship and sports concessions.'
+      },
+      {
+        question: 'Can tuition fees be paid in monthly semester installments?',
+        answer: 'Yes, ZRA provides a flexible 3-installment payment schedule for every semester across undergraduate degrees, graduate programs, and professional diplomas.'
+      }
+    ]
   },
   faculty: {
     id: 'faculty',
@@ -127,7 +139,17 @@ export const PAGES_SEO_METADATA: Record<PageId, PageSEOMeta> = {
     title: 'Online Degree & Diploma Credential Verification | 24/7 QR Desk | ZRA',
     description: 'Instant official credential verification for degrees, transcripts, and diplomas issued by Zaitoon Roots Academy. Real-time roll number and QR code security check for employers.',
     breadcrumbName: 'Credential Verification',
-    keywords: 'online degree verification Pakistan, verify student transcript online, diploma verification portal, QR credential check, employer verification desk'
+    keywords: 'online degree verification Pakistan, verify student transcript online, diploma verification portal, QR credential check, employer verification desk',
+    faqs: [
+      {
+        question: 'How can employers verify ZRA degrees and diplomas online?',
+        answer: 'Degrees, transcripts, and diplomas can be verified instantly 24/7 by entering the student registration roll number or scanning the secure QR code printed on the official certificate.'
+      },
+      {
+        question: 'Is digital verification from ZRA recognized by international evaluation agencies?',
+        answer: 'Yes, ZRA digital verification records are compliant with international WES credential evaluation benchmarks and employer background checks worldwide.'
+      }
+    ]
   },
   library: {
     id: 'library',
@@ -239,7 +261,17 @@ export const PAGES_SEO_METADATA: Record<PageId, PageSEOMeta> = {
     title: 'Contact Zaitoon Roots Academy | Admissions Helpline & WhatsApp 2026',
     description: 'Get in touch with Zaitoon Roots Academy admissions office. Campus addresses in Islamabad, Lahore, Karachi, and Dubai. Call or WhatsApp directly at 0344-7956085.',
     breadcrumbName: 'Contact & Campuses',
-    keywords: 'contact Zaitoon Roots Academy, university admissions helpline Islamabad, campus address Sector H-12, admissions WhatsApp 03447956085, contact information'
+    keywords: 'contact Zaitoon Roots Academy, university admissions helpline Islamabad, campus address Sector H-12, admissions WhatsApp 03447956085, contact information',
+    faqs: [
+      {
+        question: 'Where is the main campus of Zaitoon Roots Academy located?',
+        answer: 'The flagship central campus is located at Zaitoon Academic Boulevard, Sector H-12 / Park Road, Islamabad, Pakistan, with additional regional and international liaison campuses in Lahore, Karachi, and Dubai.'
+      },
+      {
+        question: 'What is the official admissions helpline and WhatsApp number?',
+        answer: 'Prospective students and guardians can contact the admissions desk directly via voice or WhatsApp at +92-344-7956085 or via email at info@zaitoonroots.edu.'
+      }
+    ]
   },
   'privacy-policy': {
     id: 'privacy-policy',
@@ -271,7 +303,17 @@ export const PAGES_SEO_METADATA: Record<PageId, PageSEOMeta> = {
     title: 'Global Payment Portal & All World Payment Methods - Zaitoon Roots Academy',
     description: 'Pay admission fees, tuition installments, and verification dues online via JazzCash, EasyPaisa, Raast, 1Bill, Visa, MasterCard, PayPal, Apple Pay, SWIFT Wire, or Mada.',
     breadcrumbName: 'Global Payment Portal',
-    keywords: 'pay fee online, jazzcash fee payment, easypaisa fee, raast sbp payment, visa mastercard university fee, paypal international student fee, bank challan print, meezan bank hbl challan, zra payment portal'
+    keywords: 'pay fee online, jazzcash fee payment, easypaisa fee, raast sbp payment, visa mastercard university fee, paypal international student fee, bank challan print, meezan bank hbl challan, zra payment portal',
+    faqs: [
+      {
+        question: 'What payment methods does Zaitoon Roots Academy accept for fee payment?',
+        answer: 'ZRA accepts mobile wallets (JazzCash, EasyPaisa, Nayapay, Sadapay), instant bank transfers via SBP Raast, credit/debit cards (Visa, MasterCard, UnionPay), 1Bill voucher codes across 30+ banks, Meezan & HBL print challans, and international transfers via PayPal, Apple Pay, SWIFT wire, and USDT.'
+      },
+      {
+        question: 'How do I obtain an official fee clearance receipt after payment?',
+        answer: 'Upon submitting your transaction reference or uploading your bank deposit receipt on the Global Payment Portal, the ZRA Finance Wing verifies and issues an instant downloadable PDF clearance receipt with verification QR code.'
+      }
+    ]
   }
 };
 
@@ -319,15 +361,15 @@ export function buildBreadcrumbSchema(pageId: PageId) {
 }
 
 /**
- * Builds Schema.org EducationalOrganization structured data
+ * Builds Schema.org EducationalOrganization structured data with full GEO parameters
  */
 export function buildOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'EducationalOrganization',
+    '@type': ['EducationalOrganization', 'CollegeOrUniversity'],
     '@id': `${PRODUCTION_DOMAIN}/#organization`,
     name: 'Zaitoon Roots Academy',
-    alternateName: 'ZRA',
+    alternateName: ['ZRA', 'زیتون روٹس اکیڈمی'],
     url: `${PRODUCTION_DOMAIN}/`,
     logo: `${PRODUCTION_DOMAIN}/favicon.svg`,
     image: `${PRODUCTION_DOMAIN}/og-image.svg`,
@@ -343,9 +385,24 @@ export function buildOrganizationSchema() {
       postalCode: '44000',
       addressCountry: 'PK'
     },
-    location: [
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 33.6844,
+      longitude: 73.0479
+    },
+    hasMap: 'https://maps.google.com/?q=33.6844,73.0479',
+    contactPoint: [
       {
-        '@type': 'Place',
+        '@type': 'ContactPoint',
+        telephone: '+92-344-7956085',
+        contactType: 'Admissions & Student Counseling Desk',
+        availableLanguage: ['English', 'Urdu'],
+        areaServed: ['PK', 'AE', 'GB', 'SA', 'Worldwide']
+      }
+    ],
+    subOrganization: [
+      {
+        '@type': 'CollegeOrUniversity',
         name: 'Islamabad Central Flagship Campus',
         address: {
           '@type': 'PostalAddress',
@@ -355,7 +412,7 @@ export function buildOrganizationSchema() {
         }
       },
       {
-        '@type': 'Place',
+        '@type': 'CollegeOrUniversity',
         name: 'Lahore Executive Campus',
         address: {
           '@type': 'PostalAddress',
@@ -365,7 +422,7 @@ export function buildOrganizationSchema() {
         }
       },
       {
-        '@type': 'Place',
+        '@type': 'CollegeOrUniversity',
         name: 'Karachi Coastal & Tech Campus',
         address: {
           '@type': 'PostalAddress',
@@ -375,7 +432,7 @@ export function buildOrganizationSchema() {
         }
       },
       {
-        '@type': 'Place',
+        '@type': 'CollegeOrUniversity',
         name: 'Dubai International Liaison Campus',
         address: {
           '@type': 'PostalAddress',
@@ -383,15 +440,6 @@ export function buildOrganizationSchema() {
           addressLocality: 'Dubai',
           addressCountry: 'AE'
         }
-      }
-    ],
-    contactPoint: [
-      {
-        '@type': 'ContactPoint',
-        telephone: '+92-344-7956085',
-        contactType: 'Admissions & Student Counseling Desk',
-        availableLanguage: ['English', 'Urdu'],
-        areaServed: ['PK', 'AE', 'GB', 'SA', 'Worldwide']
       }
     ]
   };
@@ -441,4 +489,94 @@ export function buildPageFaqSchema(pageId: PageId) {
       }
     }))
   };
+}
+
+/**
+ * Builds specialized Schema.org structured data (Courses, Program Catalogs, ContactPage)
+ * for AI Answer Engines (AEO) and Google Rich Results
+ */
+export function buildPageSpecializedSchema(pageId: PageId) {
+  if (pageId === 'degrees') {
+    // Representative accredited degrees from existing degreesData
+    const sampleDegrees = ALL_DEGREES.slice(0, 10);
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: "Zaitoon Roots Academy Accredited Degree Programs",
+      description: "Official directory of undergraduate and postgraduate degree programs offered by Zaitoon Roots Academy.",
+      itemListElement: sampleDegrees.map((deg, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'Course',
+          name: deg.title,
+          courseCode: deg.code,
+          description: deg.description,
+          provider: {
+            '@id': `${PRODUCTION_DOMAIN}/#organization`
+          },
+          hasCourseInstance: {
+            '@type': 'CourseInstance',
+            courseMode: 'Blended',
+            courseWorkload: deg.duration
+          },
+          offers: {
+            '@type': 'Offer',
+            price: deg.semesterFee,
+            priceCurrency: 'PKR',
+            category: 'Tuition Fee Per Semester'
+          }
+        }
+      }))
+    };
+  }
+
+  if (pageId === 'diplomas') {
+    // Representative professional diplomas from existing diplomasData
+    const sampleDiplomas = ALL_DIPLOMAS.slice(0, 10);
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: "Zaitoon Roots Academy Professional Diplomas & Certifications",
+      description: "Fast-track 1-year and 2-year high-demand professional diplomas and industry certifications.",
+      itemListElement: sampleDiplomas.map((dip, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'Course',
+          name: dip.title,
+          description: dip.description,
+          provider: {
+            '@id': `${PRODUCTION_DOMAIN}/#organization`
+          },
+          hasCourseInstance: {
+            '@type': 'CourseInstance',
+            courseMode: 'Online and On-Campus',
+            courseWorkload: dip.duration
+          },
+          offers: {
+            '@type': 'Offer',
+            price: dip.totalFee,
+            priceCurrency: 'PKR',
+            category: 'Total Diploma Fee'
+          }
+        }
+      }))
+    };
+  }
+
+  if (pageId === 'contact') {
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'ContactPage',
+      '@id': `${PRODUCTION_DOMAIN}/contact/#webpage`,
+      name: 'Contact & Campuses - Zaitoon Roots Academy',
+      url: `${PRODUCTION_DOMAIN}/contact`,
+      mainEntity: {
+        '@id': `${PRODUCTION_DOMAIN}/#organization`
+      }
+    };
+  }
+
+  return null;
 }

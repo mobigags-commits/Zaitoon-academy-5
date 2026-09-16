@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react';
 import { PageId } from '../types';
-import { PAGES_SEO_METADATA, PRODUCTION_DOMAIN, buildBreadcrumbSchema, buildPageFaqSchema } from '../data/seoData';
+import {
+  PAGES_SEO_METADATA,
+  PRODUCTION_DOMAIN,
+  buildBreadcrumbSchema,
+  buildPageFaqSchema,
+  buildPageSpecializedSchema
+} from '../data/seoData';
 
 interface SEOHeadProps {
   currentPage: PageId;
@@ -58,7 +64,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({ currentPage }) => {
     }
     breadcrumbScript.textContent = JSON.stringify(buildBreadcrumbSchema(currentPage));
 
-    // 7. Update Dynamic Page FAQ Schema
+    // 7. Update Dynamic Page FAQ Schema (AEO)
     const faqSchema = buildPageFaqSchema(currentPage);
     let faqScript = document.getElementById('schema-page-faq') as HTMLScriptElement | null;
     if (faqSchema) {
@@ -71,6 +77,21 @@ export const SEOHead: React.FC<SEOHeadProps> = ({ currentPage }) => {
       faqScript.textContent = JSON.stringify(faqSchema);
     } else if (faqScript) {
       faqScript.remove();
+    }
+
+    // 8. Update Specialized Page Schema (Courses / Educational Programs / Contact Page) for AEO & Rich Snippets
+    const specializedSchema = buildPageSpecializedSchema(currentPage);
+    let specializedScript = document.getElementById('schema-page-specialized') as HTMLScriptElement | null;
+    if (specializedSchema) {
+      if (!specializedScript) {
+        specializedScript = document.createElement('script');
+        specializedScript.id = 'schema-page-specialized';
+        specializedScript.type = 'application/ld+json';
+        document.head.appendChild(specializedScript);
+      }
+      specializedScript.textContent = JSON.stringify(specializedSchema);
+    } else if (specializedScript) {
+      specializedScript.remove();
     }
   }, [currentPage]);
 
