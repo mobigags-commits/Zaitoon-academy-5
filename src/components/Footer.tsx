@@ -1,6 +1,7 @@
 import React from 'react';
 import { PageId } from '../types';
 import { PAGES_MANIFEST, CAMPUS_LOCATIONS } from '../data/academyData';
+import { PAGES_SEO_METADATA } from '../data/seoData';
 import { ZaitoonLogo } from './ZaitoonLogo';
 import {
   GraduationCap,
@@ -26,6 +27,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
     onNavigate(pageId);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const getPath = (id: PageId) => PAGES_SEO_METADATA[id]?.path || (id === 'home' ? '/' : `/${id}`);
 
   return (
     <footer className="bg-[#0f172a] text-slate-300 font-sans border-t border-slate-800">
@@ -57,7 +60,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Brand Info & Motto */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <ZaitoonLogo variant="horizontal" size="md" isDark={true} showUrdu={true} showMotto={true} />
+              <a
+                href="/"
+                onClick={(e) => { e.preventDefault(); handleNav('home'); }}
+                className="cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 rounded-2xl inline-block"
+                title="Zaitoon Roots Academy - Official Home"
+              >
+                <ZaitoonLogo variant="horizontal" size="md" isDark={true} showUrdu={true} showMotto={true} />
+              </a>
             </div>
 
             <p className="text-sm text-slate-400 leading-relaxed pr-4">
@@ -102,40 +112,40 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </h4>
             <ul className="space-y-2 text-xs text-slate-400">
               <li>
-                <button onClick={() => handleNav('degrees')} className="hover:text-red-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('degrees')} onClick={(e) => { e.preventDefault(); handleNav('degrees'); }} className="hover:text-red-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>All The World's Degrees</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNav('diplomas')} className="hover:text-red-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('diplomas')} onClick={(e) => { e.preventDefault(); handleNav('diplomas'); }} className="hover:text-red-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>All The World's Diplomas</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNav('distance-learning')} className="hover:text-red-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('distance-learning')} onClick={(e) => { e.preventDefault(); handleNav('distance-learning'); }} className="hover:text-red-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>Global Distance Campus</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNav('career-counselor')} className="hover:text-red-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('career-counselor')} onClick={(e) => { e.preventDefault(); handleNav('career-counselor'); }} className="hover:text-red-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>AI Career Path Matcher</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNav('faculty')} className="hover:text-red-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('faculty')} onClick={(e) => { e.preventDefault(); handleNav('faculty'); }} className="hover:text-red-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>PhD Faculty & Research</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNav('calendar')} className="hover:text-red-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('calendar')} onClick={(e) => { e.preventDefault(); handleNav('calendar'); }} className="hover:text-red-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>Academic Calendar & Exams</span>
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -147,46 +157,46 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </h4>
             <ul className="space-y-2 text-xs text-slate-400">
               <li>
-                <button onClick={() => handleNav('admissions')} className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('admissions')} onClick={(e) => { e.preventDefault(); handleNav('admissions'); }} className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>Online Admission Desk</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNav('fee-scholarship')} className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('fee-scholarship')} onClick={(e) => { e.preventDefault(); handleNav('fee-scholarship'); }} className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>Fee & Scholarships 2026-27</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNav('payment-portal')} className="text-amber-400 font-bold hover:text-amber-300 transition-colors flex items-center gap-1.5">
+                <a href={getPath('payment-portal')} onClick={(e) => { e.preventDefault(); handleNav('payment-portal'); }} className="text-amber-400 font-bold hover:text-amber-300 transition-colors flex items-center gap-1.5">
                   <CreditCard className="w-3.5 h-3.5 text-amber-400" />
                   <span>Global Payment Portal (فیس ادائیگی)</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNav('lms-portal')} className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('lms-portal')} onClick={(e) => { e.preventDefault(); handleNav('lms-portal'); }} className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>Student LMS & Grades Portal</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNav('verification')} className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('verification')} onClick={(e) => { e.preventDefault(); handleNav('verification'); }} className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>Online Degree Verification</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNav('library')} className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('library')} onClick={(e) => { e.preventDefault(); handleNav('library'); }} className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>Digital E-Library Vault</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNav('placement')} className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('placement')} onClick={(e) => { e.preventDefault(); handleNav('placement'); }} className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>Corporate Placement Cell</span>
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -198,64 +208,64 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </h4>
             <ul className="space-y-2 text-xs text-slate-400">
               <li>
-                <button onClick={() => handleNav('research')} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('research')} onClick={(e) => { e.preventDefault(); handleNav('research'); }} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>Research & Innovations Wing</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNav('campus-tour')} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('campus-tour')} onClick={(e) => { e.preventDefault(); handleNav('campus-tour'); }} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>Campus Tour & Facilities</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNav('hostel-life')} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('hostel-life')} onClick={(e) => { e.preventDefault(); handleNav('hostel-life'); }} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>Hostels & Campus Residencies</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNav('accreditations')} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('accreditations')} onClick={(e) => { e.preventDefault(); handleNav('accreditations'); }} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>International Accreditations</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNav('student-life')} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('student-life')} onClick={(e) => { e.preventDefault(); handleNav('student-life'); }} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>Clubs, Societies & Sports</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNav('downloads')} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('downloads')} onClick={(e) => { e.preventDefault(); handleNav('downloads'); }} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>Prospectus & Downloads Hub</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNav('news-events')} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('news-events')} onClick={(e) => { e.preventDefault(); handleNav('news-events'); }} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>News & Convocation Gallery</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNav('alumni')} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('alumni')} onClick={(e) => { e.preventDefault(); handleNav('alumni'); }} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>Alumni Global Hall of Fame</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNav('about')} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('about')} onClick={(e) => { e.preventDefault(); handleNav('about'); }} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>About ZRA & Leadership</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleNav('contact')} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
+                <a href={getPath('contact')} onClick={(e) => { e.preventDefault(); handleNav('contact'); }} className="hover:text-blue-400 transition-colors flex items-center gap-1.5">
                   <ArrowUpRight className="w-3.5 h-3.5" />
                   <span>Contact Campuses & Helpdesk</span>
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -273,13 +283,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <span>All The World's Payment Gateways Accepted (تمام عالمی ادائیگی کے طریقے)</span>
               </h4>
             </div>
-            <button
-              onClick={() => handleNav('payment-portal')}
+            <a
+              href={getPath('payment-portal')}
+              onClick={(e) => { e.preventDefault(); handleNav('payment-portal'); }}
               className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs flex items-center gap-2 self-start lg:self-auto shadow-md transition-colors"
             >
               <span>Launch Global Payment Portal</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
-            </button>
+            </a>
           </div>
 
           <div className="flex flex-wrap items-center gap-2 text-xs font-semibold">
@@ -325,19 +336,19 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* 24 Pages Quick Bottom Bar & Legal */}
+        {/* 27 Pages Quick Bottom Bar & Legal */}
         <div className="mt-8 pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500">
           <p>© {new Date().getFullYear()} Zaitoon Roots Academy (زیتون روٹس اکیڈمی). All Rights Reserved Worldwide.</p>
           <div className="flex flex-wrap items-center gap-3">
-            <button onClick={() => handleNav('payment-portal')} className="text-amber-400 font-bold hover:underline">Pay Fee</button>
+            <a href={getPath('payment-portal')} onClick={(e) => { e.preventDefault(); handleNav('payment-portal'); }} className="text-amber-400 font-bold hover:underline">Pay Fee</a>
             <span>•</span>
-            <button onClick={() => handleNav('privacy-policy')} className="hover:text-white">Privacy Policy</button>
+            <a href={getPath('privacy-policy')} onClick={(e) => { e.preventDefault(); handleNav('privacy-policy'); }} className="hover:text-white">Privacy Policy</a>
             <span>•</span>
-            <button onClick={() => handleNav('terms')} className="hover:text-white">Terms of Service</button>
+            <a href={getPath('terms')} onClick={(e) => { e.preventDefault(); handleNav('terms'); }} className="hover:text-white">Terms of Service</a>
             <span>•</span>
-            <button onClick={() => handleNav('google-ecosystem')} className="text-sky-400 hover:underline">Google Ecosystem Hub</button>
+            <a href={getPath('google-ecosystem')} onClick={(e) => { e.preventDefault(); handleNav('google-ecosystem'); }} className="text-sky-400 hover:underline">Google Ecosystem Hub</a>
             <span>•</span>
-            <button onClick={() => handleNav('verification')} className="hover:text-white">Verify Certificate</button>
+            <a href={getPath('verification')} onClick={(e) => { e.preventDefault(); handleNav('verification'); }} className="hover:text-white">Verify Certificate</a>
           </div>
         </div>
       </div>

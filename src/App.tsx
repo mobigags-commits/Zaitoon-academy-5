@@ -35,6 +35,7 @@ import { GlobalPaymentPortalPage } from './pages/GlobalPaymentPortalPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { TermsPage } from './pages/TermsPage';
 import { GoogleEcosystemPage } from './pages/GoogleEcosystemPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 
 export default function App() {
@@ -60,6 +61,10 @@ export default function App() {
   // Safe navigation handler that updates URL pathname and scrolls to top
   const handleNavigate = useCallback((pageId: PageId) => {
     setCurrentPage(pageId);
+    if (pageId === 'not-found') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     const targetMeta = PAGES_SEO_METADATA[pageId] || PAGES_SEO_METADATA.home;
     const targetPath = targetMeta.path;
     if (typeof window !== 'undefined' && window.location.pathname !== targetPath) {
@@ -124,8 +129,10 @@ export default function App() {
         return <TermsPage onNavigate={handleNavigate} />;
       case 'google-ecosystem':
         return <GoogleEcosystemPage onNavigate={handleNavigate} />;
+      case 'not-found':
+        return <NotFoundPage onNavigate={handleNavigate} />;
       default:
-        return <HomePage onNavigate={handleNavigate} />;
+        return <NotFoundPage onNavigate={handleNavigate} />;
     }
   };
 

@@ -314,6 +314,14 @@ export const PAGES_SEO_METADATA: Record<PageId, PageSEOMeta> = {
         answer: 'Upon submitting your transaction reference or uploading your bank deposit receipt on the Global Payment Portal, the ZRA Finance Wing verifies and issues an instant downloadable PDF clearance receipt with verification QR code.'
       }
     ]
+  },
+  'not-found': {
+    id: 'not-found',
+    path: '/404',
+    title: '404 - Page Not Found | Zaitoon Roots Academy',
+    description: 'The requested academic page could not be found on the Zaitoon Roots Academy portal. Explore degree programs, diplomas, admissions, or contact our 24/7 helpdesk.',
+    breadcrumbName: 'Page Not Found',
+    keywords: '404, not found, page not found, zaitoon roots academy'
   }
 };
 

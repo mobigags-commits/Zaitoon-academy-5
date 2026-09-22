@@ -66,7 +66,7 @@ export const PAGES_MANIFEST: PageInfo[] = [
   },
   {
     id: 'faculty',
-    pageNumber: 7,
+    pageNumber: 8,
     title: 'Faculty & Research Wing',
     urduTitle: 'اساتذہ کرام و ریسرچ ڈیپارٹمنٹ',
     subtitle: 'Distinguished PhD Deans, Global Visiting Scholars & Published Research',
@@ -75,7 +75,7 @@ export const PAGES_MANIFEST: PageInfo[] = [
   },
   {
     id: 'calendar',
-    pageNumber: 8,
+    pageNumber: 9,
     title: 'Academic Calendar & Exams',
     urduTitle: 'تعلیمی کیلنڈر و امتحانات شیڈول',
     subtitle: 'Semester Timelines, Midterms, Finals, Project Submissions & Holidays',
@@ -84,7 +84,7 @@ export const PAGES_MANIFEST: PageInfo[] = [
   },
   {
     id: 'verification',
-    pageNumber: 9,
+    pageNumber: 10,
     title: 'Online Credential Verification',
     urduTitle: 'ڈگری و ڈپلوما آن لائن تصدیق',
     subtitle: 'Instant Certificate Verification System with QR Validation & Roll Lookup',
@@ -93,7 +93,7 @@ export const PAGES_MANIFEST: PageInfo[] = [
   },
   {
     id: 'library',
-    pageNumber: 10,
+    pageNumber: 11,
     title: 'Digital E-Library & Papers',
     urduTitle: 'ڈیجیٹل ای لائبریری و ریسرچ پیپرز',
     subtitle: '50,000+ E-Books, Past Examination Papers & Research Journals Repository',
@@ -102,7 +102,7 @@ export const PAGES_MANIFEST: PageInfo[] = [
   },
   {
     id: 'placement',
-    pageNumber: 11,
+    pageNumber: 12,
     title: 'Career Placement & Internships',
     urduTitle: 'ملازمتوں کے مواقع و انٹرن شپ سیل',
     subtitle: 'Corporate Liaison with Top Global Employers & High-Package Hiring Drives',
@@ -111,7 +111,7 @@ export const PAGES_MANIFEST: PageInfo[] = [
   },
   {
     id: 'campus-tour',
-    pageNumber: 12,
+    pageNumber: 13,
     title: 'Global Campus Infrastructure',
     urduTitle: 'کیمپس کی سہولیات و لیبارٹریاں',
     subtitle: 'Modern STEM Labs, Robotics Studios, Sports Arena, Hostels & Auditoriums',
@@ -120,7 +120,7 @@ export const PAGES_MANIFEST: PageInfo[] = [
   },
   {
     id: 'accreditations',
-    pageNumber: 13,
+    pageNumber: 14,
     title: 'International Affiliations',
     urduTitle: 'بین الاقوامی الحاق و تسلیم شدہ اسناد',
     subtitle: 'HEC, WES, ISO 9001 Certified, UNESCO Linkages & Global Credit Transfers',
@@ -129,7 +129,7 @@ export const PAGES_MANIFEST: PageInfo[] = [
   },
   {
     id: 'student-life',
-    pageNumber: 14,
+    pageNumber: 15,
     title: 'Student Life, Clubs & Sports',
     urduTitle: 'طلباء کی سرگرمیاں، سوسائٹیز و کھیل',
     subtitle: 'Robotics Society, Debating Club, Sports Olympiad & Model United Nations',
@@ -138,7 +138,7 @@ export const PAGES_MANIFEST: PageInfo[] = [
   },
   {
     id: 'distance-learning',
-    pageNumber: 15,
+    pageNumber: 16,
     title: 'Distance & Global Online Campus',
     urduTitle: 'آن لائن و فاصلاتی نظامِ تعلیم',
     subtitle: '100% Online Study Worldwide, Flexible Timings & International Student Base',
@@ -147,7 +147,7 @@ export const PAGES_MANIFEST: PageInfo[] = [
   },
   {
     id: 'career-counselor',
-    pageNumber: 16,
+    pageNumber: 17,
     title: 'AI Career Path & Program Matcher',
     urduTitle: 'سمارٹ کیریئر کونسلر و رہنمائی',
     subtitle: 'Interactive Aptitude Test & Tailored Degree/Diploma Decision Engine',
@@ -156,7 +156,7 @@ export const PAGES_MANIFEST: PageInfo[] = [
   },
   {
     id: 'downloads',
-    pageNumber: 17,
+    pageNumber: 18,
     title: 'Downloads & Prospectus Hub',
     urduTitle: 'پراسپیکٹس، فارمز و نصاب ڈاؤن لوڈز',
     subtitle: '2026-27 Prospectus, Admission Brochures, Migration Forms & Course Syllabi',
@@ -165,7 +165,7 @@ export const PAGES_MANIFEST: PageInfo[] = [
   },
   {
     id: 'news-events',
-    pageNumber: 18,
+    pageNumber: 19,
     title: 'News, Events & Convocation',
     urduTitle: 'خبریں، سیمینارز و سالانہ کانووکیشن',
     subtitle: 'Grand Convocation Ceremony, International Symposia & Campus Circulars',
@@ -174,7 +174,7 @@ export const PAGES_MANIFEST: PageInfo[] = [
   },
   {
     id: 'alumni',
-    pageNumber: 19,
+    pageNumber: 20,
     title: 'Alumni Network & Hall of Fame',
     urduTitle: 'سابقہ طلباء نیٹ ورک و کامیابی کی کہانیاں',
     subtitle: 'Alumni Working at Google, Microsoft, Aramco & Global Enterprise Leaders',
@@ -183,7 +183,7 @@ export const PAGES_MANIFEST: PageInfo[] = [
   },
   {
     id: 'about',
-    pageNumber: 20,
+    pageNumber: 21,
     title: 'About ZRA & Institutional Leadership',
     urduTitle: 'تعارف زیتون روٹس اکیڈمی و قیادت',
     subtitle: 'Chancellor Message, Board of Governors & 20+ Years Educational Legacy',
@@ -192,7 +192,7 @@ export const PAGES_MANIFEST: PageInfo[] = [
   },
   {
     id: 'research',
-    pageNumber: 21,
+    pageNumber: 22,
     title: 'Research Innovations & Patents Wing',
     urduTitle: 'ریسرچ انوویشنز و پیٹنٹس ونگ',
     subtitle: 'AI Neural Labs, Oncology Drug Delivery, Quantum Cryptography & CleanTech',
@@ -201,7 +201,7 @@ export const PAGES_MANIFEST: PageInfo[] = [
   },
   {
     id: 'hostel-life',
-    pageNumber: 22,
+    pageNumber: 23,
     title: 'Modern Student Hostels & Residencies',
     urduTitle: 'ہاسٹل و طلبہ کی رہائش',
     subtitle: 'Separate Boys & Girls Hostels, Nutritious Dining & High-Speed Fiber Wi-Fi',
@@ -210,12 +210,39 @@ export const PAGES_MANIFEST: PageInfo[] = [
   },
   {
     id: 'contact',
-    pageNumber: 23,
+    pageNumber: 24,
     title: 'Contact Us, Campuses & Helpdesk',
     urduTitle: 'رابطہ، کیمپس ایڈریس و کسٹمر سپورٹ',
     subtitle: 'Islamabad Main Campus, Lahore, Karachi, Dubai & 24/7 Student Helpline',
     category: 'Core',
     icon: 'PhoneCall'
+  },
+  {
+    id: 'privacy-policy',
+    pageNumber: 25,
+    title: 'Privacy & Cookie Policy',
+    urduTitle: 'پرائیویسی پالیسی و ڈیٹا سیکیورٹی',
+    subtitle: 'GDPR, PECR, Google AdSense & International Data Protection Standards',
+    category: 'Core',
+    icon: 'ShieldCheck'
+  },
+  {
+    id: 'terms',
+    pageNumber: 26,
+    title: 'Terms of Service & Rules',
+    urduTitle: 'قواعد و ضوابط و تعلیمی قوانین',
+    subtitle: 'Institutional Policies, Disciplinary Standards & Fee Refund Regulations',
+    category: 'Core',
+    icon: 'FileText'
+  },
+  {
+    id: 'google-ecosystem',
+    pageNumber: 27,
+    title: 'Google Ecosystem Command Center',
+    urduTitle: 'گوگل ایکو سسٹم کمانڈ سینٹر',
+    subtitle: 'Google Search Console, Analytics, Indexing, Ads, Merchant & Site Kit Integration',
+    category: 'Institution',
+    icon: 'Globe'
   }
 ];
 
