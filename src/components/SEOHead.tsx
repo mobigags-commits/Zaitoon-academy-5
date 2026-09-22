@@ -14,12 +14,6 @@ interface SEOHeadProps {
 
 export const SEOHead: React.FC<SEOHeadProps> = ({ currentPage }) => {
   useEffect(() => {
-    const meta = PAGES_SEO_METADATA[currentPage] || PAGES_SEO_METADATA.home;
-    const pageUrl = meta.path === '/' ? `${PRODUCTION_DOMAIN}/` : `${PRODUCTION_DOMAIN}${meta.path}`;
-
-    // 1. Update Document Title
-    document.title = meta.title;
-
     // Helper to update or create a meta tag
     const setMetaTag = (attrName: 'name' | 'property', attrValue: string, content: string) => {
       let element = document.querySelector(`meta[${attrName}="${attrValue}"]`) as HTMLMetaElement | null;
@@ -30,6 +24,39 @@ export const SEOHead: React.FC<SEOHeadProps> = ({ currentPage }) => {
       }
       element.content = content;
     };
+
+    // Helper to remove an element if it exists
+    const removeElement = (selector: string) => {
+      const el = document.querySelector(selector);
+      if (el) el.remove();
+    };
+
+    // Handle 404 Page Not Found state
+    if (currentPage === 'not-found') {
+      document.title = '404 - Page Not Found | Zaitoon Roots Academy';
+
+      // CRITICAL for Google Search Console & SEO: Prevent Soft 404 indexing
+      setMetaTag('name', 'robots', 'noindex, follow');
+      setMetaTag('name', 'description', 'The requested academic page could not be found on the Zaitoon Roots Academy portal. Explore degree programs, diplomas, admissions, or contact our 24/7 helpdesk.');
+
+      // Remove canonical tag on 404 to avoid duplicate or misleading canonical warnings
+      removeElement('link[rel="canonical"]');
+
+      // Remove dynamic schemas on 404
+      removeElement('#schema-page-breadcrumbs');
+      removeElement('#schema-page-faq');
+      removeElement('#schema-page-specialized');
+      return;
+    }
+
+    // Normal Valid Pages: Ensure indexable and structured
+    setMetaTag('name', 'robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
+
+    const meta = PAGES_SEO_METADATA[currentPage] || PAGES_SEO_METADATA.home;
+    const pageUrl = meta.path === '/' ? `${PRODUCTION_DOMAIN}/` : `${PRODUCTION_DOMAIN}${meta.path}`;
+
+    // 1. Update Document Title
+    document.title = meta.title;
 
     // 2. Update Primary Meta Description & Keywords
     setMetaTag('name', 'description', meta.description);
@@ -55,14 +82,19 @@ export const SEOHead: React.FC<SEOHeadProps> = ({ currentPage }) => {
     setMetaTag('name', 'twitter:url', pageUrl);
 
     // 6. Update Dynamic Page Breadcrumb Schema
+    const breadcrumbSchema = buildBreadcrumbSchema(currentPage);
     let breadcrumbScript = document.getElementById('schema-page-breadcrumbs') as HTMLScriptElement | null;
-    if (!breadcrumbScript) {
-      breadcrumbScript = document.createElement('script');
-      breadcrumbScript.id = 'schema-page-breadcrumbs';
-      breadcrumbScript.type = 'application/ld+json';
-      document.head.appendChild(breadcrumbScript);
+    if (breadcrumbSchema) {
+      if (!breadcrumbScript) {
+        breadcrumbScript = document.createElement('script');
+        breadcrumbScript.id = 'schema-page-breadcrumbs';
+        breadcrumbScript.type = 'application/ld+json';
+        document.head.appendChild(breadcrumbScript);
+      }
+      breadcrumbScript.textContent = JSON.stringify(breadcrumbSchema);
+    } else if (breadcrumbScript) {
+      breadcrumbScript.remove();
     }
-    breadcrumbScript.textContent = JSON.stringify(buildBreadcrumbSchema(currentPage));
 
     // 7. Update Dynamic Page FAQ Schema (AEO)
     const faqSchema = buildPageFaqSchema(currentPage);

@@ -318,22 +318,79 @@ export const PAGES_SEO_METADATA: Record<PageId, PageSEOMeta> = {
 };
 
 /**
- * Maps a URL pathname to a PageId
+ * Maps a URL pathname to a PageId with robust normalization and friendly route aliases.
+ * If the route is invalid, returns 'not-found' (genuine 404) to prevent Soft 404 penalties.
  */
 export function getPageIdFromPath(pathname: string): PageId {
-  const cleanPath = pathname.replace(/\/$/, '') || '/';
+  if (!pathname) return 'home';
+
+  // Normalize: strip query string and hash, trim, lowercase, strip trailing slashes
+  const cleanPath = pathname.split('?')[0].split('#')[0].trim().toLowerCase().replace(/\/+$/, '') || '/';
+
+  if (cleanPath === '/' || cleanPath === '') {
+    return 'home';
+  }
+
+  // Check direct matches with registered valid page paths
   for (const page of Object.values(PAGES_SEO_METADATA)) {
-    if (page.path === cleanPath) {
+    if (page.path.toLowerCase() === cleanPath) {
       return page.id;
     }
   }
-  return 'home';
+
+  // Friendly aliases for common sub-paths and direct deep links
+  const routeAliases: Record<string, PageId> = {
+    '/apply': 'admissions',
+    '/apply-now': 'admissions',
+    '/admission': 'admissions',
+    '/programs': 'degrees',
+    '/courses': 'degrees',
+    '/undergraduate': 'degrees',
+    '/postgraduate': 'degrees',
+    '/certifications': 'diplomas',
+    '/lms': 'lms-portal',
+    '/student-portal': 'lms-portal',
+    '/fees': 'fee-scholarship',
+    '/fee': 'fee-scholarship',
+    '/scholarship': 'fee-scholarship',
+    '/scholarships': 'fee-scholarship',
+    '/verify': 'verification',
+    '/credential-verification': 'verification',
+    '/pay': 'payment-portal',
+    '/payment': 'payment-portal',
+    '/online-payment': 'payment-portal',
+    '/pay-fee': 'payment-portal',
+    '/challan': 'payment-portal',
+    '/privacy': 'privacy-policy',
+    '/terms-of-service': 'terms',
+    '/ecosystem': 'google-ecosystem',
+    '/google': 'google-ecosystem',
+    '/campuses': 'campus-tour',
+    '/hostel': 'hostel-life',
+    '/hostels': 'hostel-life',
+    '/e-library': 'library',
+    '/careers': 'placement',
+    '/jobs': 'placement',
+    '/online': 'distance-learning',
+    '/online-campus': 'distance-learning'
+  };
+
+  if (routeAliases[cleanPath]) {
+    return routeAliases[cleanPath];
+  }
+
+  // Genuine unknown route -> Return genuine 'not-found'
+  return 'not-found';
 }
 
 /**
  * Builds Schema.org BreadcrumbList structured data for a page
  */
 export function buildBreadcrumbSchema(pageId: PageId) {
+  if (pageId === 'not-found') {
+    return null;
+  }
+
   const meta = PAGES_SEO_METADATA[pageId] || PAGES_SEO_METADATA.home;
   const items = [
     {
@@ -496,6 +553,10 @@ export function buildPageFaqSchema(pageId: PageId) {
  * for AI Answer Engines (AEO) and Google Rich Results
  */
 export function buildPageSpecializedSchema(pageId: PageId) {
+  if (pageId === 'not-found') {
+    return null;
+  }
+
   if (pageId === 'degrees') {
     // Representative accredited degrees from existing degreesData
     const sampleDegrees = ALL_DEGREES.slice(0, 10);
@@ -504,30 +565,37 @@ export function buildPageSpecializedSchema(pageId: PageId) {
       '@type': 'ItemList',
       name: "Zaitoon Roots Academy Accredited Degree Programs",
       description: "Official directory of undergraduate and postgraduate degree programs offered by Zaitoon Roots Academy.",
-      itemListElement: sampleDegrees.map((deg, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        item: {
-          '@type': 'Course',
-          name: deg.title,
-          courseCode: deg.code,
-          description: deg.description,
-          provider: {
-            '@id': `${PRODUCTION_DOMAIN}/#organization`
-          },
-          hasCourseInstance: {
-            '@type': 'CourseInstance',
-            courseMode: 'Blended',
-            courseWorkload: deg.duration
-          },
-          offers: {
-            '@type': 'Offer',
-            price: deg.semesterFee,
-            priceCurrency: 'PKR',
-            category: 'Tuition Fee Per Semester'
+      itemListElement: sampleDegrees.map((deg, index) => {
+        const numericPrice = deg.semesterFee.match(/Rs\.\s*([\d,]+)/)?.[1]?.replace(/,/g, '') || '95000';
+        return {
+          '@type': 'ListItem',
+          position: index + 1,
+          item: {
+            '@type': 'Course',
+            name: deg.title,
+            courseCode: deg.code,
+            description: deg.description,
+            url: `${PRODUCTION_DOMAIN}/degrees`,
+            provider: {
+              '@type': 'EducationalOrganization',
+              '@id': `${PRODUCTION_DOMAIN}/#organization`,
+              name: 'Zaitoon Roots Academy',
+              url: `${PRODUCTION_DOMAIN}/`
+            },
+            hasCourseInstance: {
+              '@type': 'CourseInstance',
+              courseMode: 'Blended',
+              courseWorkload: deg.duration
+            },
+            offers: {
+              '@type': 'Offer',
+              price: numericPrice,
+              priceCurrency: 'PKR',
+              category: 'Tuition Fee Per Semester'
+            }
           }
-        }
-      }))
+        };
+      })
     };
   }
 
@@ -539,29 +607,37 @@ export function buildPageSpecializedSchema(pageId: PageId) {
       '@type': 'ItemList',
       name: "Zaitoon Roots Academy Professional Diplomas & Certifications",
       description: "Fast-track 1-year and 2-year high-demand professional diplomas and industry certifications.",
-      itemListElement: sampleDiplomas.map((dip, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        item: {
-          '@type': 'Course',
-          name: dip.title,
-          description: dip.description,
-          provider: {
-            '@id': `${PRODUCTION_DOMAIN}/#organization`
-          },
-          hasCourseInstance: {
-            '@type': 'CourseInstance',
-            courseMode: 'Online and On-Campus',
-            courseWorkload: dip.duration
-          },
-          offers: {
-            '@type': 'Offer',
-            price: dip.totalFee,
-            priceCurrency: 'PKR',
-            category: 'Total Diploma Fee'
+      itemListElement: sampleDiplomas.map((dip, index) => {
+        const numericPrice = dip.totalFee.match(/Rs\.\s*([\d,]+)/)?.[1]?.replace(/,/g, '') || '65000';
+        return {
+          '@type': 'ListItem',
+          position: index + 1,
+          item: {
+            '@type': 'Course',
+            name: dip.title,
+            courseCode: dip.code,
+            description: dip.description,
+            url: `${PRODUCTION_DOMAIN}/diplomas`,
+            provider: {
+              '@type': 'EducationalOrganization',
+              '@id': `${PRODUCTION_DOMAIN}/#organization`,
+              name: 'Zaitoon Roots Academy',
+              url: `${PRODUCTION_DOMAIN}/`
+            },
+            hasCourseInstance: {
+              '@type': 'CourseInstance',
+              courseMode: 'Online and On-Campus',
+              courseWorkload: dip.duration
+            },
+            offers: {
+              '@type': 'Offer',
+              price: numericPrice,
+              priceCurrency: 'PKR',
+              category: 'Total Diploma Fee'
+            }
           }
-        }
-      }))
+        };
+      })
     };
   }
 
