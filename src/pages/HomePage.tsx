@@ -193,7 +193,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                         onClick={(e) => { e.preventDefault(); onNavigate('diplomas'); }}
                         className="p-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-left transition-colors flex items-center justify-between group cursor-pointer"
                       >
-                        <span className="font-bold text-white">Fast-Track Certs</span>
+                        <span className="font-bold text-white">3 & 6-Mo Courses</span>
                         <ChevronRight className="w-4 h-4 text-amber-300 group-hover:translate-x-1 transition-transform" />
                       </a>
                     </div>
@@ -226,8 +226,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
           <div className="p-4 rounded-2xl bg-black/20 border border-red-800/60">
             <p className="text-3xl sm:text-4xl font-black text-amber-300">80+</p>
-            <p className="text-xs sm:text-sm font-semibold text-rose-200 mt-1">Professional Diplomas</p>
-            <p className="text-[10px] text-rose-300/80">Tech, Health, EV & Finance</p>
+            <p className="text-xs sm:text-sm font-semibold text-rose-200 mt-1">Diplomas & Courses</p>
+            <p className="text-[10px] text-rose-300/80">3-6 Month & 1-Year Fast-Tracks</p>
           </div>
           <div className="p-4 rounded-2xl bg-black/20 border border-red-800/60">
             <p className="text-3xl sm:text-4xl font-black text-amber-300">25,000+</p>

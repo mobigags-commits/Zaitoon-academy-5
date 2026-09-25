@@ -26,11 +26,23 @@ interface DiplomasPageProps {
 
 export const DiplomasPage: React.FC<DiplomasPageProps> = ({ onNavigate }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedDuration, setSelectedDuration] = useState<string>('All');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [selectedLevel, setSelectedLevel] = useState<string>('All');
   const [selectedLetter, setSelectedLetter] = useState<string>('All');
   const [selectedMode, setSelectedMode] = useState<string>('All');
   const [activeDiplomaModal, setActiveDiplomaModal] = useState<DiplomaProgram | null>(null);
+
+  const durationOptions = [
+    { label: 'All Durations', value: 'All' },
+    { label: '⚡ 3-Month Fast-Track Courses', value: '3-Months' },
+    { label: '🔥 6-Month Professional Diplomas', value: '6-Months' },
+    { label: '🎓 1-2 Year Advanced Certifications', value: '1-Year-Plus' }
+  ];
+
+  const count3m = useMemo(() => ALL_DIPLOMAS.filter(d => d.duration.toLowerCase().includes('3 month')).length, []);
+  const count6m = useMemo(() => ALL_DIPLOMAS.filter(d => d.duration.toLowerCase().includes('6 month')).length, []);
+  const countLong = useMemo(() => ALL_DIPLOMAS.filter(d => d.duration.toLowerCase().includes('year')).length, []);
 
   const categories = [
     'All',
@@ -45,6 +57,8 @@ export const DiplomasPage: React.FC<DiplomasPageProps> = ({ onNavigate }) => {
 
   const levels = [
     'All',
+    '3-Month Fast-Track Certificate',
+    '6-Month Professional Diploma',
     'Professional Diploma',
     'Executive Certification',
     'Advanced Diploma',
@@ -71,15 +85,21 @@ export const DiplomasPage: React.FC<DiplomasPageProps> = ({ onNavigate }) => {
       const matchCat = selectedCategory === 'All' || dip.category === selectedCategory;
       const matchLvl = selectedLevel === 'All' || dip.level === selectedLevel;
       const matchLetter = selectedLetter === 'All' || dip.alphabetLetter === selectedLetter;
+      const matchDuration =
+        selectedDuration === 'All' ||
+        (selectedDuration === '3-Months' && dip.duration.toLowerCase().includes('3 month')) ||
+        (selectedDuration === '6-Months' && dip.duration.toLowerCase().includes('6 month')) ||
+        (selectedDuration === '1-Year-Plus' && (dip.duration.toLowerCase().includes('year') || dip.duration.toLowerCase().includes('1.5') || dip.duration.toLowerCase().includes('2 year')));
+
       const matchMode =
         selectedMode === 'All' ||
         (selectedMode === '100% Online Live Classes (Worldwide)' && dip.onlineAvailable) ||
         (selectedMode === 'On-Campus Hands-on Lab' && dip.classDeliveryModes?.includes('On-Campus Regular')) ||
         (selectedMode === 'Hybrid Blended Weekend' && dip.classDeliveryModes?.includes('Hybrid Blended'));
 
-      return matchSearch && matchCat && matchLvl && matchLetter && matchMode;
+      return matchSearch && matchCat && matchLvl && matchLetter && matchDuration && matchMode;
     });
-  }, [searchQuery, selectedCategory, selectedLevel, selectedLetter, selectedMode]);
+  }, [searchQuery, selectedCategory, selectedLevel, selectedLetter, selectedDuration, selectedMode]);
 
   return (
     <div className="bg-slate-50 min-h-screen py-10 font-sans text-slate-900">
@@ -90,7 +110,7 @@ export const DiplomasPage: React.FC<DiplomasPageProps> = ({ onNavigate }) => {
             <div className="space-y-2">
               <div className="flex items-center gap-2">
                 <span className="px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold uppercase tracking-wider">
-                  Page 3: All The World's Professional Diplomas & Certifications
+                  Page 3: Professional Diplomas & 3-6 Month Short Courses
                 </span>
                 <span className="text-xs font-bold text-slate-400">|</span>
                 <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
@@ -98,10 +118,10 @@ export const DiplomasPage: React.FC<DiplomasPageProps> = ({ onNavigate }) => {
                 </span>
               </div>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-                All The World's Professional Diplomas & Certifications
+                All The World's Professional Diplomas & Short Courses
               </h1>
               <p className="text-slate-600 text-sm max-w-3xl">
-                اکیڈمی میں تمام عالمی پروفیشنل ڈپلوماز (All The World's Diplomas): High-impact vocational, executive, and technological diplomas in AI Prompt Engineering, Cyber Security, Cloud DevOps, Electric Vehicles, Nursing, ACCA & Digital Media. <strong className="text-amber-900 font-bold">تمام ڈپلوماز کی کلاسز دنیا بھر میں آن لائن دستیاب ہیں۔</strong>
+                اکیڈمی میں تمام عالمی پروفیشنل ڈپلوماز اور 3 و 6 ماہ کے سرٹیفیکیشن کورسز: High-impact vocational, executive, and technological diplomas in AI Prompt Engineering, Data Science, Python, MERN Stack, Flutter, Cyber Security, Cloud DevOps, Electric Vehicles, Nursing, ACCA & Digital Media. <strong className="text-amber-900 font-bold">تمام 3 ماہ اور 6 ماہ کے کورسز دنیا بھر میں آن لائن دستیاب ہیں۔</strong>
               </p>
             </div>
 
@@ -110,39 +130,110 @@ export const DiplomasPage: React.FC<DiplomasPageProps> = ({ onNavigate }) => {
               className="shrink-0 px-6 py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs flex items-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer"
             >
               <Award className="w-4 h-4" />
-              <span>Direct Diploma Enrollment</span>
+              <span>Direct Course Enrollment</span>
             </button>
           </div>
 
+          {/* Quick Duration Tabs */}
+          <div className="mt-6 pt-5 border-t border-slate-100">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-600">Course Duration Filter:</span>
+              <span className="text-[11px] text-amber-700 font-semibold bg-amber-50 px-2 py-0.5 rounded">3 اور 6 ماہ کے کورسز</span>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              <button
+                onClick={() => setSelectedDuration('All')}
+                className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all text-left flex items-center justify-between cursor-pointer ${
+                  selectedDuration === 'All'
+                    ? 'bg-amber-600 text-white shadow-md ring-2 ring-amber-300'
+                    : 'bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200'
+                }`}
+              >
+                <span>All Programs</span>
+                <span className={`text-[10px] px-2 py-0.5 rounded-full font-extrabold ${selectedDuration === 'All' ? 'bg-amber-800 text-white' : 'bg-slate-200 text-slate-800'}`}>
+                  {ALL_DIPLOMAS.length}
+                </span>
+              </button>
+
+              <button
+                onClick={() => setSelectedDuration('3-Months')}
+                className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all text-left flex items-center justify-between cursor-pointer ${
+                  selectedDuration === '3-Months'
+                    ? 'bg-amber-600 text-white shadow-md ring-2 ring-amber-300'
+                    : 'bg-amber-50/70 hover:bg-amber-100 text-amber-950 border border-amber-200'
+                }`}
+              >
+                <span className="flex items-center gap-1.5">
+                  <span>⚡ 3-Month Fast-Track</span>
+                </span>
+                <span className={`text-[10px] px-2 py-0.5 rounded-full font-extrabold ${selectedDuration === '3-Months' ? 'bg-amber-800 text-white' : 'bg-amber-200 text-amber-900'}`}>
+                  {count3m}
+                </span>
+              </button>
+
+              <button
+                onClick={() => setSelectedDuration('6-Months')}
+                className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all text-left flex items-center justify-between cursor-pointer ${
+                  selectedDuration === '6-Months'
+                    ? 'bg-amber-600 text-white shadow-md ring-2 ring-amber-300'
+                    : 'bg-orange-50/70 hover:bg-orange-100 text-orange-950 border border-orange-200'
+                }`}
+              >
+                <span className="flex items-center gap-1.5">
+                  <span>🔥 6-Month Diplomas</span>
+                </span>
+                <span className={`text-[10px] px-2 py-0.5 rounded-full font-extrabold ${selectedDuration === '6-Months' ? 'bg-amber-800 text-white' : 'bg-orange-200 text-orange-900'}`}>
+                  {count6m}
+                </span>
+              </button>
+
+              <button
+                onClick={() => setSelectedDuration('1-Year-Plus')}
+                className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all text-left flex items-center justify-between cursor-pointer ${
+                  selectedDuration === '1-Year-Plus'
+                    ? 'bg-amber-600 text-white shadow-md ring-2 ring-amber-300'
+                    : 'bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200'
+                }`}
+              >
+                <span className="flex items-center gap-1.5">
+                  <span>🎓 1-2 Year Certifications</span>
+                </span>
+                <span className={`text-[10px] px-2 py-0.5 rounded-full font-extrabold ${selectedDuration === '1-Year-Plus' ? 'bg-amber-800 text-white' : 'bg-slate-200 text-slate-800'}`}>
+                  {countLong}
+                </span>
+              </button>
+            </div>
+          </div>
+
           {/* Filters & Search */}
-          <div className="mt-8 pt-6 border-t border-slate-100 space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-              <div className="md:col-span-5 relative">
+          <div className="mt-5 pt-5 border-t border-slate-100 space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
+              <div className="md:col-span-4 relative">
                 <Search className="w-5 h-5 text-slate-400 absolute left-3.5 top-3.5" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search diploma, skills (e.g. AI Prompting, SOC, EV, SEO, MLT)..."
+                  placeholder="Search course, skills (e.g. Python, Next.js, SEO, Solar)..."
                   className="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:border-amber-600"
                 />
               </div>
 
               <div className="md:col-span-3">
                 <select
-                  value={selectedMode}
-                  onChange={(e) => setSelectedMode(e.target.value)}
+                  value={selectedDuration}
+                  onChange={(e) => setSelectedDuration(e.target.value)}
                   className="w-full py-3 px-3.5 rounded-xl bg-amber-50/60 border border-amber-200 text-amber-950 text-sm focus:outline-none focus:border-amber-600 font-bold"
                 >
-                  {modes.map((m) => (
-                    <option key={m} value={m}>
-                      {m === 'All' ? '🌐 All Class Delivery Modes' : m}
+                  {durationOptions.map((opt) => (
+                    <option key={opt.value} value={opt.value}>
+                      {opt.label}
                     </option>
                   ))}
                 </select>
               </div>
 
-              <div className="md:col-span-2">
+              <div className="md:col-span-3">
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
@@ -158,13 +249,13 @@ export const DiplomasPage: React.FC<DiplomasPageProps> = ({ onNavigate }) => {
 
               <div className="md:col-span-2">
                 <select
-                  value={selectedLevel}
-                  onChange={(e) => setSelectedLevel(e.target.value)}
+                  value={selectedMode}
+                  onChange={(e) => setSelectedMode(e.target.value)}
                   className="w-full py-3 px-3.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-sm focus:outline-none focus:border-amber-600 font-medium"
                 >
-                  {levels.map((l) => (
-                    <option key={l} value={l}>
-                      {l === 'All' ? 'All Formats' : l}
+                  {modes.map((m) => (
+                    <option key={m} value={m}>
+                      {m === 'All' ? '🌐 All Class Modes' : m}
                     </option>
                   ))}
                 </select>
@@ -205,11 +296,12 @@ export const DiplomasPage: React.FC<DiplomasPageProps> = ({ onNavigate }) => {
         {/* Diplomas Grid */}
         <div className="mb-6 flex items-center justify-between">
           <p className="text-sm font-bold text-slate-600">
-            Showing <span className="text-amber-800 font-extrabold">{filteredDiplomas.length}</span> Professional Diplomas
+            Showing <span className="text-amber-800 font-extrabold">{filteredDiplomas.length}</span> Courses & Professional Diplomas
           </p>
           <button
             onClick={() => {
               setSearchQuery('');
+              setSelectedDuration('All');
               setSelectedCategory('All');
               setSelectedLevel('All');
               setSelectedLetter('All');

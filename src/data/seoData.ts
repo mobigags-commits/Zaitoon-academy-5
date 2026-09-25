@@ -58,14 +58,14 @@ export const PAGES_SEO_METADATA: Record<PageId, PageSEOMeta> = {
   diplomas: {
     id: 'diplomas',
     path: '/diplomas',
-    title: 'Professional Diplomas 2026 | 1-2 Year IT, Medical & AI Certifications | ZRA',
-    description: 'Enroll in 80+ industry-recognized 1-year and 2-year professional diplomas in 2026. Practical labs in Cybersecurity, AI Prompt Engineering, Paramedical, and Full-Stack Development.',
-    breadcrumbName: 'Professional Diplomas',
-    keywords: 'professional diplomas 2026, 1 year IT diploma Pakistan, paramedical technology diploma, cybersecurity certification Islamabad, AI prompt engineering course, vocational training diplomas, fast-track diplomas ZRA',
+    title: 'Professional Diplomas & 3-6 Month Short Courses 2026 | IT, AI & Vocational | ZRA',
+    description: 'Enroll in 80+ industry-recognized 3-month short courses, 6-month fast-track diplomas, and 1-year certifications in 2026. Practical training in Python, AI, Next.js, Flutter, Cybersecurity, and Paramedical.',
+    breadcrumbName: 'Professional Diplomas & Short Courses',
+    keywords: 'professional diplomas 2026, 3 month short courses, 6 month diploma Pakistan, 1 year IT diploma Pakistan, paramedical technology diploma, cybersecurity certification Islamabad, AI prompt engineering course, vocational training diplomas, fast-track diplomas ZRA',
     faqs: [
       {
-        question: 'What is the duration of professional diplomas at ZRA?',
-        answer: 'Diplomas range from 6-month fast-track executive certifications to 1-year and 2-year comprehensive professional diplomas with clinical and industry internships.'
+        question: 'What is the duration of professional diplomas and courses at ZRA?',
+        answer: 'Courses range from 3-month fast-track skill certificates and 6-month professional diplomas to 1-year and 2-year comprehensive certifications with clinical and industry internships.'
       },
       {
         question: 'Are working professionals eligible for evening or weekend diploma classes?',
