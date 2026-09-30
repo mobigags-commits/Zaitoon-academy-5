@@ -1,18 +1,38 @@
 {
+  "id": "/",
   "name": "Zaitoon Roots Academy",
-  "short_name": "ZRA",
-  "description": "Premier international academic portal for Zaitoon Roots Academy offering World Degrees, Professional Diplomas, and Online Admissions.",
+  "short_name": "ZRA Academy",
+  "description": "Official academic portal for Zaitoon Roots Academy offering All The World's Degrees, Professional Diplomas, and Online Admissions.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#8B0000",
   "theme_color": "#8B0000",
   "orientation": "portrait-primary",
+  "categories": ["education", "books", "productivity"],
   "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
     {
       "src": "/favicon.svg",
       "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "type": "image/svg+xml"
     }
   ]
 }

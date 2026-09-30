@@ -20,9 +20,10 @@ import {
 
 interface FooterProps {
   onNavigate: (page: PageId) => void;
+  onOpenInstallModal?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInstallModal }) => {
   const handleNav = (pageId: PageId) => {
     onNavigate(pageId);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -102,6 +103,22 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <Mail className="w-4 h-4 text-blue-400 shrink-0" />
                 <span>Admissions: admissions@zaitoonroots.edu | Info: info@zaitoonroots.edu</span>
               </div>
+
+              {/* Install Mobile & PC App Card */}
+              {onOpenInstallModal && (
+                <div className="pt-2">
+                  <button
+                    onClick={onOpenInstallModal}
+                    className="w-full sm:w-auto inline-flex items-center gap-3 px-4 py-2.5 rounded-xl bg-gradient-to-r from-red-700 to-amber-600 hover:from-red-600 hover:to-amber-500 text-white font-bold text-xs shadow-md transition transform hover:-translate-y-0.5 cursor-pointer border border-amber-400/40"
+                  >
+                    <img src="/pwa-192x192.png" alt="App" className="w-5 h-5 rounded object-contain bg-white p-0.5" />
+                    <div className="text-left">
+                      <p className="leading-tight">Install Official App</p>
+                      <p className="text-[10px] text-amber-200 font-normal">موبائل و کمپیوٹر پر ڈاؤنلوڈ کریں</p>
+                    </div>
+                  </button>
+                </div>
+              )}
             </div>
           </div>
 
@@ -349,6 +366,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <a href={getPath('google-ecosystem')} onClick={(e) => { e.preventDefault(); handleNav('google-ecosystem'); }} className="text-sky-400 hover:underline">Google Ecosystem Hub</a>
             <span>•</span>
             <a href={getPath('verification')} onClick={(e) => { e.preventDefault(); handleNav('verification'); }} className="hover:text-white">Verify Certificate</a>
+            {onOpenInstallModal && (
+              <>
+                <span>•</span>
+                <button onClick={onOpenInstallModal} className="text-amber-400 font-bold hover:underline cursor-pointer">
+                  📲 Download App (ایپ ڈاؤنلوڈ)
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>

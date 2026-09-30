@@ -3,6 +3,7 @@ import { PageId } from '../types';
 import { PAGES_MANIFEST } from '../data/academyData';
 import { PAGES_SEO_METADATA } from '../data/seoData';
 import { ZaitoonLogo } from './ZaitoonLogo';
+import { PWAInstallButton } from './PWAInstallButton';
 import {
   GraduationCap,
   Award,
@@ -20,16 +21,19 @@ import {
   CalendarDays,
   FileText,
   MessageCircle,
-  CreditCard
+  CreditCard,
+  Download,
+  Smartphone
 } from 'lucide-react';
 
 interface HeaderProps {
   currentPage: PageId;
   onNavigate: (page: PageId) => void;
   onOpenSearch: () => void;
+  onOpenInstallModal: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenSearch }) => {
+export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenSearch, onOpenInstallModal }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [pagesDropdownOpen, setPagesDropdownOpen] = useState(false);
   const [academicsDropdownOpen, setAcademicsDropdownOpen] = useState(false);
@@ -71,6 +75,15 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenS
               <span className="hidden xs:inline">Owner WhatsApp:</span>
               <span className="font-mono">0344-7956085</span>
             </a>
+            <span className="text-slate-600 hidden sm:inline">|</span>
+            <button
+              onClick={onOpenInstallModal}
+              className="text-amber-400 hover:text-amber-300 font-bold flex items-center gap-1 cursor-pointer transition-colors"
+              title="Download and Install Official App"
+            >
+              <Download className="w-3.5 h-3.5 animate-bounce" />
+              <span>Install App (موبائل ایپ)</span>
+            </button>
             <span className="text-slate-600 hidden sm:inline">|</span>
             <a
               href="/verification"
@@ -365,6 +378,9 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenS
               <span>WhatsApp: 0344-7956085</span>
             </a>
 
+            {/* PWA Install Button in Header */}
+            <PWAInstallButton onOpenModal={onOpenInstallModal} variant="header" />
+
             <a
               href="/admissions"
               onClick={(e) => { e.preventDefault(); handlePageSelect('admissions'); }}
@@ -406,11 +422,21 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenS
             href="https://wa.me/923447956085?text=Assalam-o-Alaikum%2C%20I%20want%20information%20regarding%20Zaitoon%20Roots%20Academy%20Admissions%20and%20Programs"
             target="_blank"
             rel="noopener noreferrer"
-            className="mb-4 w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md"
+            className="mb-3 w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md"
           >
             <MessageCircle className="w-4 h-4 fill-current" />
             <span>Owner Direct WhatsApp: 0344-7956085</span>
           </a>
+
+          {/* Quick Mobile App Install in Drawer */}
+          <PWAInstallButton
+            onOpenModal={() => {
+              setMobileMenuOpen(false);
+              onOpenInstallModal();
+            }}
+            variant="drawer"
+            className="mb-4"
+          />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {PAGES_MANIFEST.map((page) => {

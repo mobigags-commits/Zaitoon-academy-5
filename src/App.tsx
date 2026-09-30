@@ -37,6 +37,9 @@ import { TermsPage } from './pages/TermsPage';
 import { GoogleEcosystemPage } from './pages/GoogleEcosystemPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
+import { InstallAppModal } from './components/InstallAppModal';
+import { MobileInstallBanner } from './components/MobileInstallBanner';
+import { OfflineIndicator } from './components/OfflineIndicator';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>(() => {
@@ -46,6 +49,7 @@ export default function App() {
     return 'home';
   });
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isInstallModalOpen, setIsInstallModalOpen] = useState(false);
 
   // Sync state with browser history (back/forward buttons)
   useEffect(() => {
@@ -54,8 +58,13 @@ export default function App() {
       setCurrentPage(pageId);
     };
 
+    const handleOpenInstall = () => setIsInstallModalOpen(true);
+    window.addEventListener('open-pwa-install', handleOpenInstall);
     window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('open-pwa-install', handleOpenInstall);
+      window.removeEventListener('popstate', handlePopState);
+    };
   }, []);
 
   // Safe navigation handler that updates URL pathname and scrolls to top
@@ -146,6 +155,7 @@ export default function App() {
         currentPage={currentPage}
         onNavigate={handleNavigate}
         onOpenSearch={() => setIsSearchOpen(true)}
+        onOpenInstallModal={() => setIsInstallModalOpen(true)}
       />
 
       {/* Main Active Page View */}
@@ -154,7 +164,10 @@ export default function App() {
       </main>
 
       {/* Universal Global Footer */}
-      <Footer onNavigate={handleNavigate} />
+      <Footer
+        onNavigate={handleNavigate}
+        onOpenInstallModal={() => setIsInstallModalOpen(true)}
+      />
 
       {/* Quick Search Spotlight Modal */}
       <QuickSearchModal
@@ -165,6 +178,18 @@ export default function App() {
 
       {/* Interactive AI Admission Counselor Widget */}
       <LiveChatWidget onNavigate={handleNavigate} />
+
+      {/* PWA App Install Modal */}
+      <InstallAppModal
+        isOpen={isInstallModalOpen}
+        onClose={() => setIsInstallModalOpen(false)}
+      />
+
+      {/* Mobile PWA Install Prompt Banner */}
+      <MobileInstallBanner onOpenModal={() => setIsInstallModalOpen(true)} />
+
+      {/* Offline Status Connectivity Banner */}
+      <OfflineIndicator />
 
       {/* Cookie Consent Banner */}
       <CookieConsentBanner onNavigate={handleNavigate} />

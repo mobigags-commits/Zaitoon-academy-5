@@ -47,6 +47,63 @@ export const DownloadsPage: React.FC<DownloadsPageProps> = ({ onNavigate }) => {
           </div>
         </div>
 
+        {/* Featured Official Mobile & Desktop App Card */}
+        <div className="bg-gradient-to-r from-[#8B0000] via-[#A00000] to-[#550000] rounded-3xl p-6 sm:p-8 text-white mb-8 shadow-xl border border-amber-500/40 relative overflow-hidden">
+          <div className="absolute top-0 right-0 -mr-10 -mt-10 w-48 h-48 bg-white/5 rounded-full blur-2xl pointer-events-none"></div>
+          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="flex items-start gap-4">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white p-1.5 shadow-2xl flex-shrink-0 border-2 border-amber-400">
+                <img src="/pwa-192x192.png" alt="ZRA App Icon" className="w-full h-full object-contain rounded-xl" />
+              </div>
+              <div className="space-y-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-950 font-black text-xs">
+                    OFFICIAL APP 2026
+                  </span>
+                  <span className="text-xs text-rose-200">Android • iPhone • Windows • Mac</span>
+                </div>
+                <h2 className="text-xl sm:text-2xl font-black text-white">
+                  Zaitoon Roots Academy Official Mobile & Desktop App
+                </h2>
+                <p className="text-xs sm:text-sm text-rose-100 max-w-2xl">
+                  ہماری آفیشل موبائل ایپ اپنے فون یا لیپ ٹاپ پر ڈاؤنلوڈ اور انسٹال کریں۔ بجلی جیسی تیز رفتار، آف لائن موڈ، داخلہ الرٹس اور فوری سرٹیفکیٹ تصدیق۔
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
+              <button
+                onClick={() => {
+                  const event = new CustomEvent('open-pwa-install');
+                  window.dispatchEvent(event);
+                }}
+                className="px-5 py-3 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs sm:text-sm shadow-xl flex items-center justify-center gap-2 transition transform hover:scale-105 cursor-pointer"
+              >
+                <Download className="w-4 h-4 text-slate-950 animate-bounce" />
+                <span>Install App (ایپ انسٹال کریں)</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  const urlContent = `[InternetShortcut]\nURL=${window.location.origin}\nIconIndex=0\nIconFile=${window.location.origin}/favicon.ico\n`;
+                  const blob = new Blob([urlContent], { type: 'text/plain;charset=utf-8' });
+                  const url = URL.createObjectURL(blob);
+                  const link = document.createElement('a');
+                  link.href = url;
+                  link.download = 'ZRA-Zaitoon-Roots-Academy.url';
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                  URL.revokeObjectURL(url);
+                }}
+                className="px-4 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm border border-white/20 flex items-center justify-center gap-2 transition cursor-pointer"
+              >
+                <span>Download Shortcut</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
         {/* Download Items Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
           {docs.map((doc) => (

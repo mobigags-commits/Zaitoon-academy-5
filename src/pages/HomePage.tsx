@@ -23,7 +23,11 @@ import {
   Building,
   PhoneCall,
   Search,
-  CreditCard
+  CreditCard,
+  Download,
+  Smartphone,
+  Laptop,
+  WifiOff
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -519,6 +523,91 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Official App Installation & Download Showcase */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#3d020a] to-[#250106] border-t border-red-950">
+        <div className="max-w-7xl mx-auto">
+          <div className="bg-gradient-to-r from-red-900/90 via-slate-900/90 to-red-950/90 rounded-3xl p-8 sm:p-12 border border-amber-400/40 shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-amber-400/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-8 space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/50 text-amber-300 text-xs font-bold uppercase tracking-wider">
+                  <Smartphone className="w-3.5 h-3.5" />
+                  <span>آفیشل موبائل و کمپیوٹر ایپ — ZRA Official App</span>
+                </div>
+
+                <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
+                  Zaitoon Roots Academy App انسٹال اور ڈاؤنلوڈ کریں
+                </h2>
+
+                <p className="text-rose-100 text-sm sm:text-base leading-relaxed max-w-2xl">
+                  ہماری جدید ترین پروگریسو ویب ایپ (PWA) کو اپنے Android موبائل، iPhone، یا Windows/Mac لیپ ٹاپ پر بغیر کسی پلے اسٹور کے سیکنڈوں میں انسٹال کریں۔ سپر فاسٹ اسپیڈ، آف لائن 120+ ڈگریز، داخلہ پورٹل اور فیس الرٹس ایک کلک پر۔
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                  <div className="flex items-center gap-2 text-xs text-slate-200">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span>سائز 1MB سے بھی کم (Lightweight)</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-slate-200">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span>آف لائن موڈ سپورٹ (Offline Ready)</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-slate-200">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span>داخلہ و رزلٹ فوری الرٹس</span>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-4 pt-4">
+                  <button
+                    onClick={() => {
+                      const event = new CustomEvent('open-pwa-install');
+                      window.dispatchEvent(event);
+                    }}
+                    className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-sm shadow-xl flex items-center gap-2.5 transition transform hover:scale-105 cursor-pointer"
+                  >
+                    <Download className="w-5 h-5 text-slate-950 animate-bounce" />
+                    <span>Install App Now (ابھی ایپ انسٹال کریں)</span>
+                  </button>
+
+                  <button
+                    onClick={() => onNavigate('downloads')}
+                    className="px-5 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 flex items-center gap-2 transition cursor-pointer"
+                  >
+                    <span>View Downloads Center</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              <div className="lg:col-span-4 flex justify-center">
+                <div className="relative w-56 sm:w-64 bg-slate-900 rounded-3xl p-4 border-4 border-slate-700 shadow-2xl">
+                  <div className="w-16 h-1.5 bg-slate-700 rounded-full mx-auto mb-3"></div>
+                  <div className="bg-[#8B0000] rounded-2xl p-4 text-center text-white border border-amber-400/30">
+                    <img
+                      src="/pwa-192x192.png"
+                      alt="ZRA Mobile Icon"
+                      className="w-16 h-16 rounded-2xl mx-auto shadow-md border border-amber-300/60 mb-2"
+                    />
+                    <h3 className="text-sm font-black">ZRA Academy</h3>
+                    <p className="text-[10px] text-amber-200">Official Mobile App</p>
+                    <div className="mt-3 py-1.5 px-3 rounded-lg bg-emerald-600/90 text-white text-[11px] font-bold">
+                      ✓ Ready to Install
+                    </div>
+                  </div>
+                  <div className="mt-4 flex justify-around text-[10px] text-slate-400 font-semibold">
+                    <span className="flex items-center gap-1"><Smartphone className="w-3 h-3 text-emerald-400" /> Android</span>
+                    <span className="flex items-center gap-1"><Laptop className="w-3 h-3 text-blue-400" /> Windows</span>
+                    <span className="flex items-center gap-1"><WifiOff className="w-3 h-3 text-amber-400" /> Offline</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
