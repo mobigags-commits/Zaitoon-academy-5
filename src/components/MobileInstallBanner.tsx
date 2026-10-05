@@ -48,21 +48,21 @@ export const MobileInstallBanner: React.FC<MobileInstallBannerProps> = ({ onOpen
         <div className="min-w-0">
           <p className="text-xs font-bold text-white truncate flex items-center gap-1.5">
             <span>ZRA Official App</span>
-            <span className="text-[10px] px-1.5 py-0.2 bg-emerald-500 text-white rounded font-medium">Free</span>
+            <span className="text-[10px] px-1.5 py-0.2 bg-amber-400 text-slate-950 font-black rounded">Rs. 100</span>
           </p>
           <p className="text-[11px] text-amber-300 truncate">
-            موبائل پر آفیشل ایپ انسٹال کریں
+            آفیشل موبائل ایپ (فیس صرف 100 روپے)
           </p>
         </div>
       </div>
 
       <div className="flex items-center gap-2 flex-shrink-0">
         <button
-          onClick={handleInstallClick}
+          onClick={onOpenModal}
           className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-xs shadow transition transform active:scale-95 flex items-center gap-1 cursor-pointer"
         >
           <Download className="w-3.5 h-3.5 text-slate-950" />
-          <span>انسٹال</span>
+          <span>انسٹال (100 Rs)</span>
         </button>
 
         <button

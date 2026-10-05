@@ -183,6 +183,7 @@ export default function App() {
       <InstallAppModal
         isOpen={isInstallModalOpen}
         onClose={() => setIsInstallModalOpen(false)}
+        onNavigate={handleNavigate}
       />
 
       {/* Mobile PWA Install Prompt Banner */}

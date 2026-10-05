@@ -20,16 +20,9 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({
     return null;
   }
 
-  const handleClick = async (e: React.MouseEvent) => {
+  const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (isInstallable) {
-      const res = await install();
-      if (!res) {
-        onOpenModal();
-      }
-    } else {
-      onOpenModal();
-    }
+    onOpenModal();
   };
 
   if (variant === 'drawer') {

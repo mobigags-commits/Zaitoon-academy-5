@@ -537,7 +537,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               <div className="lg:col-span-8 space-y-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/50 text-amber-300 text-xs font-bold uppercase tracking-wider">
                   <Smartphone className="w-3.5 h-3.5" />
-                  <span>آفیشل موبائل و کمپیوٹر ایپ — ZRA Official App</span>
+                  <span>آفیشل موبائل و کمپیوٹر ایپ — ڈاؤنلوڈ فیس: صرف 100 روپے</span>
                 </div>
 
                 <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
@@ -545,7 +545,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 </h2>
 
                 <p className="text-rose-100 text-sm sm:text-base leading-relaxed max-w-2xl">
-                  ہماری جدید ترین پروگریسو ویب ایپ (PWA) کو اپنے Android موبائل، iPhone، یا Windows/Mac لیپ ٹاپ پر بغیر کسی پلے اسٹور کے سیکنڈوں میں انسٹال کریں۔ سپر فاسٹ اسپیڈ، آف لائن 120+ ڈگریز، داخلہ پورٹل اور فیس الرٹس ایک کلک پر۔
+                  ہماری جدید ترین پروگریسو ویب ایپ (PWA) کو اپنے Android موبائل، iPhone، یا Windows/Mac لیپ ٹاپ پر سیکنڈوں میں انسٹال کریں۔ برائے ایپ سرور و ڈاؤنلوڈ لائسنس نامینل فیس صرف 100 روپے رکھی گئی ہے جو ویب سائٹ کے ذریعے اونر کے اکاؤنٹ کو براہ راست موصول ہوتی ہے۔
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">

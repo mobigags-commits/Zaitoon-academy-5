@@ -98,6 +98,14 @@ export const FEE_PURPOSES: FeePurposeOption[] = [
     category: 'International'
   },
   {
+    id: 'app-download-fee',
+    label: 'Official Mobile & PC App Download/Install License Fee (Rs. 100)',
+    urduLabel: 'موبائل و کمپیوٹر ایپ ڈاؤنلوڈ و انسٹالیشن فیس (100 روپے)',
+    defaultPkr: 100,
+    defaultUsd: 1,
+    category: 'App License'
+  },
+  {
     id: 'custom-amount',
     label: 'Custom Amount / Scholarship Installment / Partial Payment',
     urduLabel: 'اپنی مرضی کی رقم / بقایا اقساط',

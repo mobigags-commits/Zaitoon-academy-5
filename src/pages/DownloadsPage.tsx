@@ -60,13 +60,16 @@ export const DownloadsPage: React.FC<DownloadsPageProps> = ({ onNavigate }) => {
                   <span className="px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-950 font-black text-xs">
                     OFFICIAL APP 2026
                   </span>
+                  <span className="px-2 py-0.5 rounded-full bg-emerald-500 text-white font-bold text-[11px]">
+                    Download Fee: Rs. 100
+                  </span>
                   <span className="text-xs text-rose-200">Android • iPhone • Windows • Mac</span>
                 </div>
                 <h2 className="text-xl sm:text-2xl font-black text-white">
                   Zaitoon Roots Academy Official Mobile & Desktop App
                 </h2>
                 <p className="text-xs sm:text-sm text-rose-100 max-w-2xl">
-                  ہماری آفیشل موبائل ایپ اپنے فون یا لیپ ٹاپ پر ڈاؤنلوڈ اور انسٹال کریں۔ بجلی جیسی تیز رفتار، آف لائن موڈ، داخلہ الرٹس اور فوری سرٹیفکیٹ تصدیق۔
+                  ہماری آفیشل موبائل ایپ ڈاؤنلوڈ اور انسٹال کریں (نامینل فیس صرف 100 روپے برائے اونر اکاؤنٹ)۔ بجلی جیسی تیز رفتار، آف لائن موڈ، داخلہ الرٹس اور فوری سرٹیفکیٹ تصدیق۔
                 </p>
               </div>
             </div>
