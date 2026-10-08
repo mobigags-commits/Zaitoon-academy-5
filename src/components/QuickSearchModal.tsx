@@ -79,7 +79,7 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
             <div className="py-6 text-center text-slate-500 space-y-3">
               <p className="text-sm font-medium">Type any keyword to search across the entire academy catalog:</p>
               <div className="flex flex-wrap justify-center gap-2">
-                {['Artificial Intelligence', 'Cyber Security', 'MBBS', 'Cloud DevOps', 'Law & LLB', 'ACCA', 'Electric Vehicle'].map((tag) => (
+                {['Artificial Intelligence', 'Deposit & Withdraw (ڈپازٹ و ودڈرا)', 'Cyber Security', 'MBBS', 'Cloud DevOps', 'Law & LLB', 'ACCA', 'Electric Vehicle'].map((tag) => (
                   <button
                     key={tag}
                     onClick={() => setQuery(tag)}

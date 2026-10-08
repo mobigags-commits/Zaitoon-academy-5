@@ -357,7 +357,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInstallModal }
         <div className="mt-8 pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500">
           <p>© {new Date().getFullYear()} Zaitoon Roots Academy (زیتون روٹس اکیڈمی). All Rights Reserved Worldwide.</p>
           <div className="flex flex-wrap items-center gap-3">
-            <a href={getPath('payment-portal')} onClick={(e) => { e.preventDefault(); handleNav('payment-portal'); }} className="text-amber-400 font-bold hover:underline">Pay Fee</a>
+            <a href={getPath('payment-portal')} onClick={(e) => { e.preventDefault(); handleNav('payment-portal'); }} className="text-amber-400 font-bold hover:underline">Pay Fee (فیس ادائیگی)</a>
+            <span>•</span>
+            <a href={getPath('payment-portal')} onClick={(e) => { e.preventDefault(); handleNav('payment-portal'); }} className="text-emerald-400 font-bold hover:underline">Deposit & Withdraw (ڈپازٹ و ودڈرا)</a>
             <span>•</span>
             <a href={getPath('privacy-policy')} onClick={(e) => { e.preventDefault(); handleNav('privacy-policy'); }} className="hover:text-white">Privacy Policy</a>
             <span>•</span>

@@ -23,7 +23,9 @@ import {
   MessageCircle,
   CreditCard,
   Download,
-  Smartphone
+  Smartphone,
+  ArrowDownLeft,
+  ArrowUpRight
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -74,6 +76,16 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenS
               <MessageCircle className="w-3.5 h-3.5 fill-current" />
               <span className="hidden xs:inline">Owner WhatsApp:</span>
               <span className="font-mono">0344-7956085</span>
+            </a>
+            <span className="text-slate-600 hidden sm:inline">|</span>
+            <a
+              href="/payment-portal"
+              onClick={(e) => { e.preventDefault(); handlePageSelect('payment-portal'); }}
+              className="text-emerald-400 hover:text-emerald-300 font-bold hidden sm:flex items-center gap-1 cursor-pointer transition-colors"
+              title="Deposit Funds or Withdraw"
+            >
+              <ArrowDownLeft className="w-3.5 h-3.5" />
+              <span>Deposit & Withdraw (ڈپازٹ و ودڈرا)</span>
             </a>
             <span className="text-slate-600 hidden sm:inline">|</span>
             <button
@@ -468,10 +480,10 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenS
             <a
               href="/payment-portal"
               onClick={(e) => { e.preventDefault(); handlePageSelect('payment-portal'); }}
-              className="w-full py-3 rounded-xl font-bold text-center bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center gap-2 shadow-lg"
+              className="w-full py-3 rounded-xl font-bold text-center bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white flex items-center justify-center gap-2 shadow-lg"
             >
               <CreditCard className="w-4 h-4" />
-              <span>Pay Fee Online (تمام ادائیگی کے طریقے)</span>
+              <span>Pay, Deposit & Withdraw (فیس، ڈپازٹ و ودڈرا)</span>
             </a>
 
             <a

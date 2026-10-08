@@ -34,9 +34,13 @@ import {
   Upload,
   AlertCircle,
   RefreshCw,
-  Search
+  Search,
+  ArrowDownLeft,
+  ArrowUpRight,
+  History
 } from 'lucide-react';
 import { AdSenseBanner } from '../components/AdSenseBanner';
+import { DepositWithdrawDesk } from '../components/DepositWithdrawDesk';
 
 interface GlobalPaymentPortalPageProps {
   onNavigate: (page: PageId) => void;
@@ -49,6 +53,18 @@ export const GlobalPaymentPortalPage: React.FC<GlobalPaymentPortalPageProps> = (
   preSelectedProgramId,
   preSelectedFeePurpose
 }) => {
+  // Portal Mode: fee clearance or deposit / withdraw desk
+  const [portalMode, setPortalMode] = useState<'fee-payment' | 'deposit' | 'withdraw' | 'history'>(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const tabParam = urlParams.get('tab');
+      if (tabParam === 'deposit') return 'deposit';
+      if (tabParam === 'withdraw') return 'withdraw';
+      if (tabParam === 'history' || tabParam === 'wallet' || tabParam === 'ledger') return 'history';
+    }
+    return 'fee-payment';
+  });
+
   // Category state
   const [activeCategory, setActiveCategory] = useState<PaymentCategory>('all');
   const [selectedMethodId, setSelectedMethodId] = useState<string>('jazzcash');
@@ -243,8 +259,71 @@ export const GlobalPaymentPortalPage: React.FC<GlobalPaymentPortalPageProps> = (
           </div>
         </div>
 
-        {/* If a submission was just processed, show the Digital Receipt prominently */}
-        {submissionResult && (
+        {/* Portal Mode Switcher: Fee Payment vs Deposit vs Withdraw vs Ledger */}
+        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-2 sm:p-2.5 flex flex-wrap items-center justify-between gap-3 shadow-xl">
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              onClick={() => setPortalMode('fee-payment')}
+              className={`px-3.5 sm:px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition cursor-pointer ${
+                portalMode === 'fee-payment'
+                  ? 'bg-amber-400 text-slate-950 font-black shadow-md'
+                  : 'bg-slate-800 hover:bg-slate-700 text-slate-300'
+              }`}
+            >
+              <CreditCard className="w-4 h-4" />
+              <span>Fee Payment Clearance (فیس ادائیگی)</span>
+            </button>
+
+            <button
+              onClick={() => setPortalMode('deposit')}
+              className={`px-3.5 sm:px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition cursor-pointer ${
+                portalMode === 'deposit'
+                  ? 'bg-emerald-500 text-white font-black shadow-md'
+                  : 'bg-slate-800 hover:bg-slate-700 text-emerald-400'
+              }`}
+            >
+              <ArrowDownLeft className="w-4 h-4" />
+              <span>Deposit Funds (ڈپازٹ جمع کروائیں)</span>
+            </button>
+
+            <button
+              onClick={() => setPortalMode('withdraw')}
+              className={`px-3.5 sm:px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition cursor-pointer ${
+                portalMode === 'withdraw'
+                  ? 'bg-red-600 text-white font-black shadow-md'
+                  : 'bg-slate-800 hover:bg-slate-700 text-red-400'
+              }`}
+            >
+              <ArrowUpRight className="w-4 h-4" />
+              <span>Withdraw / Refund (ودڈرا رقم نکلوائیں)</span>
+            </button>
+
+            <button
+              onClick={() => setPortalMode('history')}
+              className={`px-3.5 sm:px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 transition cursor-pointer ${
+                portalMode === 'history'
+                  ? 'bg-blue-600 text-white font-black shadow-md'
+                  : 'bg-slate-800 hover:bg-slate-700 text-sky-400'
+              }`}
+            >
+              <History className="w-4 h-4" />
+              <span>Wallet Ledger (والٹ لیجر)</span>
+            </button>
+          </div>
+
+          <div className="hidden xl:flex items-center gap-2 text-xs text-slate-400 px-3">
+            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+            <span>ZRA Treasury: 0344-7956085</span>
+          </div>
+        </div>
+
+        {/* If portalMode is deposit, withdraw, or history, render DepositWithdrawDesk */}
+        {portalMode !== 'fee-payment' ? (
+          <DepositWithdrawDesk initialTab={portalMode} />
+        ) : (
+          <>
+            {/* If a submission was just processed, show the Digital Receipt prominently */}
+            {submissionResult && (
           <div
             id="receipt-print-area"
             className="bg-white text-slate-900 rounded-3xl p-6 sm:p-10 border-4 border-amber-500/40 shadow-2xl space-y-6 animate-in zoom-in-95"
@@ -779,6 +858,8 @@ export const GlobalPaymentPortalPage: React.FC<GlobalPaymentPortalPageProps> = (
             </form>
           </div>
         </div>
+        </>
+        )}
 
         {/* Ad Placement */}
         <AdSenseBanner format="leaderboard" showPreviewNotice={true} />

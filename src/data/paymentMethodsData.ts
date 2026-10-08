@@ -795,3 +795,18 @@ export interface PaymentSubmission {
   status: 'Verified & Cleared' | 'Pending Bank Reconciliation';
   receiptQrCodeUrl: string;
 }
+
+export interface WalletTransaction {
+  id: string;
+  type: 'deposit' | 'withdraw';
+  amountPkr: number;
+  method: string;
+  accountTitle: string;
+  accountNumber: string;
+  purpose: string;
+  status: 'Completed' | 'Processing' | 'Approved' | 'In Review';
+  timestamp: string;
+  referenceId: string;
+  notes?: string;
+}
+

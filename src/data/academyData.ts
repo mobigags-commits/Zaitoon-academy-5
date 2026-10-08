@@ -58,9 +58,9 @@ export const PAGES_MANIFEST: PageInfo[] = [
   {
     id: 'payment-portal',
     pageNumber: 7,
-    title: 'Global Payment Portal (All Methods)',
-    urduTitle: 'عالمی ادائیگی پورٹل (تمام بینکنگ و والٹس)',
-    subtitle: 'JazzCash, EasyPaisa, Raast, Cards, PayPal, Apple Pay, SWIFT & Bank Challan',
+    title: 'Payment, Deposit & Withdraw Portal',
+    urduTitle: 'فیس ادائیگی، فنڈز ڈپازٹ اور ودڈرا پورٹل',
+    subtitle: 'Deposit & Withdraw (JazzCash, EasyPaisa, Raast, Bank), Tuition Fee Clearance & Refunds',
     category: 'Admissions & Fees',
     icon: 'CreditCard'
   },

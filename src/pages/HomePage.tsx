@@ -441,21 +441,23 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <div>
               <span className="text-xs font-bold text-amber-400 uppercase tracking-widest">Global Financial Infrastructure</span>
               <h2 className="text-2xl sm:text-3xl font-black text-white mt-1">
-                Puri Dunya K Tamam Payment Methods & Instant Forms
+                Payment, Deposit & Withdraw Portal (تمام ادائیگی و فنڈز)
               </h2>
               <p className="text-rose-200 text-xs sm:text-sm mt-1">
-                تمام ملکی اور بین الاقوامی ادائیگی کے ذرائع برائے داخلہ، سمسٹر فیس اور سرٹیفیکیشن
+                فیس جمع کروائیں، ایڈوانس فنڈز ڈپازٹ کریں، یا ریفنڈ و اسکالرشپ فوری اپنے اکاؤنٹ میں ودڈرا کریں۔
               </p>
             </div>
-            <a
-              href={getPath('payment-portal')}
-              onClick={(e) => { e.preventDefault(); onNavigate('payment-portal'); }}
-              className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-bold text-xs shadow-lg flex items-center gap-2 self-start lg:self-auto cursor-pointer"
-            >
-              <CreditCard className="w-4 h-4" />
-              <span>Open Complete Payment Portal</span>
-              <ArrowRight className="w-4 h-4" />
-            </a>
+            <div className="flex flex-wrap items-center gap-2 self-start lg:self-auto">
+              <a
+                href={getPath('payment-portal')}
+                onClick={(e) => { e.preventDefault(); onNavigate('payment-portal'); }}
+                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-bold text-xs shadow-lg flex items-center gap-2 cursor-pointer"
+              >
+                <CreditCard className="w-4 h-4" />
+                <span>Deposit & Withdraw Desk (ڈپازٹ و ودڈرا)</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">

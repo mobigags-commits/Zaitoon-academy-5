@@ -300,10 +300,10 @@ export const PAGES_SEO_METADATA: Record<PageId, PageSEOMeta> = {
   'payment-portal': {
     id: 'payment-portal',
     path: '/payment-portal',
-    title: 'Global Payment Portal & All World Payment Methods - Zaitoon Roots Academy',
-    description: 'Pay admission fees, tuition installments, and verification dues online via JazzCash, EasyPaisa, Raast, 1Bill, Visa, MasterCard, PayPal, Apple Pay, SWIFT Wire, or Mada.',
-    breadcrumbName: 'Global Payment Portal',
-    keywords: 'pay fee online, jazzcash fee payment, easypaisa fee, raast sbp payment, visa mastercard university fee, paypal international student fee, bank challan print, meezan bank hbl challan, zra payment portal',
+    title: 'Payment, Deposit & Withdraw Portal - Zaitoon Roots Academy',
+    description: 'Deposit funds, clear semester fees, and submit instant withdrawal / refund requests via JazzCash, EasyPaisa, Raast, Cards, and Banks.',
+    breadcrumbName: 'Payment, Deposit & Withdraw',
+    keywords: 'deposit money university, withdraw refund pakistan, jazzcash deposit, easypaisa withdrawal, pay fee online, raast sbp payment, visa mastercard university fee, bank challan print, zra treasury portal',
     faqs: [
       {
         question: 'What payment methods does Zaitoon Roots Academy accept for fee payment?',
@@ -369,6 +369,10 @@ export function getPageIdFromPath(pathname: string): PageId {
     '/online-payment': 'payment-portal',
     '/pay-fee': 'payment-portal',
     '/challan': 'payment-portal',
+    '/deposit': 'payment-portal',
+    '/withdraw': 'payment-portal',
+    '/wallet': 'payment-portal',
+    '/deposit-withdraw': 'payment-portal',
     '/privacy': 'privacy-policy',
     '/terms-of-service': 'terms',
     '/ecosystem': 'google-ecosystem',
