@@ -25,7 +25,8 @@ import {
   Download,
   Smartphone,
   ArrowDownLeft,
-  ArrowUpRight
+  ArrowUpRight,
+  Wallet
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -33,9 +34,16 @@ interface HeaderProps {
   onNavigate: (page: PageId) => void;
   onOpenSearch: () => void;
   onOpenInstallModal: () => void;
+  onOpenDepositWithdraw?: (tab?: 'overview' | 'deposit' | 'withdraw' | 'history') => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenSearch, onOpenInstallModal }) => {
+export const Header: React.FC<HeaderProps> = ({
+  currentPage,
+  onNavigate,
+  onOpenSearch,
+  onOpenInstallModal,
+  onOpenDepositWithdraw
+}) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [pagesDropdownOpen, setPagesDropdownOpen] = useState(false);
   const [academicsDropdownOpen, setAcademicsDropdownOpen] = useState(false);
@@ -78,15 +86,20 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenS
               <span className="font-mono">0344-7956085</span>
             </a>
             <span className="text-slate-600 hidden sm:inline">|</span>
-            <a
-              href="/payment-portal"
-              onClick={(e) => { e.preventDefault(); handlePageSelect('payment-portal'); }}
+            <button
+              onClick={() => {
+                if (onOpenDepositWithdraw) {
+                  onOpenDepositWithdraw('overview');
+                } else {
+                  handlePageSelect('payment-portal');
+                }
+              }}
               className="text-emerald-400 hover:text-emerald-300 font-bold hidden sm:flex items-center gap-1 cursor-pointer transition-colors"
               title="Deposit Funds or Withdraw"
             >
-              <ArrowDownLeft className="w-3.5 h-3.5" />
+              <ArrowDownLeft className="w-3.5 h-3.5 text-emerald-400" />
               <span>Deposit & Withdraw (ڈپازٹ و ودڈرا)</span>
-            </a>
+            </button>
             <span className="text-slate-600 hidden sm:inline">|</span>
             <button
               onClick={onOpenInstallModal}
@@ -390,6 +403,29 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenS
               <span>WhatsApp: 0344-7956085</span>
             </a>
 
+            {/* Quick Deposit & Withdraw Button */}
+            <button
+              onClick={() => {
+                if (onOpenDepositWithdraw) {
+                  onOpenDepositWithdraw('overview');
+                } else {
+                  handlePageSelect('payment-portal');
+                }
+              }}
+              className={`hidden md:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl font-bold text-xs shadow-sm transition-all transform hover:-translate-y-0.5 cursor-pointer border ${
+                isHome
+                  ? 'bg-emerald-600/90 hover:bg-emerald-500 text-white border-emerald-400/40 shadow-emerald-950/40'
+                  : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border-emerald-300'
+              }`}
+              title="Deposit funds or Request Withdrawal"
+            >
+              <Wallet className="w-3.5 h-3.5" />
+              <span>Deposit / Withdraw</span>
+              <span className="text-[10px] px-1 py-0.5 rounded bg-black/20 font-mono">
+                ڈپازٹ و ودڈرا
+              </span>
+            </button>
+
             {/* PWA Install Button in Header */}
             <PWAInstallButton onOpenModal={onOpenInstallModal} variant="header" />
 
@@ -427,6 +463,38 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenS
           <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-800">
             <span className="text-sm font-bold text-slate-300">Zaitoon Roots Academy Menu</span>
             <span className="text-xs px-2 py-0.5 bg-red-600 rounded text-white font-medium">27 Pages</span>
+          </div>
+
+          {/* Quick Deposit & Withdraw in Mobile Drawer */}
+          <div className="grid grid-cols-2 gap-2 mb-3">
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                if (onOpenDepositWithdraw) {
+                  onOpenDepositWithdraw('deposit');
+                } else {
+                  handlePageSelect('payment-portal');
+                }
+              }}
+              className="py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-md transition"
+            >
+              <ArrowDownLeft className="w-4 h-4" />
+              <span>Deposit (ڈپازٹ)</span>
+            </button>
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                if (onOpenDepositWithdraw) {
+                  onOpenDepositWithdraw('withdraw');
+                } else {
+                  handlePageSelect('payment-portal');
+                }
+              }}
+              className="py-2.5 px-3 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-md transition"
+            >
+              <ArrowUpRight className="w-4 h-4" />
+              <span>Withdraw (ودڈرا)</span>
+            </button>
           </div>
 
           {/* Quick Owner WhatsApp in Mobile Drawer */}
@@ -477,14 +545,20 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate, onOpenS
           </div>
 
           <div className="mt-6 pt-4 border-t border-slate-800 flex flex-col gap-3">
-            <a
-              href="/payment-portal"
-              onClick={(e) => { e.preventDefault(); handlePageSelect('payment-portal'); }}
-              className="w-full py-3 rounded-xl font-bold text-center bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white flex items-center justify-center gap-2 shadow-lg"
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                if (onOpenDepositWithdraw) {
+                  onOpenDepositWithdraw('overview');
+                } else {
+                  handlePageSelect('payment-portal');
+                }
+              }}
+              className="w-full py-3 rounded-xl font-bold text-center bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white flex items-center justify-center gap-2 shadow-lg cursor-pointer"
             >
-              <CreditCard className="w-4 h-4" />
-              <span>Pay, Deposit & Withdraw (فیس، ڈپازٹ و ودڈرا)</span>
-            </a>
+              <Wallet className="w-4 h-4" />
+              <span>Deposit & Withdraw Funds (فیس، ڈپازٹ و ودڈرا)</span>
+            </button>
 
             <a
               href="/admissions"

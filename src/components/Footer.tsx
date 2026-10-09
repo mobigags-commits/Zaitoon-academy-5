@@ -15,15 +15,18 @@ import {
   Heart,
   MessageCircle,
   CreditCard,
-  Lock
+  Lock,
+  ArrowDownLeft,
+  Wallet
 } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (page: PageId) => void;
   onOpenInstallModal?: () => void;
+  onOpenDepositWithdraw?: (tab?: 'overview' | 'deposit' | 'withdraw' | 'history') => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInstallModal }) => {
+export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInstallModal, onOpenDepositWithdraw }) => {
   const handleNav = (pageId: PageId) => {
     onNavigate(pageId);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -190,6 +193,30 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInstallModal }
                   <CreditCard className="w-3.5 h-3.5 text-amber-400" />
                   <span>Global Payment Portal (فیس ادائیگی)</span>
                 </a>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    if (onOpenDepositWithdraw) onOpenDepositWithdraw('deposit');
+                    else handleNav('payment-portal');
+                  }}
+                  className="text-emerald-400 font-bold hover:text-emerald-300 transition-colors flex items-center gap-1.5 cursor-pointer text-left"
+                >
+                  <ArrowDownLeft className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Deposit Funds (فنڈز و فیس ڈپازٹ)</span>
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    if (onOpenDepositWithdraw) onOpenDepositWithdraw('withdraw');
+                    else handleNav('payment-portal');
+                  }}
+                  className="text-rose-400 font-bold hover:text-rose-300 transition-colors flex items-center gap-1.5 cursor-pointer text-left"
+                >
+                  <ArrowUpRight className="w-3.5 h-3.5 text-rose-400" />
+                  <span>Withdraw & Refund (ودڈرا رقم نکلوائیں)</span>
+                </button>
               </li>
               <li>
                 <a href={getPath('lms-portal')} onClick={(e) => { e.preventDefault(); handleNav('lms-portal'); }} className="hover:text-amber-400 transition-colors flex items-center gap-1.5">
@@ -359,7 +386,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInstallModal }
           <div className="flex flex-wrap items-center gap-3">
             <a href={getPath('payment-portal')} onClick={(e) => { e.preventDefault(); handleNav('payment-portal'); }} className="text-amber-400 font-bold hover:underline">Pay Fee (فیس ادائیگی)</a>
             <span>•</span>
-            <a href={getPath('payment-portal')} onClick={(e) => { e.preventDefault(); handleNav('payment-portal'); }} className="text-emerald-400 font-bold hover:underline">Deposit & Withdraw (ڈپازٹ و ودڈرا)</a>
+            <button
+              onClick={() => {
+                if (onOpenDepositWithdraw) onOpenDepositWithdraw('overview');
+                else handleNav('payment-portal');
+              }}
+              className="text-emerald-400 font-bold hover:underline cursor-pointer"
+            >
+              Deposit & Withdraw (ڈپازٹ و ودڈرا)
+            </button>
             <span>•</span>
             <a href={getPath('privacy-policy')} onClick={(e) => { e.preventDefault(); handleNav('privacy-policy'); }} className="hover:text-white">Privacy Policy</a>
             <span>•</span>

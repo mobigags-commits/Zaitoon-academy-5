@@ -67,6 +67,12 @@ export const DepositWithdrawDesk: React.FC<DepositWithdrawDeskProps> = ({
 }) => {
   const [activeTab, setActiveTab] = useState<'overview' | 'deposit' | 'withdraw' | 'history'>(initialTab);
 
+  useEffect(() => {
+    if (initialTab) {
+      setActiveTab(initialTab);
+    }
+  }, [initialTab]);
+
   // Wallet Balance (Stored in localStorage)
   const [balance, setBalance] = useState<number>(() => {
     if (typeof window !== 'undefined') {

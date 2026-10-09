@@ -40,6 +40,7 @@ import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { InstallAppModal } from './components/InstallAppModal';
 import { MobileInstallBanner } from './components/MobileInstallBanner';
 import { OfflineIndicator } from './components/OfflineIndicator';
+import { DepositWithdrawDesk } from './components/DepositWithdrawDesk';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>(() => {
@@ -50,6 +51,13 @@ export default function App() {
   });
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isInstallModalOpen, setIsInstallModalOpen] = useState(false);
+  const [isDepositWithdrawModalOpen, setIsDepositWithdrawModalOpen] = useState(false);
+  const [depositWithdrawTab, setDepositWithdrawTab] = useState<'overview' | 'deposit' | 'withdraw' | 'history'>('overview');
+
+  const handleOpenDepositWithdraw = useCallback((tab: 'overview' | 'deposit' | 'withdraw' | 'history' = 'overview') => {
+    setDepositWithdrawTab(tab);
+    setIsDepositWithdrawModalOpen(true);
+  }, []);
 
   // Sync state with browser history (back/forward buttons)
   useEffect(() => {
@@ -59,13 +67,21 @@ export default function App() {
     };
 
     const handleOpenInstall = () => setIsInstallModalOpen(true);
+    const handleOpenDepositEvent = (e: Event) => {
+      const customEvent = e as CustomEvent<{ tab?: 'overview' | 'deposit' | 'withdraw' | 'history' }>;
+      const tab = customEvent.detail?.tab || 'overview';
+      handleOpenDepositWithdraw(tab);
+    };
+
     window.addEventListener('open-pwa-install', handleOpenInstall);
+    window.addEventListener('open-deposit-withdraw', handleOpenDepositEvent);
     window.addEventListener('popstate', handlePopState);
     return () => {
       window.removeEventListener('open-pwa-install', handleOpenInstall);
+      window.removeEventListener('open-deposit-withdraw', handleOpenDepositEvent);
       window.removeEventListener('popstate', handlePopState);
     };
-  }, []);
+  }, [handleOpenDepositWithdraw]);
 
   // Safe navigation handler that updates URL pathname and scrolls to top
   const handleNavigate = useCallback((pageId: PageId) => {
@@ -156,6 +172,7 @@ export default function App() {
         onNavigate={handleNavigate}
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenInstallModal={() => setIsInstallModalOpen(true)}
+        onOpenDepositWithdraw={handleOpenDepositWithdraw}
       />
 
       {/* Main Active Page View */}
@@ -167,6 +184,7 @@ export default function App() {
       <Footer
         onNavigate={handleNavigate}
         onOpenInstallModal={() => setIsInstallModalOpen(true)}
+        onOpenDepositWithdraw={handleOpenDepositWithdraw}
       />
 
       {/* Quick Search Spotlight Modal */}
@@ -178,6 +196,24 @@ export default function App() {
 
       {/* Interactive AI Admission Counselor Widget */}
       <LiveChatWidget onNavigate={handleNavigate} />
+
+      {/* Universal Deposit & Withdraw Desk Modal */}
+      {isDepositWithdrawModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/85 backdrop-blur-md overflow-y-auto animate-in fade-in duration-200"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setIsDepositWithdrawModalOpen(false);
+          }}
+        >
+          <div className="relative w-full max-w-5xl my-auto max-h-[94vh] overflow-y-auto rounded-3xl shadow-2xl animate-in zoom-in-95 duration-200">
+            <DepositWithdrawDesk
+              isModal={true}
+              initialTab={depositWithdrawTab}
+              onClose={() => setIsDepositWithdrawModalOpen(false)}
+            />
+          </div>
+        </div>
+      )}
 
       {/* PWA App Install Modal */}
       <InstallAppModal

@@ -11,7 +11,10 @@ import {
   HelpCircle,
   ArrowRight,
   ShieldCheck,
-  CreditCard
+  CreditCard,
+  ArrowDownLeft,
+  ArrowUpRight,
+  Wallet
 } from 'lucide-react';
 
 interface FeeScholarshipPageProps {
@@ -233,6 +236,31 @@ export const FeeScholarshipPage: React.FC<FeeScholarshipPageProps> = ({ onNaviga
                 <span>Lock This Fee & Apply Online</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
+
+              <div className="grid grid-cols-2 gap-2 pt-1">
+                <button
+                  onClick={() => {
+                    window.dispatchEvent(
+                      new CustomEvent('open-deposit-withdraw', { detail: { tab: 'deposit' } })
+                    );
+                  }}
+                  className="py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-emerald-700 border border-emerald-300 font-bold text-xs flex items-center justify-center gap-1.5 transition cursor-pointer"
+                >
+                  <ArrowDownLeft className="w-3.5 h-3.5" />
+                  <span>Advance Deposit (ڈپازٹ)</span>
+                </button>
+                <button
+                  onClick={() => {
+                    window.dispatchEvent(
+                      new CustomEvent('open-deposit-withdraw', { detail: { tab: 'withdraw' } })
+                    );
+                  }}
+                  className="py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-rose-700 border border-rose-300 font-bold text-xs flex items-center justify-center gap-1.5 transition cursor-pointer"
+                >
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                  <span>Refund / Withdraw (ودڈرا)</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>

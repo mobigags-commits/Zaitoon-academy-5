@@ -65,6 +65,17 @@ export const GlobalPaymentPortalPage: React.FC<GlobalPaymentPortalPageProps> = (
     return 'fee-payment';
   });
 
+  useEffect(() => {
+    const handleDepositWithdrawEvent = (e: Event) => {
+      const customEvent = e as CustomEvent<{ tab?: 'fee-payment' | 'deposit' | 'withdraw' | 'history' }>;
+      if (customEvent.detail?.tab) {
+        setPortalMode(customEvent.detail.tab);
+      }
+    };
+    window.addEventListener('open-deposit-withdraw', handleDepositWithdrawEvent);
+    return () => window.removeEventListener('open-deposit-withdraw', handleDepositWithdrawEvent);
+  }, []);
+
   // Category state
   const [activeCategory, setActiveCategory] = useState<PaymentCategory>('all');
   const [selectedMethodId, setSelectedMethodId] = useState<string>('jazzcash');

@@ -27,7 +27,10 @@ import {
   Download,
   Smartphone,
   Laptop,
-  WifiOff
+  WifiOff,
+  Wallet,
+  ArrowDownLeft,
+  ArrowUpRight
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -396,7 +399,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {[
-            { id: 'payment-portal', title: 'Global Fee Payment', icon: CreditCard, desc: 'JazzCash, EasyPaisa, Card, Raast' },
+            { id: 'payment-portal', title: 'Fee, Deposit & Withdraw', icon: Wallet, desc: 'Deposit, Withdraw, JazzCash, Card, Raast' },
             { id: 'admissions', title: 'Online Admissions', icon: GraduationCap, desc: 'Digital Application & Challan' },
             { id: 'lms-portal', title: 'Student Portal (LMS)', icon: Layers, desc: 'Lectures, Timetable & GPA' },
             { id: 'fee-scholarship', title: 'Fee & Scholarships', icon: TrendingUp, desc: '100% Merit Financial Aid' },
@@ -448,14 +451,38 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-2 self-start lg:self-auto">
+              <button
+                onClick={() => {
+                  window.dispatchEvent(
+                    new CustomEvent('open-deposit-withdraw', { detail: { tab: 'deposit' } })
+                  );
+                }}
+                className="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-lg flex items-center gap-1.5 cursor-pointer transition transform hover:-translate-y-0.5"
+              >
+                <ArrowDownLeft className="w-4 h-4" />
+                <span>Deposit (ڈپازٹ جمع کروائیں)</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  window.dispatchEvent(
+                    new CustomEvent('open-deposit-withdraw', { detail: { tab: 'withdraw' } })
+                  );
+                }}
+                className="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs shadow-lg flex items-center gap-1.5 cursor-pointer transition transform hover:-translate-y-0.5"
+              >
+                <ArrowUpRight className="w-4 h-4" />
+                <span>Withdraw (ودڈرا رقم نکلوائیں)</span>
+              </button>
+
               <a
                 href={getPath('payment-portal')}
                 onClick={(e) => { e.preventDefault(); onNavigate('payment-portal'); }}
-                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-bold text-xs shadow-lg flex items-center gap-2 cursor-pointer"
+                className="px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs shadow-md flex items-center gap-1.5 cursor-pointer transition"
               >
                 <CreditCard className="w-4 h-4" />
-                <span>Deposit & Withdraw Desk (ڈپازٹ و ودڈرا)</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>Fee Clearance (فیس ادائیگی)</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </a>
             </div>
           </div>
