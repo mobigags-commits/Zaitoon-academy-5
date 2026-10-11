@@ -315,6 +315,24 @@ export const PAGES_SEO_METADATA: Record<PageId, PageSEOMeta> = {
       }
     ]
   },
+  'teacher-portal': {
+    id: 'teacher-portal',
+    path: '/teacher-portal',
+    title: 'Teachers & Faculty Portal - Onboarding Form, Syllabus & Grading | ZRA',
+    description: 'Official Zaitoon Roots Academy Teachers Portal. Complete faculty recruitment and onboarding form, course syllabus planner, student attendance log, exam marks entry, and academic schedule.',
+    breadcrumbName: 'Teachers & Faculty Portal',
+    keywords: 'teacher portal, faculty portal, zra teacher application form, university faculty jobs pakistan, syllabus planner, student marks entry, attendance log, teacher recruitment islamabad, academic lms teacher login',
+    faqs: [
+      {
+        question: 'How can instructors apply for teaching positions at Zaitoon Roots Academy?',
+        answer: 'Prospective teachers and professors can fill out the complete online Faculty Onboarding & Application Form on the Teachers Portal with full academic qualifications, research publications, teaching preferences, and resume upload.'
+      },
+      {
+        question: 'What management tools are available for faculty in the Teachers Portal?',
+        answer: 'Faculty members have access to the Course Syllabus & Lecture Planner, Student Marks and Exam Grading Entry with auto-GPA calculation, Daily Attendance Tracking, and Leave & Replacement Roster forms.'
+      }
+    ]
+  },
   'not-found': {
     id: 'not-found',
     path: '/404',
@@ -384,7 +402,12 @@ export function getPageIdFromPath(pathname: string): PageId {
     '/careers': 'placement',
     '/jobs': 'placement',
     '/online': 'distance-learning',
-    '/online-campus': 'distance-learning'
+    '/online-campus': 'distance-learning',
+    '/teacher': 'teacher-portal',
+    '/teachers': 'teacher-portal',
+    '/teacher-portal': 'teacher-portal',
+    '/teachers-portal': 'teacher-portal',
+    '/faculty-portal': 'teacher-portal'
   };
 
   if (routeAliases[cleanPath]) {

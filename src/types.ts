@@ -26,6 +26,7 @@ export type PageId =
   | 'terms'
   | 'google-ecosystem'
   | 'payment-portal'
+  | 'teacher-portal'
   | 'not-found';
 
 export interface PageInfo {
@@ -177,4 +178,63 @@ export interface AdmissionApplication {
   status: 'Application Submitted' | 'Document Verification Pending' | 'Test Scheduled' | 'Admission Offer Issued';
   challanNumber: string;
   estimatedFee: string;
+}
+
+export interface TeacherApplication {
+  applicationId: string;
+  fullName: string;
+  fatherHusbandName: string;
+  cnicOrPassport: string;
+  dob: string;
+  gender: string;
+  bloodGroup: string;
+  mobileWhatsapp: string;
+  alternatePhone: string;
+  email: string;
+  address: string;
+  city: string;
+  domicile: string;
+  highestDegree: string;
+  terminalDegreeTitle: string;
+  awardingInstitute: string;
+  passingYear: string;
+  cgpaOrDivision: string;
+  thesisTitle: string;
+  hecAttested: boolean;
+  totalExperienceYears: number;
+  currentOrganization: string;
+  currentDesignation: string;
+  lastDrawnSalary: string;
+  expectedSalary: string;
+  departmentApplying: string;
+  preferredCourses: string[];
+  preferredMode: 'Physical On-Campus' | 'Online Distance Learning' | 'Hybrid Blended';
+  teachingShift: 'Morning' | 'Evening' | 'Weekend Executive';
+  publicationsCount: number;
+  googleScholarUrl?: string;
+  orcidId?: string;
+  resumeFileName?: string;
+  submissionDate: string;
+  status: 'Received & In Review' | 'Shortlisted for Interview' | 'Demo Lecture Scheduled' | 'Appointment Offer Issued';
+}
+
+export interface StudentGradeRecord {
+  id: string;
+  rollNumber: string;
+  studentName: string;
+  quizMarks: number;
+  assignmentMarks: number;
+  midtermMarks: number;
+  finalMarks: number;
+  totalMarks: number;
+  grade: string;
+  gpa: number;
+  remarks: string;
+}
+
+export interface AttendanceRecord {
+  rollNumber: string;
+  studentName: string;
+  status: 'Present' | 'Absent' | 'Late' | 'Excused';
+  remarks?: string;
 }

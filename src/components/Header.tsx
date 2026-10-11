@@ -120,6 +120,16 @@ export const Header: React.FC<HeaderProps> = ({
             </a>
             <span className="text-slate-600 hidden md:inline">|</span>
             <a
+              href="/teacher-portal"
+              onClick={(e) => { e.preventDefault(); handlePageSelect('teacher-portal'); }}
+              className="hover:text-amber-300 text-amber-400 font-bold hidden md:flex items-center gap-1 cursor-pointer transition-colors"
+              title="Teachers & Faculty Management Portal"
+            >
+              <GraduationCap className="w-3.5 h-3.5 text-amber-400" />
+              <span>Teachers Portal (اساتذہ پورٹل)</span>
+            </a>
+            <span className="text-slate-600 hidden md:inline">|</span>
+            <a
               href="/lms-portal"
               onClick={(e) => { e.preventDefault(); handlePageSelect('lms-portal'); }}
               className="hover:text-amber-400 transition-colors hidden md:flex items-center gap-1 cursor-pointer"
@@ -314,7 +324,25 @@ export const Header: React.FC<HeaderProps> = ({
               Faculty
             </a>
 
-            {/* All 27 Pages Mega Menu Dropdown */}
+            <a
+              href="/teacher-portal"
+              onClick={(e) => { e.preventDefault(); handlePageSelect('teacher-portal'); }}
+              className={`px-3 py-2 rounded-lg font-bold text-sm flex items-center gap-1.5 transition-all ${
+                currentPage === 'teacher-portal'
+                  ? isHome
+                    ? 'bg-amber-400 text-slate-950 font-black'
+                    : 'bg-indigo-600 text-white font-black'
+                  : isHome
+                  ? 'text-amber-200 hover:bg-white/10'
+                  : 'text-indigo-700 hover:bg-indigo-50'
+              }`}
+              title="Teachers & Faculty Management Portal"
+            >
+              <GraduationCap className="w-4 h-4 text-amber-400" />
+              <span>Teachers Portal (اساتذہ پورٹل)</span>
+            </a>
+
+            {/* All Pages Mega Menu Dropdown */}
             <div className="relative">
               <button
                 onClick={() => setPagesDropdownOpen(!pagesDropdownOpen)}
@@ -329,7 +357,7 @@ export const Header: React.FC<HeaderProps> = ({
                 }`}
               >
                 <Layers className="w-4 h-4 text-amber-400" />
-                <span>All 27 Pages</span>
+                <span>All 28 Pages</span>
                 <ChevronDown className="w-3.5 h-3.5" />
               </button>
 
@@ -340,11 +368,11 @@ export const Header: React.FC<HeaderProps> = ({
                 >
                   <div className="col-span-2 pb-2 border-b border-slate-100 flex items-center justify-between">
                     <div>
-                      <h4 className="font-bold text-slate-900 text-sm">Zaitoon Roots Academy — All 27 Institutional Pages</h4>
-                      <p className="text-xs text-slate-500">مکمل 27 صفحات ڈائرکٹری اور فوری نیویگیشن</p>
+                      <h4 className="font-bold text-slate-900 text-sm">Zaitoon Roots Academy — All 28 Institutional Pages</h4>
+                      <p className="text-xs text-slate-500">مکمل 28 صفحات ڈائرکٹری اور فوری نیویگیشن</p>
                     </div>
                     <span className="text-xs font-semibold px-2.5 py-1 bg-red-100 text-red-700 rounded-full">
-                      27 Comprehensive Portals
+                      28 Comprehensive Portals
                     </span>
                   </div>
 
@@ -462,8 +490,22 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="lg:hidden bg-slate-900 text-white border-b border-slate-800 px-4 py-6 max-h-[85vh] overflow-y-auto animate-in slide-in-from-top-4 duration-200">
           <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-800">
             <span className="text-sm font-bold text-slate-300">Zaitoon Roots Academy Menu</span>
-            <span className="text-xs px-2 py-0.5 bg-red-600 rounded text-white font-medium">27 Pages</span>
+            <span className="text-xs px-2 py-0.5 bg-red-600 rounded text-white font-medium">28 Pages</span>
           </div>
+
+          {/* Quick Teachers Portal in Mobile Drawer */}
+          <a
+            href="/teacher-portal"
+            onClick={(e) => {
+              e.preventDefault();
+              setMobileMenuOpen(false);
+              handlePageSelect('teacher-portal');
+            }}
+            className="mb-3 w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-indigo-700 via-indigo-600 to-purple-700 hover:from-indigo-600 hover:to-purple-600 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md cursor-pointer border border-indigo-400/30"
+          >
+            <GraduationCap className="w-4 h-4 text-amber-300" />
+            <span>Teachers & Faculty Portal (اساتذہ پورٹل و مکمل فارم)</span>
+          </a>
 
           {/* Quick Deposit & Withdraw in Mobile Drawer */}
           <div className="grid grid-cols-2 gap-2 mb-3">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PageId } from '../types';
 import { FACULTY_MEMBERS } from '../data/academyData';
-import { Users, Mail, BookOpen, Award, Globe, Search, Send, CheckCircle2 } from 'lucide-react';
+import { Users, Mail, BookOpen, Award, Globe, Search, Send, CheckCircle2, GraduationCap } from 'lucide-react';
 
 interface FacultyPageProps {
   onNavigate: (page: PageId) => void;
@@ -55,6 +55,39 @@ export const FacultyPage: React.FC<FacultyPageProps> = ({ onNavigate }) => {
                 className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-900 focus:outline-none focus:border-blue-600"
               />
             </div>
+          </div>
+        </div>
+
+        {/* Teachers Portal Direct Access & Faculty Recruitment Banner */}
+        <div className="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 border border-indigo-800/40 rounded-3xl p-6 sm:p-7 shadow-lg mb-8 text-white flex flex-col md:flex-row md:items-center justify-between gap-5">
+          <div className="flex items-start sm:items-center gap-4">
+            <div className="w-14 h-14 rounded-2xl bg-amber-400 text-slate-950 flex items-center justify-center font-black shrink-0 shadow-md">
+              <GraduationCap className="w-8 h-8" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="px-2.5 py-0.5 rounded-full bg-amber-400/20 text-amber-300 text-xs font-bold border border-amber-400/30">
+                  New Faculty Portal
+                </span>
+                <span className="text-xs text-slate-300">اساتذہ و فیکلٹی پورٹل</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-extrabold text-white mt-1">
+                Official Teachers Portal & Onboarding Application
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-300">
+                Are you an instructor or academic researcher? Access the 16-Week Syllabus Planner, student marks entry, daily attendance log, and faculty recruitment form.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2 shrink-0">
+            <button
+              onClick={() => onNavigate('teacher-portal')}
+              className="px-5 py-3 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-xs sm:text-sm flex items-center gap-2 shadow-xl cursor-pointer transition-transform hover:scale-105"
+            >
+              <GraduationCap className="w-4 h-4" />
+              <span>Enter Teachers Portal (اساتذہ پورٹل کھولیں)</span>
+            </button>
           </div>
         </div>
 

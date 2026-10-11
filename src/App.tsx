@@ -35,6 +35,7 @@ import { GlobalPaymentPortalPage } from './pages/GlobalPaymentPortalPage';
 import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { TermsPage } from './pages/TermsPage';
 import { GoogleEcosystemPage } from './pages/GoogleEcosystemPage';
+import { TeacherPortalPage } from './pages/TeacherPortalPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { InstallAppModal } from './components/InstallAppModal';
@@ -154,6 +155,8 @@ export default function App() {
         return <TermsPage onNavigate={handleNavigate} />;
       case 'google-ecosystem':
         return <GoogleEcosystemPage onNavigate={handleNavigate} />;
+      case 'teacher-portal':
+        return <TeacherPortalPage onNavigate={handleNavigate} />;
       case 'not-found':
         return <NotFoundPage onNavigate={handleNavigate} />;
       default:

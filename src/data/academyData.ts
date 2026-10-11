@@ -243,6 +243,15 @@ export const PAGES_MANIFEST: PageInfo[] = [
     subtitle: 'Google Search Console, Analytics, Indexing, Ads, Merchant & Site Kit Integration',
     category: 'Institution',
     icon: 'Globe'
+  },
+  {
+    id: 'teacher-portal',
+    pageNumber: 28,
+    title: 'Teachers & Faculty Portal',
+    urduTitle: 'اساتذہ و فیکلٹی پورٹل (مکمل فارم اور ڈیش بورڈ)',
+    subtitle: 'Faculty Onboarding Application, Course Syllabus, Attendance Log, Student Marks & Timetable',
+    category: 'Institution',
+    icon: 'GraduationCap'
   }
 ];
 
