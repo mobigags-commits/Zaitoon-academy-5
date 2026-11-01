@@ -252,6 +252,15 @@ export const PAGES_MANIFEST: PageInfo[] = [
     subtitle: 'Faculty Onboarding Application, Course Syllabus, Attendance Log, Student Marks & Timetable',
     category: 'Institution',
     icon: 'GraduationCap'
+  },
+  {
+    id: 'admin-portal',
+    pageNumber: 29,
+    title: 'Executive Admin & Treasury Portal',
+    urduTitle: 'ایگزیکٹو ایڈمن و ٹریژری پورٹل',
+    subtitle: 'Admissions Pipeline, Fee & Deposit Approvals, Faculty Vetting & Master System Control',
+    category: 'Institution',
+    icon: 'Lock'
   }
 ];
 

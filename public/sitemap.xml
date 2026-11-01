@@ -185,8 +185,22 @@
   <!-- 27. Google Ecosystem Command Center -->
   <url>
     <loc>https://zaitoon-academy-5.vercel.app/google-ecosystem</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <!-- 28. Teachers & Faculty Portal -->
+  <url>
+    <loc>https://zaitoon-academy-5.vercel.app/teacher-portal</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- 29. Executive Admin & Treasury Portal -->
+  <url>
+    <loc>https://zaitoon-academy-5.vercel.app/admin-portal</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

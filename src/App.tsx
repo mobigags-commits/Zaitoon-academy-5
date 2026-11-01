@@ -36,6 +36,7 @@ import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
 import { TermsPage } from './pages/TermsPage';
 import { GoogleEcosystemPage } from './pages/GoogleEcosystemPage';
 import { TeacherPortalPage } from './pages/TeacherPortalPage';
+import { AdminDashboardPage } from './pages/AdminDashboardPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { InstallAppModal } from './components/InstallAppModal';
@@ -157,6 +158,8 @@ export default function App() {
         return <GoogleEcosystemPage onNavigate={handleNavigate} />;
       case 'teacher-portal':
         return <TeacherPortalPage onNavigate={handleNavigate} />;
+      case 'admin-portal':
+        return <AdminDashboardPage onNavigate={handleNavigate} />;
       case 'not-found':
         return <NotFoundPage onNavigate={handleNavigate} />;
       default:

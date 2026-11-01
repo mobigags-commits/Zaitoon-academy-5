@@ -26,8 +26,10 @@ import {
   Smartphone,
   ArrowDownLeft,
   ArrowUpRight,
-  Wallet
+  Wallet,
+  Lock
 } from 'lucide-react';
+import { ThemeToggle } from './ThemeToggle';
 
 interface HeaderProps {
   currentPage: PageId;
@@ -126,26 +128,29 @@ export const Header: React.FC<HeaderProps> = ({
               title="Teachers & Faculty Management Portal"
             >
               <GraduationCap className="w-3.5 h-3.5 text-amber-400" />
-              <span>Teachers Portal (اساتذہ پورٹل)</span>
+              <span>Teachers Portal</span>
+            </a>
+            <span className="text-slate-600 hidden md:inline">|</span>
+            <a
+              href="/admin-portal"
+              onClick={(e) => { e.preventDefault(); handlePageSelect('admin-portal'); }}
+              className="hover:text-rose-300 text-rose-400 font-bold hidden md:flex items-center gap-1 cursor-pointer transition-colors"
+              title="Executive Admin & Treasury Command Center"
+            >
+              <Lock className="w-3.5 h-3.5 text-rose-400" />
+              <span>Admin Portal (ایڈمن پورٹل)</span>
             </a>
             <span className="text-slate-600 hidden md:inline">|</span>
             <a
               href="/lms-portal"
               onClick={(e) => { e.preventDefault(); handlePageSelect('lms-portal'); }}
-              className="hover:text-amber-400 transition-colors hidden md:flex items-center gap-1 cursor-pointer"
+              className="hover:text-amber-400 transition-colors hidden lg:flex items-center gap-1 cursor-pointer"
             >
               <LayoutDashboard className="w-3.5 h-3.5 text-blue-400" />
-              <span>Student LMS</span>
+              <span>LMS</span>
             </a>
-            <span className="text-slate-600 hidden lg:inline">|</span>
-            <a
-              href="/distance-learning"
-              onClick={(e) => { e.preventDefault(); handlePageSelect('distance-learning'); }}
-              className="hidden lg:flex items-center gap-1 text-slate-300 hover:text-amber-400 cursor-pointer"
-            >
-              <Globe2 className="w-3.5 h-3.5 text-amber-400" />
-              <span>Global Online Campus</span>
-            </a>
+            <span className="text-slate-600 hidden sm:inline">|</span>
+            <ThemeToggle variant="compact" />
           </div>
         </div>
       </div>
@@ -357,7 +362,7 @@ export const Header: React.FC<HeaderProps> = ({
                 }`}
               >
                 <Layers className="w-4 h-4 text-amber-400" />
-                <span>All 28 Pages</span>
+                <span>All 29 Pages</span>
                 <ChevronDown className="w-3.5 h-3.5" />
               </button>
 
@@ -368,11 +373,11 @@ export const Header: React.FC<HeaderProps> = ({
                 >
                   <div className="col-span-2 pb-2 border-b border-slate-100 flex items-center justify-between">
                     <div>
-                      <h4 className="font-bold text-slate-900 text-sm">Zaitoon Roots Academy — All 28 Institutional Pages</h4>
-                      <p className="text-xs text-slate-500">مکمل 28 صفحات ڈائرکٹری اور فوری نیویگیشن</p>
+                      <h4 className="font-bold text-slate-900 text-sm">Zaitoon Roots Academy — All 29 Institutional Pages</h4>
+                      <p className="text-xs text-slate-500">مکمل 29 صفحات ڈائرکٹری اور فوری نیویگیشن</p>
                     </div>
                     <span className="text-xs font-semibold px-2.5 py-1 bg-red-100 text-red-700 rounded-full">
-                      28 Comprehensive Portals
+                      29 Comprehensive Portals
                     </span>
                   </div>
 
@@ -490,22 +495,40 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="lg:hidden bg-slate-900 text-white border-b border-slate-800 px-4 py-6 max-h-[85vh] overflow-y-auto animate-in slide-in-from-top-4 duration-200">
           <div className="flex items-center justify-between pb-4 mb-4 border-b border-slate-800">
             <span className="text-sm font-bold text-slate-300">Zaitoon Roots Academy Menu</span>
-            <span className="text-xs px-2 py-0.5 bg-red-600 rounded text-white font-medium">28 Pages</span>
+            <div className="flex items-center gap-2">
+              <ThemeToggle variant="compact" />
+              <span className="text-xs px-2 py-0.5 bg-red-600 rounded text-white font-medium">29 Pages</span>
+            </div>
           </div>
 
-          {/* Quick Teachers Portal in Mobile Drawer */}
-          <a
-            href="/teacher-portal"
-            onClick={(e) => {
-              e.preventDefault();
-              setMobileMenuOpen(false);
-              handlePageSelect('teacher-portal');
-            }}
-            className="mb-3 w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-indigo-700 via-indigo-600 to-purple-700 hover:from-indigo-600 hover:to-purple-600 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md cursor-pointer border border-indigo-400/30"
-          >
-            <GraduationCap className="w-4 h-4 text-amber-300" />
-            <span>Teachers & Faculty Portal (اساتذہ پورٹل و مکمل فارم)</span>
-          </a>
+          {/* Quick Admin Portal & Teachers Portal in Mobile Drawer */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
+            <a
+              href="/admin-portal"
+              onClick={(e) => {
+                e.preventDefault();
+                setMobileMenuOpen(false);
+                handlePageSelect('admin-portal');
+              }}
+              className="py-2.5 px-3 rounded-xl bg-gradient-to-r from-red-800 to-amber-700 hover:from-red-700 hover:to-amber-600 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md cursor-pointer border border-amber-500/30"
+            >
+              <Lock className="w-4 h-4 text-amber-300" />
+              <span>Admin & Treasury Portal (ایڈمن پورٹل)</span>
+            </a>
+
+            <a
+              href="/teacher-portal"
+              onClick={(e) => {
+                e.preventDefault();
+                setMobileMenuOpen(false);
+                handlePageSelect('teacher-portal');
+              }}
+              className="py-2.5 px-3 rounded-xl bg-gradient-to-r from-indigo-700 via-indigo-600 to-purple-700 hover:from-indigo-600 hover:to-purple-600 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md cursor-pointer border border-indigo-400/30"
+            >
+              <GraduationCap className="w-4 h-4 text-amber-300" />
+              <span>Teachers Portal (اساتذہ پورٹل)</span>
+            </a>
+          </div>
 
           {/* Quick Deposit & Withdraw in Mobile Drawer */}
           <div className="grid grid-cols-2 gap-2 mb-3">

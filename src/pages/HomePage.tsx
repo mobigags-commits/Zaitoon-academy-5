@@ -30,7 +30,8 @@ import {
   WifiOff,
   Wallet,
   ArrowDownLeft,
-  ArrowUpRight
+  ArrowUpRight,
+  Lock
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -385,20 +386,21 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* Institutional Highlights Grid (23 Pages Quick Launcher) */}
+      {/* Institutional Highlights Grid (29 Pages Quick Launcher) */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
-          <span className="text-xs font-bold text-amber-400 uppercase tracking-widest">Complete 23-Page Institutional Ecosystem</span>
+          <span className="text-xs font-bold text-amber-400 uppercase tracking-widest">Complete 29-Page Institutional Ecosystem</span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
-            Explore All Academic & Student Portals
+            Explore All Academic, Faculty & Administrative Portals
           </h2>
           <p className="text-rose-200 text-sm">
-            اکیڈمی کے تمام 23 خصوصی ڈیجیٹل پورٹلز، طلباء سہولیات اور آن لائن نظام
+            اکیڈمی کے تمام 29 خصوصی ڈیجیٹل پورٹلز، طلباء و اساتذہ سہولیات اور ایگزیکٹو ایڈمن نظام
           </p>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {[
+            { id: 'admin-portal', title: 'Executive Admin & Treasury', icon: Lock, desc: 'Admissions Pipeline & Fee Approvals' },
             { id: 'teacher-portal', title: 'Teachers & Faculty Portal', icon: GraduationCap, desc: 'Faculty Onboarding Form, Syllabus & Marks' },
             { id: 'payment-portal', title: 'Fee, Deposit & Withdraw', icon: Wallet, desc: 'Deposit, Withdraw, JazzCash, Card, Raast' },
             { id: 'admissions', title: 'Online Admissions', icon: Sparkles, desc: 'Digital Application & Challan' },

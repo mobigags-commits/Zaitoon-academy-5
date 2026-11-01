@@ -27,7 +27,26 @@ export type PageId =
   | 'google-ecosystem'
   | 'payment-portal'
   | 'teacher-portal'
+  | 'admin-portal'
   | 'not-found';
+
+export interface AdminSession {
+  isAuthenticated: boolean;
+  role: 'Super Admin' | 'Registrar General' | 'Finance Bursar' | 'System Auditor';
+  adminName: string;
+  loginTime: string;
+  token?: string;
+}
+
+export interface SystemAuditLog {
+  id: string;
+  timestamp: string;
+  action: string;
+  actor: string;
+  module: 'Admissions' | 'Treasury' | 'Faculty' | 'Security' | 'SEO';
+  status: 'Success' | 'Pending' | 'Warning';
+  details: string;
+}
 
 export interface PageInfo {
   id: PageId;

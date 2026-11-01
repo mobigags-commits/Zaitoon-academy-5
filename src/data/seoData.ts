@@ -333,6 +333,24 @@ export const PAGES_SEO_METADATA: Record<PageId, PageSEOMeta> = {
       }
     ]
   },
+  'admin-portal': {
+    id: 'admin-portal',
+    path: '/admin-portal',
+    title: 'Executive Admin & Treasury Command Center | Zaitoon Roots Academy',
+    description: 'Secure management console for university administrators, registrar, and finance bursars. Real-time admissions approvals, fee deposits, withdrawal clearing, and system audits.',
+    breadcrumbName: 'Admin & Treasury Portal',
+    keywords: 'ZRA admin portal, university admissions management, treasury ledger approval, faculty application review, academic administration, student fee clearance',
+    faqs: [
+      {
+        question: 'Who is authorized to access the ZRA Executive Admin Portal?',
+        answer: 'Access is strictly restricted to designated University Registrars, Bursars, and Super Administrators with multi-factor passkeys and session tokens.'
+      },
+      {
+        question: 'Can finance officers approve pending deposits and withdrawal requests here?',
+        answer: 'Yes, the integrated Treasury Ledger module enables immediate verification and approval of JazzCash, EasyPaisa, Raast, and Bank Wire transactions.'
+      }
+    ]
+  },
   'not-found': {
     id: 'not-found',
     path: '/404',
@@ -407,7 +425,12 @@ export function getPageIdFromPath(pathname: string): PageId {
     '/teachers': 'teacher-portal',
     '/teacher-portal': 'teacher-portal',
     '/teachers-portal': 'teacher-portal',
-    '/faculty-portal': 'teacher-portal'
+    '/faculty-portal': 'teacher-portal',
+    '/admin': 'admin-portal',
+    '/admin-portal': 'admin-portal',
+    '/admin-dashboard': 'admin-portal',
+    '/executive-portal': 'admin-portal',
+    '/registrar': 'admin-portal'
   };
 
   if (routeAliases[cleanPath]) {

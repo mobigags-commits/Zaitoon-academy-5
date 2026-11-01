@@ -317,6 +317,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInstallModal, 
                   <span>Contact Campuses & Helpdesk</span>
                 </a>
               </li>
+              <li>
+                <a href={getPath('admin-portal')} onClick={(e) => { e.preventDefault(); handleNav('admin-portal'); }} className="text-amber-400 font-bold hover:text-amber-300 transition-colors flex items-center gap-1.5">
+                  <Lock className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Executive Admin & Treasury Portal</span>
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -386,10 +392,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenInstallModal, 
           </div>
         </div>
 
-        {/* 28 Pages Quick Bottom Bar & Legal */}
+        {/* 29 Pages Quick Bottom Bar & Legal */}
         <div className="mt-8 pt-6 border-t border-slate-800 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500">
           <p>© {new Date().getFullYear()} Zaitoon Roots Academy (زیتون روٹس اکیڈمی). All Rights Reserved Worldwide.</p>
           <div className="flex flex-wrap items-center gap-3">
+            <a href={getPath('admin-portal')} onClick={(e) => { e.preventDefault(); handleNav('admin-portal'); }} className="text-rose-400 font-bold hover:underline flex items-center gap-1">
+              <Lock className="w-3 h-3" />
+              <span>Admin Portal (ایڈمن پورٹل)</span>
+            </a>
+            <span>•</span>
             <a href={getPath('teacher-portal')} onClick={(e) => { e.preventDefault(); handleNav('teacher-portal'); }} className="text-amber-400 font-bold hover:underline">Teachers Portal (اساتذہ پورٹل)</a>
             <span>•</span>
             <a href={getPath('payment-portal')} onClick={(e) => { e.preventDefault(); handleNav('payment-portal'); }} className="text-amber-400 font-bold hover:underline">Pay Fee (فیس ادائیگی)</a>
