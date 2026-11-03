@@ -3,21 +3,42 @@ import { PageId } from '../types';
 import { CAMPUS_LOCATIONS } from '../data/academyData';
 import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, MessageSquare, Sparkles, MessageCircle } from 'lucide-react';
 
+import { apiClient } from '../utils/apiClient';
+
 interface ContactPageProps {
   onNavigate: (page: PageId) => void;
 }
 
 export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [inquiryRefId, setInquiryRefId] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [subject, setSubject] = useState('Admission Inquiry');
   const [message, setMessage] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setFormSubmitted(true);
+    setErrorMessage('');
+    setIsSubmitting(true);
+    try {
+      const res = await apiClient.createContact({
+        name,
+        email,
+        phone,
+        subject,
+        message
+      });
+      setInquiryRefId(res.data?.id || `CNT-${Math.floor(100 + Math.random() * 900)}`);
+      setFormSubmitted(true);
+    } catch (err: any) {
+      setErrorMessage(err.message || 'Failed to dispatch inquiry. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -87,16 +108,31 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
           <div className="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
             <h3 className="text-xl font-bold text-slate-900">Send an Official Inquiry to Admissions Helpdesk</h3>
 
+            {errorMessage && (
+              <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-xs font-semibold text-red-700">
+                {errorMessage}
+              </div>
+            )}
+
             {formSubmitted ? (
               <div className="p-8 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-3">
                 <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
-                <h4 className="text-lg font-bold text-emerald-900">Inquiry Dispatched Successfully!</h4>
+                <h4 className="text-lg font-bold text-emerald-900">Inquiry Dispatched & Saved to Database!</h4>
+                <div className="inline-block px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full font-mono text-xs font-bold">
+                  Reference: {inquiryRefId}
+                </div>
                 <p className="text-xs text-emerald-700">
-                  Thank you, <strong>{name}</strong>. Our senior admissions counselor will contact you via WhatsApp/Phone within 2 working hours.
+                  Thank you, <strong>{name}</strong>. Your inquiry has been logged in the Registrar Helpdesk records. Our admissions counselor will contact you via WhatsApp/Phone within 2 working hours.
                 </p>
                 <button
-                  onClick={() => setFormSubmitted(false)}
-                  className="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold cursor-pointer"
+                  onClick={() => {
+                    setFormSubmitted(false);
+                    setName('');
+                    setEmail('');
+                    setPhone('');
+                    setMessage('');
+                  }}
+                  className="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold cursor-pointer hover:bg-emerald-800 transition-colors"
                 >
                   Send Another Inquiry
                 </button>
@@ -169,10 +205,20 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-xl bg-red-700 hover:bg-red-800 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-md cursor-pointer"
+                  disabled={isSubmitting}
+                  className="w-full py-3.5 rounded-xl bg-red-700 hover:bg-red-800 disabled:opacity-60 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-md cursor-pointer transition-all"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>Submit Inquiry to Helpdesk</span>
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <span>Saving to Permanent Database...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      <span>Submit Inquiry to Helpdesk</span>
+                    </>
+                  )}
                 </button>
               </form>
             )}

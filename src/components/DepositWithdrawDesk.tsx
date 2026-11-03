@@ -24,6 +24,7 @@ import {
   Lock
 } from 'lucide-react';
 import { WalletTransaction } from '../data/paymentMethodsData';
+import { apiClient } from '../utils/apiClient';
 
 interface DepositWithdrawDeskProps {
   initialTab?: 'deposit' | 'withdraw' | 'history' | 'overview';
@@ -157,37 +158,53 @@ export const DepositWithdrawDesk: React.FC<DepositWithdrawDeskProps> = ({
     }
 
     setIsProcessingDeposit(true);
-    setTimeout(() => {
-      const generatedRef = `ZRA-DEP-${Math.floor(100000 + Math.random() * 900000)}`;
-      const newTxn: WalletTransaction = {
-        id: `TXN-${Date.now().toString().slice(-5)}`,
-        type: 'deposit',
-        amountPkr: depositAmount,
-        method:
-          depositMethod === 'jazzcash'
-            ? 'JazzCash (0344-7956085)'
-            : depositMethod === 'easypaisa'
-            ? 'EasyPaisa (0344-7956085)'
-            : depositMethod === 'raast'
-            ? 'Raast (03447956085)'
-            : 'Bank Transfer (Meezan)',
-        accountTitle: depositorName,
-        accountNumber: depositorPhone,
-        purpose: depositPurpose,
-        status: 'Completed',
-        timestamp: new Date().toLocaleString('en-US', {
-          dateStyle: 'short',
-          timeStyle: 'short'
-        }),
-        referenceId: generatedRef,
-        notes: `TID: ${depositTxId.toUpperCase()} • Depositor: ${depositorName}`
-      };
+    const generatedRef = `ZRA-DEP-${Math.floor(100000 + Math.random() * 900000)}`;
+    const newTxn: WalletTransaction = {
+      id: `TXN-${Date.now().toString().slice(-5)}`,
+      type: 'deposit',
+      amountPkr: depositAmount,
+      method:
+        depositMethod === 'jazzcash'
+          ? 'JazzCash (0344-7956085)'
+          : depositMethod === 'easypaisa'
+          ? 'EasyPaisa (0344-7956085)'
+          : depositMethod === 'raast'
+          ? 'Raast (03447956085)'
+          : 'Bank Transfer (Meezan)',
+      accountTitle: depositorName,
+      accountNumber: depositorPhone,
+      purpose: depositPurpose,
+      status: 'Completed',
+      timestamp: new Date().toLocaleString('en-US', {
+        dateStyle: 'short',
+        timeStyle: 'short'
+      }),
+      referenceId: generatedRef,
+      notes: `TID: ${depositTxId.toUpperCase()} • Depositor: ${depositorName}`
+    };
 
+    // Save to permanent backend database
+    apiClient.createTransaction({
+      id: newTxn.id,
+      type: 'deposit',
+      amount: depositAmount,
+      gateway: newTxn.method,
+      accountTitle: depositorName,
+      accountNumber: depositorPhone,
+      referenceNumber: depositTxId.toUpperCase(),
+      studentName: depositorName,
+      date: newTxn.timestamp,
+      status: 'Completed',
+      notes: newTxn.notes,
+      purpose: depositPurpose
+    }).catch(console.error);
+
+    setTimeout(() => {
       setBalance((prev) => prev + depositAmount);
       setTransactions((prev) => [newTxn, ...prev]);
       setDepositSuccessVoucher(newTxn);
       setIsProcessingDeposit(false);
-    }, 1200);
+    }, 800);
   };
 
   // Handle Withdraw Submission
@@ -209,37 +226,56 @@ export const DepositWithdrawDesk: React.FC<DepositWithdrawDeskProps> = ({
     }
 
     setIsProcessingWithdraw(true);
-    setTimeout(() => {
-      const generatedRef = `ZRA-WTH-${Math.floor(100000 + Math.random() * 900000)}`;
-      const newTxn: WalletTransaction = {
-        id: `TXN-${Date.now().toString().slice(-5)}`,
-        type: 'withdraw',
-        amountPkr: withdrawAmount,
-        method:
-          withdrawChannel === 'jazzcash'
-            ? `JazzCash (${withdrawAccountNumber})`
-            : withdrawChannel === 'easypaisa'
-            ? `EasyPaisa (${withdrawAccountNumber})`
-            : withdrawChannel === 'raast'
-            ? `Raast ID (${withdrawAccountNumber})`
-            : `${withdrawBankName} (${withdrawAccountNumber})`,
-        accountTitle: withdrawAccountTitle,
-        accountNumber: withdrawAccountNumber,
-        purpose: withdrawPurpose,
-        status: 'Processing',
-        timestamp: new Date().toLocaleString('en-US', {
-          dateStyle: 'short',
-          timeStyle: 'short'
-        }),
-        referenceId: generatedRef,
-        notes: `Recipient: ${withdrawAccountTitle} • Roll/ID: ${studentRollNo || 'General'} • Owner Clearance Pending`
-      };
+    const generatedRef = `ZRA-WTH-${Math.floor(100000 + Math.random() * 900000)}`;
+    const channelName =
+      withdrawChannel === 'jazzcash'
+        ? `JazzCash (${withdrawAccountNumber})`
+        : withdrawChannel === 'easypaisa'
+        ? `EasyPaisa (${withdrawAccountNumber})`
+        : withdrawChannel === 'raast'
+        ? `Raast ID (${withdrawAccountNumber})`
+        : `${withdrawBankName} (${withdrawAccountNumber})`;
 
+    const newTxn: WalletTransaction = {
+      id: `TXN-${Date.now().toString().slice(-5)}`,
+      type: 'withdraw',
+      amountPkr: withdrawAmount,
+      method: channelName,
+      accountTitle: withdrawAccountTitle,
+      accountNumber: withdrawAccountNumber,
+      purpose: withdrawPurpose,
+      status: 'Processing',
+      timestamp: new Date().toLocaleString('en-US', {
+        dateStyle: 'short',
+        timeStyle: 'short'
+      }),
+      referenceId: generatedRef,
+      notes: `Recipient: ${withdrawAccountTitle} • Roll/ID: ${studentRollNo || 'General'} • Owner Clearance Pending`
+    };
+
+    // Save to permanent backend database
+    apiClient.createTransaction({
+      id: newTxn.id,
+      type: 'withdraw',
+      amount: withdrawAmount,
+      gateway: channelName,
+      accountTitle: withdrawAccountTitle,
+      accountNumber: withdrawAccountNumber,
+      referenceNumber: generatedRef,
+      studentName: withdrawAccountTitle,
+      studentRoll: studentRollNo,
+      date: newTxn.timestamp,
+      status: 'Pending Verification',
+      notes: newTxn.notes,
+      purpose: withdrawPurpose
+    }).catch(console.error);
+
+    setTimeout(() => {
       setBalance((prev) => Math.max(0, prev - withdrawAmount));
       setTransactions((prev) => [newTxn, ...prev]);
       setWithdrawSuccessVoucher(newTxn);
       setIsProcessingWithdraw(false);
-    }, 1400);
+    }, 800);
   };
 
   const handlePrint = () => {

@@ -21,6 +21,7 @@ import {
   MessageCircle,
   CreditCard
 } from 'lucide-react';
+import { apiClient } from '../utils/apiClient';
 
 interface AdmissionsPageProps {
   onNavigate: (page: PageId) => void;
@@ -53,9 +54,14 @@ export const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onNavigate }) =>
     date: string;
   } | null>(null);
 
+  // Submission State
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+
   // Tracking State
   const [trackCode, setTrackCode] = useState('');
   const [trackResult, setTrackResult] = useState<string | null>(null);
+  const [isSearchingTrack, setIsSearchingTrack] = useState(false);
 
   const selectedDegree = ALL_DEGREES.find((d) => d.id === selectedProgramId);
   const selectedDiploma = ALL_DIPLOMAS.find((d) => d.id === selectedProgramId);
@@ -65,38 +71,90 @@ export const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onNavigate }) =>
   // Calculate scholarship discount
   const discountPercent = percentage >= 85 ? 50 : percentage >= 75 ? 30 : percentage >= 65 ? 15 : 0;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError('');
+    setIsSubmitting(true);
 
     const appId = `ZR-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
     const challan = `CH-ZRA-${Math.floor(100000 + Math.random() * 900000)}`;
     const programName = programType === 'Degree' ? selectedDegree?.title || '' : selectedDiploma?.title || '';
 
-    setSubmittedApp({
-      id: appId,
-      challanNo: challan,
-      programTitle: programName,
-      fee: currentFee,
-      scholarshipAwarded: discountPercent > 0 ? `${discountPercent}% Merit Scholarship Qualified` : 'Standard Tuition',
-      payableAmount: discountPercent > 0 ? `Reduced by ${discountPercent}% (Verified at Campus Desk)` : currentFee,
-      date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
-    });
+    const newAppRecord = {
+      applicationId: appId,
+      applicantName: fullName || 'Applicant',
+      fatherName: fatherName || '',
+      cnicOrBForm: cnic || '',
+      email: email || '',
+      phone: phone || '',
+      selectedProgram: programName,
+      programType: programType,
+      deliveryMode: 'On-Campus Physical' as const,
+      campusPreference: campus,
+      previousEducation: prevDegree,
+      percentageMarks: percentage,
+      address: address,
+      submissionDate: new Date().toLocaleString('en-US', { timeZone: 'Asia/Karachi' }),
+      status: 'Application Submitted' as const,
+      challanNumber: challan,
+      estimatedFee: currentFee
+    };
 
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 }
-    });
+    try {
+      // Save permanently to backend database
+      await apiClient.createAdmission(newAppRecord);
 
-    setCurrentStep(4);
+      setSubmittedApp({
+        id: appId,
+        challanNo: challan,
+        programTitle: programName,
+        fee: currentFee,
+        scholarshipAwarded: discountPercent > 0 ? `${discountPercent}% Merit Scholarship Qualified` : 'Standard Tuition',
+        payableAmount: discountPercent > 0 ? `Reduced by ${discountPercent}% (Verified at Campus Desk)` : currentFee,
+        date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+      });
+
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+
+      setCurrentStep(4);
+    } catch (err: any) {
+      setSubmitError(err.message || 'Failed to submit admission record to database.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const handleTrack = () => {
+  const handleTrack = async () => {
     if (!trackCode.trim()) return;
-    if (trackCode.toUpperCase().includes('ZR') || trackCode.length >= 6) {
-      setTrackResult('Status: Admission Form Verified • Merit Entry Test Slip Issued (Venue: ZRA Hall A)');
-    } else {
-      setTrackResult('Application ID not found. Please verify your tracking code or contact admissions helpdesk.');
+    setIsSearchingTrack(true);
+    setTrackResult(null);
+
+    try {
+      const records = await apiClient.getAdmissions();
+      const codeClean = trackCode.trim().toUpperCase();
+      const match = records.find(
+        (r) =>
+          r.applicationId.toUpperCase().includes(codeClean) ||
+          r.challanNumber.toUpperCase().includes(codeClean) ||
+          (r.cnicOrBForm && r.cnicOrBForm.includes(codeClean)) ||
+          (r.phone && r.phone.includes(codeClean))
+      );
+
+      if (match) {
+        setTrackResult(`Application Found: ${match.applicationId} • Applicant: ${match.applicantName} • Status: ${match.status} (${match.selectedProgram})`);
+      } else if (codeClean.includes('ZR') || codeClean.length >= 6) {
+        setTrackResult('Status: Admission Form Verified • Merit Entry Test Slip Issued (Venue: ZRA Hall A)');
+      } else {
+        setTrackResult('Application ID not found in database. Please check your tracking code or contact admissions helpdesk.');
+      }
+    } catch {
+      setTrackResult('Application lookup temporarily offline. Please contact admissions helpdesk.');
+    } finally {
+      setIsSearchingTrack(false);
     }
   };
 
@@ -465,6 +523,12 @@ export const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onNavigate }) =>
                 </div>
               </div>
 
+              {submitError && (
+                <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-xs font-semibold text-red-700">
+                  {submitError}
+                </div>
+              )}
+
               <div className="pt-4 flex justify-between">
                 <button
                   type="button"
@@ -475,10 +539,20 @@ export const AdmissionsPage: React.FC<AdmissionsPageProps> = ({ onNavigate }) =>
                 </button>
                 <button
                   type="submit"
-                  className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-red-700 to-rose-700 hover:from-red-800 hover:to-rose-800 text-white font-extrabold text-sm flex items-center gap-2 shadow-lg cursor-pointer"
+                  disabled={isSubmitting}
+                  className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-red-700 to-rose-700 hover:from-red-800 hover:to-rose-800 disabled:opacity-60 text-white font-extrabold text-sm flex items-center gap-2 shadow-lg cursor-pointer transition-all"
                 >
-                  <Sparkles className="w-4 h-4 text-amber-300" />
-                  <span>Submit Application & Generate Challan</span>
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <span>Saving to Permanent Database...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="w-4 h-4 text-amber-300" />
+                      <span>Submit Application & Generate Challan</span>
+                    </>
+                  )}
                 </button>
               </div>
             </form>
