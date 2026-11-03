@@ -1,0 +1,29 @@
+[
+  {
+    "id": "LOG-1793743329311",
+    "timestamp": "2026-11-03 22:02:09",
+    "action": "New Admission Submitted",
+    "actor": "Test Student ZRA",
+    "module": "Admissions",
+    "status": "Success",
+    "details": "Application ZR-2026-9254 submitted for BS Artificial Intelligence."
+  },
+  {
+    "id": "LOG-1001",
+    "timestamp": "2026-10-07 08:30:15",
+    "action": "System Boot & Permanent JSON Database Initialized",
+    "actor": "System Daemon",
+    "module": "Security",
+    "status": "Success",
+    "details": "Database tables verified in /data/db/*.json with atomic write locks."
+  },
+  {
+    "id": "LOG-1002",
+    "timestamp": "2026-10-07 09:15:22",
+    "action": "Admission Offer Generation",
+    "actor": "Registrar General",
+    "module": "Admissions",
+    "status": "Success",
+    "details": "Application ZR-2026-1049 approved with 30% merit scholarship waiver."
+  }
+]

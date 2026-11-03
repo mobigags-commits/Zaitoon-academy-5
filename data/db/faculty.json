@@ -1,0 +1,43 @@
+[
+  {
+    "applicationId": "FAC-2026-081",
+    "fullName": "Dr. Tariq Mahmood Khan",
+    "fatherHusbandName": "Mehmood Ahmed",
+    "cnicOrPassport": "37405-1928374-1",
+    "dob": "1984-06-12",
+    "gender": "Male",
+    "bloodGroup": "B+",
+    "mobileWhatsapp": "0344-7956085",
+    "alternatePhone": "051-9284710",
+    "email": "tariq.mahmood@zra.edu.pk",
+    "address": "Street 9, Sector G-11/3, Islamabad",
+    "city": "Islamabad",
+    "domicile": "Islamabad Capital Territory",
+    "highestDegree": "PhD / Doctorate",
+    "terminalDegreeTitle": "PhD in Artificial Intelligence",
+    "awardingInstitute": "National University of Sciences & Technology (NUST)",
+    "passingYear": "2021",
+    "cgpaOrDivision": "3.92 / 4.00 (First Division)",
+    "thesisTitle": "Deep Reinforcement Learning in Multi-Agent Autonomous Navigation",
+    "hecAttested": true,
+    "totalExperienceYears": 8,
+    "currentOrganization": "FAST National University / AI Tech Hub",
+    "currentDesignation": "Associate Professor / Lead AI Scientist",
+    "lastDrawnSalary": "PKR 285,000",
+    "expectedSalary": "PKR 350,000",
+    "departmentApplying": "Faculty of Computing & Artificial Intelligence",
+    "preferredCourses": [
+      "CS-401 Deep Learning",
+      "AI-302 Neural Networks",
+      "SE-410 DevOps & Cloud"
+    ],
+    "preferredMode": "Physical On-Campus",
+    "teachingShift": "Morning",
+    "publicationsCount": 12,
+    "googleScholarUrl": "https://scholar.google.com/citations?user=zra-ai-faculty",
+    "orcidId": "0000-0002-1825-0097",
+    "resumeFileName": "Dr_Tariq_Khan_CV_Updated_2026.pdf",
+    "submissionDate": "2026-10-02 04:30 PM",
+    "status": "Shortlisted for Interview"
+  }
+]

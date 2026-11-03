@@ -1,0 +1,24 @@
+[
+  {
+    "id": "CNT-501",
+    "name": "Kamran Akmal",
+    "email": "kamran.akmal@edu.pk",
+    "phone": "0321-9988776",
+    "subject": "Equivalence & HEC Recognition Query",
+    "message": "Can I transfer my 3rd semester BS Computer Science credits from another university to Zaitoon Roots Academy?",
+    "status": "Replied",
+    "createdAt": "2026-10-04 11:15 AM",
+    "notes": "Transferred to Academic Registrar office."
+  },
+  {
+    "id": "CNT-502",
+    "name": "Sobia Batool",
+    "email": "sobia.batool@gmail.com",
+    "phone": "0315-4422119",
+    "subject": "Hostel Accommodation for Female Students",
+    "message": "Please provide monthly fee and security details for female hostel at Islamabad Campus.",
+    "status": "New",
+    "createdAt": "2026-10-07 09:05 AM",
+    "notes": "Pending hostel warden response."
+  }
+]

@@ -1,0 +1,61 @@
+[
+  {
+    "id": "TXN-90214",
+    "type": "deposit",
+    "amount": 145000,
+    "gateway": "JazzCash Direct (0344-7956085)",
+    "accountTitle": "Zaitoon Academic Treasury",
+    "accountNumber": "0344-7956085",
+    "referenceNumber": "JC-88421095",
+    "studentName": "Hamza Farooq",
+    "studentRoll": "ZRA-2026-CS-104",
+    "date": "2026-10-05 11:20 AM",
+    "status": "Completed",
+    "notes": "Semester 1 Advance Tuition Cleared",
+    "purpose": "Tuition Fee Deposit"
+  },
+  {
+    "id": "TXN-90215",
+    "type": "withdraw",
+    "amount": 35000,
+    "gateway": "EasyPaisa Wallet (0344-7956085)",
+    "accountTitle": "Ayesha Noor (Scholarship Refund)",
+    "accountNumber": "0300-8847192",
+    "referenceNumber": "EP-44910283",
+    "studentName": "Ayesha Noor",
+    "studentRoll": "ZRA-2026-AI-019",
+    "date": "2026-10-06 12:45 PM",
+    "status": "Pending Verification",
+    "notes": "Merit Scholarship 50% Tuition Fee Refund",
+    "purpose": "Scholarship Stipend Refund"
+  },
+  {
+    "id": "TXN-90216",
+    "type": "deposit",
+    "amount": 85000,
+    "gateway": "Raast Instant Pay (P2M)",
+    "accountTitle": "Zaitoon Roots Academy",
+    "accountNumber": "RAAST-ZRA-PK-01",
+    "referenceNumber": "RST-9918237",
+    "studentName": "Zainab Bibi",
+    "studentRoll": "ZRA-2026-DPT-055",
+    "date": "2026-10-06 01:15 PM",
+    "status": "Completed",
+    "notes": "Physical Therapy DPT Admission Challan",
+    "purpose": "Admission Fee"
+  },
+  {
+    "id": "TXN-90217",
+    "type": "withdraw",
+    "amount": 60000,
+    "gateway": "Habib Bank Ltd (HBL Corporate)",
+    "accountTitle": "Faculty Honorarium Clearance",
+    "accountNumber": "0042-7901846101",
+    "referenceNumber": "HBL-782194",
+    "studentName": "Dr. Tariq Mahmood (Research Grant)",
+    "date": "2026-10-07 02:00 PM",
+    "status": "Pending Verification",
+    "notes": "AI Neural Lab Research Paper Bounty",
+    "purpose": "Faculty Honorarium"
+  }
+]
