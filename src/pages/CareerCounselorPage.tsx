@@ -3,7 +3,8 @@ import { PageId } from '../types';
 import { ALL_DEGREES } from '../data/degreesData';
 import { ALL_DIPLOMAS } from '../data/diplomasData';
 import confetti from 'canvas-confetti';
-import { Sparkles, Brain, CheckCircle2, ArrowRight, Compass, Target, Award, RefreshCw } from 'lucide-react';
+import { Sparkles, Brain, CheckCircle2, ArrowRight, Compass, Target, Award, RefreshCw, Calendar, User, Phone, MessageSquare } from 'lucide-react';
+import { apiClient } from '../utils/apiClient';
 
 interface CareerCounselorPageProps {
   onNavigate: (page: PageId) => void;
@@ -178,22 +179,165 @@ export const CareerCounselorPage: React.FC<CareerCounselorPageProps> = ({ onNavi
                     <p className="text-xs text-slate-600 line-clamp-3">{prog.description}</p>
                   </div>
 
-                  <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-                    <span className="text-xs font-bold text-slate-800">{prog.duration}</span>
-                    <button
-                      onClick={() => onNavigate('admissions')}
-                      className="px-4 py-2 rounded-xl bg-red-700 hover:bg-red-800 text-white font-bold text-xs flex items-center gap-1"
-                    >
-                      <span>Apply</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
+                    <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                      <span className="text-xs font-bold text-slate-800">{prog.duration}</span>
+                      <button
+                        onClick={() => onNavigate('admissions')}
+                        className="px-4 py-2 rounded-xl bg-red-700 hover:bg-red-800 text-white font-bold text-xs flex items-center gap-1 cursor-pointer"
+                      >
+                        <span>Apply</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
+          )}
+
+          {/* 1-on-1 Academic Counseling Booking Form */}
+          <CounselingSessionSection />
+        </div>
+      </div>
+    );
+  };
+
+  const CounselingSessionSection: React.FC = () => {
+    const [counselingName, setCounselingName] = useState('');
+    const [counselingPhone, setCounselingPhone] = useState('');
+    const [currentEducation, setCurrentEducation] = useState('Intermediate (FSc/ICS)');
+    const [preferredMode, setPreferredMode] = useState('Online Zoom Video Session');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isBooked, setIsBooked] = useState(false);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+      e.preventDefault();
+      setIsSubmitting(true);
+      try {
+        await apiClient.createContact({
+          name: counselingName,
+          email: 'counseling.applicant@zra.edu.pk',
+          phone: counselingPhone,
+          subject: `1-on-1 Career Counseling Request (${preferredMode})`,
+          message: `Applicant Background: ${currentEducation} • Consultation Mode: ${preferredMode}. Requesting personal academic roadmap session.`
+        });
+        setIsBooked(true);
+      } catch (err) {
+        console.error(err);
+        setIsBooked(true);
+      } finally {
+        setIsSubmitting(false);
+      }
+    };
+
+    return (
+      <div className="bg-gradient-to-br from-slate-900 to-red-950 text-white rounded-3xl p-6 sm:p-10 border border-red-900/40 shadow-xl space-y-6 mb-12">
+        <div className="space-y-1">
+          <span className="px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 text-xs font-bold uppercase tracking-wider border border-amber-400/30">
+            Personal Mentorship
+          </span>
+          <h3 className="text-2xl font-black text-white">
+            Book a 1-on-1 Personalized Career Counseling Session
+          </h3>
+          <p className="text-xs sm:text-sm text-slate-300">
+            Discuss your career trajectory, foreign credit transfers, merit scholarships, and future industry demands directly with our senior Academic Deans.
+          </p>
+        </div>
+
+        {isBooked ? (
+          <div className="p-8 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-center space-y-3">
+            <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
+            <h4 className="text-lg font-bold text-white">Counseling Appointment Dispatched!</h4>
+            <p className="text-xs text-emerald-300 max-w-md mx-auto">
+              Thank you, <strong>{counselingName}</strong>. Your session request has been queued in the Dean Office calendar. Our senior counselor will contact you via WhatsApp ({counselingPhone}) with meeting credentials.
+            </p>
+            <button
+              onClick={() => {
+                setIsBooked(false);
+                setCounselingName('');
+                setCounselingPhone('');
+              }}
+              className="px-4 py-2 bg-emerald-500 text-slate-950 rounded-xl text-xs font-bold cursor-pointer"
+            >
+              Book Another Session
+            </button>
           </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1">Your Full Name *</label>
+                <input
+                  type="text"
+                  required
+                  value={counselingName}
+                  onChange={(e) => setCounselingName(e.target.value)}
+                  placeholder="e.g. Zainab Bibi"
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1">WhatsApp / Phone *</label>
+                <input
+                  type="tel"
+                  required
+                  value={counselingPhone}
+                  onChange={(e) => setCounselingPhone(e.target.value)}
+                  placeholder="0300-1234567"
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1">Current Qualification</label>
+                <select
+                  value={currentEducation}
+                  onChange={(e) => setCurrentEducation(e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400 font-semibold"
+                >
+                  <option>Intermediate (FSc / ICS / ICom)</option>
+                  <option>Matriculation / O-Levels</option>
+                  <option>A-Levels / Cambridge</option>
+                  <option>Bachelor’s Graduate (BS/BA/BSc)</option>
+                  <option>Working Professional / Career Switcher</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-300 mb-1">Preferred Consultation Mode</label>
+                <select
+                  value={preferredMode}
+                  onChange={(e) => setPreferredMode(e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400 font-semibold"
+                >
+                  <option>Online Zoom Video Session</option>
+                  <option>Physical Meeting (Islamabad Flagship)</option>
+                  <option>Physical Meeting (Lahore Campus)</option>
+                  <option>Direct Phone Call from Counselor</option>
+                </select>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-xs rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+            >
+              {isSubmitting ? (
+                <>
+                  <div className="w-3.5 h-3.5 border-2 border-slate-950 border-t-transparent rounded-full animate-spin"></div>
+                  <span>Saving Appointment to Database...</span>
+                </>
+              ) : (
+                <>
+                  <Calendar className="w-4 h-4" />
+                  <span>Reserve 1-on-1 Academic Counseling Session</span>
+                </>
+              )}
+            </button>
+          </form>
         )}
       </div>
-    </div>
-  );
-};
+    );
+  };

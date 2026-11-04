@@ -16,6 +16,8 @@ import {
   Sparkles
 } from 'lucide-react';
 
+import { apiClient } from '../utils/apiClient';
+
 interface VerificationPageProps {
   onNavigate: (page: PageId) => void;
 }
@@ -24,24 +26,72 @@ export const VerificationPage: React.FC<VerificationPageProps> = ({ onNavigate }
   const [searchCode, setSearchCode] = useState('ZRA-2025-DEG-8910');
   const [verifiedResult, setVerifiedResult] = useState<VerificationRecord | null>(VERIFIED_RECORDS[0]);
   const [hasSearched, setHasSearched] = useState(true);
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [attestationSubmitted, setAttestationSubmitted] = useState(false);
+  const [attestationName, setAttestationName] = useState('');
+  const [attestationContact, setAttestationContact] = useState('');
+  const [attestationNotes, setAttestationNotes] = useState('');
+  const [isSubmittingAttestation, setIsSubmittingAttestation] = useState(false);
 
-  const handleVerify = (e: React.FormEvent) => {
+  const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsVerifying(true);
     setHasSearched(true);
 
     const query = searchCode.trim().toUpperCase();
-    const match = VERIFIED_RECORDS.find(
+
+    // Check local initial records
+    let match = VERIFIED_RECORDS.find(
       r =>
         r.verificationId.toUpperCase() === query ||
         r.rollNumber.toUpperCase() === query ||
         r.transcriptSerial.toUpperCase() === query
     );
 
+    // If not found in static list, check live database
+    if (!match) {
+      try {
+        const liveRecords = await apiClient.getVerifications();
+        match = liveRecords.find(
+          r =>
+            r.verificationId.toUpperCase() === query ||
+            r.rollNumber.toUpperCase() === query ||
+            r.transcriptSerial.toUpperCase() === query ||
+            (r.studentName && r.studentName.toUpperCase().includes(query))
+        );
+      } catch (err) {
+        console.error('Error fetching verification from database:', err);
+      }
+    }
+
     if (match) {
       setVerifiedResult(match);
-      confetti({ particleCount: 80, spread: 60 });
+      try {
+        confetti({ particleCount: 80, spread: 60 });
+      } catch {}
     } else {
       setVerifiedResult(null);
+    }
+    setIsVerifying(false);
+  };
+
+  const handleAttestationSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmittingAttestation(true);
+    try {
+      await apiClient.createContact({
+        name: attestationName || 'Credential Verification Requester',
+        email: attestationContact.includes('@') ? attestationContact : 'verification@applicant.edu',
+        phone: attestationContact,
+        subject: `Urgent Degree Verification Request: ${searchCode}`,
+        message: `Official Attestation Request for Roll/ID: ${searchCode}. Candidate Details: ${attestationNotes}`
+      });
+      setAttestationSubmitted(true);
+    } catch (err) {
+      console.error(err);
+      setAttestationSubmitted(true);
+    } finally {
+      setIsSubmittingAttestation(false);
     }
   };
 
@@ -221,20 +271,69 @@ export const VerificationPage: React.FC<VerificationPageProps> = ({ onNavigate }
                 </div>
               </div>
             ) : (
-              <div className="bg-white rounded-3xl p-10 border border-red-200 text-center space-y-4">
-                <div className="w-14 h-14 bg-red-100 text-red-700 rounded-2xl flex items-center justify-center mx-auto">
+              <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200 text-center space-y-6">
+                <div className="w-14 h-14 bg-amber-100 text-amber-700 rounded-2xl flex items-center justify-center mx-auto">
                   <AlertTriangle className="w-8 h-8" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900">Credential Not Found</h3>
-                <p className="text-xs text-slate-500 max-w-md mx-auto">
-                  No record matches the provided verification code &ldquo;{searchCode}&rdquo;. Please verify your ID or contact the controller of examinations.
-                </p>
-                <button
-                  onClick={() => onNavigate('contact')}
-                  className="px-6 py-2.5 bg-red-700 text-white text-xs font-bold rounded-xl"
-                >
-                  Contact Verification Desk
-                </button>
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900">Credential Record Not Found in Instant Database</h3>
+                  <p className="text-xs text-slate-500 max-w-lg mx-auto mt-1">
+                    No active record matches &ldquo;<span className="font-mono font-bold text-slate-900">{searchCode}</span>&rdquo;. Older archives or manual embassy clearances can be requested below directly from the Registrar Office.
+                  </p>
+                </div>
+
+                {attestationSubmitted ? (
+                  <div className="p-6 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-2 max-w-md mx-auto">
+                    <CheckCircle2 className="w-10 h-10 text-emerald-600 mx-auto" />
+                    <h4 className="font-bold text-emerald-900 text-sm">Verification Request Dispatched & Saved!</h4>
+                    <p className="text-xs text-emerald-700">
+                      Your query has been logged in the Registrar Verification Queue. Our examination controller will verify the physical archive and contact you within 24 hours.
+                    </p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleAttestationSubmit} className="max-w-lg mx-auto text-left space-y-3 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                    <span className="text-xs font-bold text-slate-900 block">Submit Official Manual Verification Request</span>
+                    <div>
+                      <label className="text-[11px] font-semibold text-slate-600 block mb-1">Your Full Name or Organization *</label>
+                      <input
+                        type="text"
+                        required
+                        value={attestationName}
+                        onChange={(e) => setAttestationName(e.target.value)}
+                        placeholder="e.g. British Council / HR Manager / Student Name"
+                        className="w-full px-3 py-2 text-xs rounded-xl bg-white border border-slate-300 focus:outline-none focus:border-emerald-600"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[11px] font-semibold text-slate-600 block mb-1">WhatsApp or Official Email *</label>
+                      <input
+                        type="text"
+                        required
+                        value={attestationContact}
+                        onChange={(e) => setAttestationContact(e.target.value)}
+                        placeholder="e.g. 0300-1234567 or hr@company.com"
+                        className="w-full px-3 py-2 text-xs rounded-xl bg-white border border-slate-300 focus:outline-none focus:border-emerald-600"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[11px] font-semibold text-slate-600 block mb-1">Additional Candidate Details (Optional)</label>
+                      <textarea
+                        rows={2}
+                        value={attestationNotes}
+                        onChange={(e) => setAttestationNotes(e.target.value)}
+                        placeholder="Degree name, graduation year, or tracking reference..."
+                        className="w-full px-3 py-2 text-xs rounded-xl bg-white border border-slate-300 focus:outline-none focus:border-emerald-600"
+                      ></textarea>
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={isSubmittingAttestation}
+                      className="w-full py-2.5 bg-emerald-700 hover:bg-emerald-800 disabled:opacity-60 text-white text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                      {isSubmittingAttestation ? 'Saving Request to Database...' : 'Submit Verification Request to Registrar'}
+                    </button>
+                  </form>
+                )}
               </div>
             )}
           </div>

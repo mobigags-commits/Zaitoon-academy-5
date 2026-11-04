@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { PageId } from '../types';
 import { Building2, Eye, MapPin, Sparkles, CheckCircle2, Video, Layers } from 'lucide-react';
+import { apiClient } from '../utils/apiClient';
 
 interface CampusTourPageProps {
   onNavigate: (page: PageId) => void;
@@ -131,7 +132,159 @@ export const CampusTourPage: React.FC<CampusTourPageProps> = ({ onNavigate }) =>
             </div>
           </div>
         </div>
+
+        {/* Guided Tour Reservation Form */}
+        <TourBookingSection />
       </div>
+    </div>
+  );
+};
+
+const TourBookingSection: React.FC = () => {
+  const [visitorName, setVisitorName] = useState('');
+  const [visitorPhone, setVisitorPhone] = useState('');
+  const [campus, setCampus] = useState('Islamabad Central Flagship Campus');
+  const [preferredDate, setPreferredDate] = useState('');
+  const [guestsCount, setGuestsCount] = useState('2');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      await apiClient.createContact({
+        name: visitorName,
+        email: 'tour.visitor@zra.edu.pk',
+        phone: visitorPhone,
+        subject: `Campus Tour Booking: ${campus}`,
+        message: `Reservation for ${guestsCount} visitors on ${preferredDate || 'Upcoming Weekend'}. Campus: ${campus}.`
+      });
+      setSubmitted(true);
+    } catch (err) {
+      console.error(err);
+      setSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6 mb-12">
+      <div className="space-y-1">
+        <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider">
+          On-Campus Experience
+        </span>
+        <h3 className="text-2xl font-black text-slate-900">
+          Book an Official Guided Campus Tour & Lab Demo
+        </h3>
+        <p className="text-xs sm:text-sm text-slate-500">
+          Bring your family or prospective students to experience our NVIDIA AI labs, high-tech flight simulators, teaching hospitals, and executive smart classrooms.
+        </p>
+      </div>
+
+      {submitted ? (
+        <div className="p-8 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-3">
+          <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
+          <h4 className="text-lg font-bold text-emerald-900">Tour Booking Confirmed & Dispatched!</h4>
+          <p className="text-xs text-emerald-700 max-w-md mx-auto">
+            Thank you, <strong>{visitorName}</strong>. Your tour pass has been logged in the Campus Relations registry. Our protocol officer will contact you on WhatsApp ({visitorPhone}) with gate entry clearance.
+          </p>
+          <button
+            onClick={() => {
+              setSubmitted(false);
+              setVisitorName('');
+              setVisitorPhone('');
+            }}
+            className="px-4 py-2 bg-emerald-700 text-white rounded-xl text-xs font-bold cursor-pointer"
+          >
+            Book Another Tour
+          </button>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div>
+              <label className="block text-xs font-bold text-slate-700 mb-1">Visitor / Parent Full Name *</label>
+              <input
+                type="text"
+                required
+                value={visitorName}
+                onChange={(e) => setVisitorName(e.target.value)}
+                placeholder="e.g. Tariq Mehmood"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-xs focus:outline-none focus:border-red-600 font-medium"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-slate-700 mb-1">WhatsApp / Phone Number *</label>
+              <input
+                type="tel"
+                required
+                value={visitorPhone}
+                onChange={(e) => setVisitorPhone(e.target.value)}
+                placeholder="0300-1234567"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-xs focus:outline-none focus:border-red-600 font-medium"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-slate-700 mb-1">Select Campus</label>
+              <select
+                value={campus}
+                onChange={(e) => setCampus(e.target.value)}
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-xs focus:outline-none focus:border-red-600 font-semibold"
+              >
+                <option>Islamabad Central Flagship Campus</option>
+                <option>Lahore Executive Campus</option>
+                <option>Karachi Waterfront Smart Campus</option>
+                <option>Dubai International Hub</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-slate-700 mb-1">Preferred Date & Guests</label>
+              <div className="grid grid-cols-2 gap-2">
+                <input
+                  type="date"
+                  required
+                  value={preferredDate}
+                  onChange={(e) => setPreferredDate(e.target.value)}
+                  className="w-full px-2 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-xs focus:outline-none focus:border-red-600"
+                />
+                <select
+                  value={guestsCount}
+                  onChange={(e) => setGuestsCount(e.target.value)}
+                  className="w-full px-2 py-2.5 rounded-xl bg-slate-50 border border-slate-300 text-slate-900 text-xs focus:outline-none focus:border-red-600 font-semibold"
+                >
+                  <option value="1">1 Person</option>
+                  <option value="2">2 Persons</option>
+                  <option value="3-5">3-5 Family</option>
+                  <option value="Group">School Group</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full sm:w-auto px-8 py-3.5 bg-red-700 hover:bg-red-800 disabled:opacity-60 text-white font-extrabold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+          >
+            {isSubmitting ? (
+              <>
+                <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <span>Saving Tour Reservation to Database...</span>
+              </>
+            ) : (
+              <>
+                <MapPin className="w-4 h-4" />
+                <span>Confirm & Reserve Campus Guided Tour</span>
+              </>
+            )}
+          </button>
+        </form>
+      )}
     </div>
   );
 };

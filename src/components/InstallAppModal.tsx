@@ -26,6 +26,7 @@ import {
 } from 'lucide-react';
 import { usePWAInstall } from '../utils/usePWAInstall';
 import { PageId } from '../types';
+import { apiClient } from '../utils/apiClient';
 
 interface InstallAppModalProps {
   isOpen: boolean;
@@ -93,9 +94,25 @@ export const InstallAppModal: React.FC<InstallAppModalProps> = ({
     }
 
     setIsVerifying(true);
+    const generatedPassId = `ZRA-APP100-${Math.random().toString(36).substring(2, 7).toUpperCase()}-${Date.now().toString().slice(-4)}`;
+
+    // Save to permanent Treasury database
+    apiClient.createTransaction({
+      id: generatedPassId,
+      type: 'deposit',
+      amount: 100,
+      gateway: selectedMethod === 'jazzcash' ? 'JazzCash Direct (0344-7956085)' : selectedMethod === 'easypaisa' ? 'EasyPaisa Wallet (0344-7956085)' : 'Raast Instant Pay (03447956085)',
+      accountTitle: 'PWA App Installation Licensee',
+      accountNumber: cleanInput,
+      referenceNumber: cleanInput.toUpperCase(),
+      studentName: 'App User',
+      date: new Date().toLocaleString(),
+      status: 'Completed',
+      notes: `ZRA Mobile App Download License (Rs. 100) • Verified TID: ${cleanInput.toUpperCase()}`,
+      purpose: 'Mobile App Download License'
+    }).catch(console.error);
+
     setTimeout(() => {
-      // Generate Official License ID
-      const generatedPassId = `ZRA-APP100-${Math.random().toString(36).substring(2, 7).toUpperCase()}-${Date.now().toString().slice(-4)}`;
       localStorage.setItem('zra_app_license_paid', 'true');
       localStorage.setItem('zra_app_license_txid', cleanInput.toUpperCase());
       localStorage.setItem('zra_app_license_pass', generatedPassId);
@@ -105,7 +122,7 @@ export const InstallAppModal: React.FC<InstallAppModalProps> = ({
       setLicenseTxId(cleanInput.toUpperCase());
       setIsVerifying(false);
       setActiveTab('auto');
-    }, 1200);
+    }, 1000);
   };
 
   const handleInstallClick = async () => {

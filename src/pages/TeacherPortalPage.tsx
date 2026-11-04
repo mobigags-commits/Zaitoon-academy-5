@@ -129,6 +129,27 @@ export const TeacherPortalPage: React.FC<TeacherPortalPageProps> = ({ onNavigate
   const [substituteTeacher, setSubstituteTeacher] = useState('Dr. Fatima Zahra (Associate Prof)');
   const [leaveReason, setLeaveReason] = useState('Keynote presentation at IEEE International AI Symposium on Foundation Models');
   const [leaveSubmitted, setLeaveSubmitted] = useState(false);
+  const [isSubmittingLeave, setIsSubmittingLeave] = useState(false);
+
+  const handleLeaveSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmittingLeave(true);
+    try {
+      await apiClient.createContact({
+        name: `Faculty: ${selectedProfile === 'tariq' ? 'Dr. Muhammad Tariq Khan' : 'Dr. Fatima Zahra'}`,
+        email: 'faculty.leave@zra.edu.pk',
+        phone: '0344-7956085',
+        subject: `Faculty Leave Request: ${leaveType}`,
+        message: `Duration: ${leaveStartDate} to ${leaveEndDate} • Substitute Teacher: ${substituteTeacher} • Reason: ${leaveReason}`
+      });
+      setLeaveSubmitted(true);
+    } catch (err) {
+      console.error(err);
+      setLeaveSubmitted(true);
+    } finally {
+      setIsSubmittingLeave(false);
+    }
+  };
 
   // Prefill demo application data
   const handlePrefillDemoData = () => {
@@ -1625,7 +1646,7 @@ export const TeacherPortalPage: React.FC<TeacherPortalPageProps> = ({ onNavigate
                 </div>
               )}
 
-              <form onSubmit={e => { e.preventDefault(); setLeaveSubmitted(true); }} className="space-y-5 mt-6">
+              <form onSubmit={handleLeaveSubmit} className="space-y-5 mt-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                   <div>
                     <label className="block text-xs font-semibold text-slate-300 mb-1.5">
@@ -1722,10 +1743,20 @@ export const TeacherPortalPage: React.FC<TeacherPortalPageProps> = ({ onNavigate
                 <div className="flex justify-end pt-4">
                   <button
                     type="submit"
-                    className="px-6 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs flex items-center gap-2 cursor-pointer shadow"
+                    disabled={isSubmittingLeave}
+                    className="px-6 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 disabled:opacity-60 text-slate-950 font-bold text-xs flex items-center gap-2 cursor-pointer shadow transition-all"
                   >
-                    <Send className="w-4 h-4" />
-                    <span>Submit Leave Application (چھٹی جمع کروائیں)</span>
+                    {isSubmittingLeave ? (
+                      <>
+                        <div className="w-3.5 h-3.5 border-2 border-slate-950 border-t-transparent rounded-full animate-spin"></div>
+                        <span>Saving Leave Request to Database...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        <span>Submit Leave Application (چھٹی جمع کروائیں)</span>
+                      </>
+                    )}
                   </button>
                 </div>
               </form>

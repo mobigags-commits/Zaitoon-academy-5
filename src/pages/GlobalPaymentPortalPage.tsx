@@ -41,6 +41,7 @@ import {
 } from 'lucide-react';
 import { AdSenseBanner } from '../components/AdSenseBanner';
 import { DepositWithdrawDesk } from '../components/DepositWithdrawDesk';
+import { apiClient } from '../utils/apiClient';
 
 interface GlobalPaymentPortalPageProps {
   onNavigate: (page: PageId) => void;
@@ -154,42 +155,58 @@ export const GlobalPaymentPortalPage: React.FC<GlobalPaymentPortalPageProps> = (
 
     setIsProcessing(true);
 
-    // Simulate real gateway verification delay
+    const pkrVal = customAmountPkr;
+    const usdVal = Math.round(customAmountPkr / USD_TO_PKR_RATE);
+    const generatedRef = `ZRA-TXN-${Date.now().toString().slice(-6)}`;
+    const receiptNum = `REC-2026-${Math.floor(100000 + Math.random() * 900000)}`;
+
+    const currentPurpose =
+      FEE_PURPOSES.find((p) => p.id === selectedPurposeId)?.label ||
+      'Degree Semester Tuition';
+
+    const submission: PaymentSubmission = {
+      receiptId: receiptNum,
+      timestamp: new Date().toLocaleString('en-US', {
+        dateStyle: 'medium',
+        timeStyle: 'short'
+      }),
+      studentName,
+      studentId: studentId || 'ZRA-NEW-SCHOLAR',
+      email: email || 'student@zaitoonroots.edu',
+      phone,
+      program: selectedProgram,
+      feePurpose: currentPurpose,
+      amountPkr: pkrVal,
+      amountUsd: usdVal,
+      methodId: currentMethod.id,
+      methodName: currentMethod.name,
+      transactionRef: generatedRef,
+      status: 'Verified & Cleared',
+      receiptQrCodeUrl: `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=ZRA-VERIFIED-RECEIPT-${receiptNum}-${pkrVal}PKR`
+    };
+
+    // Save permanently to Treasury in backend database
+    apiClient.createTransaction({
+      id: generatedRef,
+      type: 'tuition_fee',
+      amount: pkrVal,
+      gateway: currentMethod.name,
+      accountTitle: studentName,
+      accountNumber: phone,
+      referenceNumber: receiptNum,
+      studentName: studentName,
+      studentRoll: studentId || 'ZRA-NEW-SCHOLAR',
+      date: submission.timestamp,
+      status: 'Completed',
+      notes: `${currentPurpose} • ${selectedProgram} • Verified & Cleared via ${currentMethod.name}`,
+      purpose: currentPurpose
+    }).catch(console.error);
+
     setTimeout(() => {
-      const pkrVal = customAmountPkr;
-      const usdVal = Math.round(customAmountPkr / USD_TO_PKR_RATE);
-      const generatedRef = `ZRA-TXN-${Date.now().toString().slice(-6)}`;
-      const receiptNum = `REC-2026-${Math.floor(100000 + Math.random() * 900000)}`;
-
-      const currentPurpose =
-        FEE_PURPOSES.find((p) => p.id === selectedPurposeId)?.label ||
-        'Degree Semester Tuition';
-
-      const submission: PaymentSubmission = {
-        receiptId: receiptNum,
-        timestamp: new Date().toLocaleString('en-US', {
-          dateStyle: 'medium',
-          timeStyle: 'short'
-        }),
-        studentName,
-        studentId: studentId || 'ZRA-NEW-SCHOLAR',
-        email: email || 'student@zaitoonroots.edu',
-        phone,
-        program: selectedProgram,
-        feePurpose: currentPurpose,
-        amountPkr: pkrVal,
-        amountUsd: usdVal,
-        methodId: currentMethod.id,
-        methodName: currentMethod.name,
-        transactionRef: generatedRef,
-        status: 'Verified & Cleared',
-        receiptQrCodeUrl: `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=ZRA-VERIFIED-RECEIPT-${receiptNum}-${pkrVal}PKR`
-      };
-
       setSubmissionResult(submission);
       setIsProcessing(false);
       window.scrollTo({ top: 400, behavior: 'smooth' });
-    }, 1800);
+    }, 1200);
   };
 
   const printReceipt = () => {
